@@ -1,4 +1,4 @@
-package com.example.flutix_training
+package com.rizkyeky.flutixtraining
 
 import io.flutter.embedding.android.FlutterActivity
 
