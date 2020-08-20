@@ -1,3 +1,3 @@
-part of "share.dart";
+part of 'share.dart';
 
-const String apiKey = "";
+const String imageBaseURL = "https://image.tmdb.org/t/p/";
