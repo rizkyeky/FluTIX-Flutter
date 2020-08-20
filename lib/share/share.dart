@@ -1,0 +1,1 @@
+part 'share_variable.dart';
