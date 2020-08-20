@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "520576720630",
+    "firebase_url": "https://flutix-8b0e9.firebaseio.com",
+    "project_id": "flutix-8b0e9",
+    "storage_bucket": "flutix-8b0e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520576720630:android:172101d7509910edd5d6d7",
+        "android_client_info": {
+          "package_name": "com.rizkyeky.flutixtraining"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520576720630-7i3b4ojm38gi0ffv7p8mtcgai11qga4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-Qf9cvYLALbhDyELNtxq1FuKABgNnafQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520576720630-7i3b4ojm38gi0ffv7p8mtcgai11qga4h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
