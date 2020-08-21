@@ -1,8 +1,8 @@
 part of 'extension.dart';
 
-extension FirebaseUserExtension on User {
-  model.User convertToUser(String name, List<String> favoriteGenre, List<String> favoriteCountry) => 
-  model.User(uid, name, email, photoURL, favoriteGenre, favoriteCountry);
+extension FirebaseUserExtension on fireAuth.User {
+  User convertToUser(String name, List<String> favoriteGenre, List<String> favoriteCountry) => 
+    User(uid, name, email, photoURL, favoriteGenre, favoriteCountry);
 
-  Future<model.User> fromFireStore() async => await UserService.getUser(this.uid);
+  Future<User> fromFireStore() async => await UserService.getUser(this.uid);
 }
