@@ -1,9 +1,10 @@
 part of 'service.dart';
 
 class UserService {
-  static CollectionReference _userCollection = FirebaseFirestore.instance.collection('user'); 
+  static fireStore.CollectionReference _userCollection = fireStore.FirebaseFirestore
+    .instance.collection('user'); 
 
-  static Future<void> updateUser(model.User user) async {
+  static Future<void> updateUser(User user) async {
     String genres = '';
 
     for (String genre in user.favoriteGenre) {
@@ -25,10 +26,10 @@ class UserService {
     });
   }
 
-  static Future<model.User> getUser(String id) async {
-    DocumentSnapshot snapshot = await _userCollection.doc(id).get();
+  static Future<User> getUser(String id) async {
+    fireStore.DocumentSnapshot snapshot = await _userCollection.doc(id).get();
 
-    return model.User(
+    return User(
       id,
       snapshot.data()["name"],
       snapshot.data()["email"],
