@@ -2,6 +2,15 @@ part of 'service.dart';
 
 class AuthService {
   static fireAuth.FirebaseAuth _auth = fireAuth.FirebaseAuth.instance;
+  static Stream<fireAuth.User> get userAuth => _auth.authStateChanges();
+
+  static Future<bool> isSignIn() async {
+
+    fireAuth.User user = await _auth.authStateChanges().first;
+ 
+    if (user != null) return true;
+    else return false;
+  }
 
   static Future<AuthResult> signUp(String name, String email, String password, 
   List<String> favoriteGenre, List<String> favoriteCountry) async {
@@ -23,10 +32,12 @@ class AuthService {
     
     } on fireAuth.FirebaseAuthException catch (e) {
       String errorType;
+      
       if (e.code == 'weak-password') 
         errorType = 'password is too weak';
       else if (e.code == 'email-already-in-use') 
         errorType = 'email is already in use';
+      
       return AuthResult(message: 'Error signUp: ' + errorType);
     
     } catch (e) {
@@ -37,16 +48,18 @@ class AuthService {
   static Future<AuthResult> signIn(String email, String password) async {
     try {
       fireAuth.UserCredential result = await _auth.signInWithEmailAndPassword(
-        email: email, password: password
-      );
-      User user = await UserService.getUser(result.user.uid);
-      print(user.favoriteCountry);
-      print(user.favoriteCountry.runtimeType);
+        email: email, password: password);
       
+      User user = await UserService.getUser(result.user.uid);
       return AuthResult(user: user);
+
     } catch (e) {
       return AuthResult(message: 'Error signIn: ' + e.toString());
     }
+  }
+
+  static Future<void> signOut() async {
+    await _auth.signOut();
   }
 }
 
