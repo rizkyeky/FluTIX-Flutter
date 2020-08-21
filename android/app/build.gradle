@@ -62,4 +62,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
+// project.ext {
+//   set('FlutterFire', [
+//     FirebaseSDKVersion: '21.1.0'
+//   ])
+// }
+
 apply plugin: 'com.google.gms.google-services'
