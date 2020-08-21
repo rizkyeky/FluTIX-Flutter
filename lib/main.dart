@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    Widget home = (isSignIn) ? MyHomePage(title: 'Home Page',) : MyHomePage(title: 'SignUp Page',);
+    Widget home = (isSignIn) ? MyHomePage(title: 'Home Page',) : MyHomePage(title: 'SignIn Page',);
 
     return MaterialApp(
       title: 'Flutter Demo',
@@ -50,31 +50,22 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            StreamBuilder<bool>(
+              stream: AuthService.isSignInStream(),
+              builder: (context, snapshot) {
+                return Text(
+                  (snapshot.hasData) 
+                  ? (snapshot.data) 
+                    ? 'You Already Sign In' 
+                    : 'You Sign Out'
+                  : 'Loading',
+                );
+              }
             ),
             Text(
               '1',
               style: Theme.of(context).textTheme.headline4,
             ),
-            // RaisedButton(
-            //   child: Text("Sign Up"),
-            //   onPressed: () async {
-            //     AuthResult result = await AuthService.signUp(
-            //       'Rizky Eky',
-            //       'rizeky@gmail.com',
-            //       '123456',
-            //       ['Romace', 'Action', 'Adventure'],
-            //       ['Western', 'Indonesia', 'Korea'],
-            //     );
-
-            //     if (result.user == null) {
-            //       print(result.message);
-            //     } else {
-            //       print(result.user.toString());
-            //     }
-            //   }
-            // ),
             RaisedButton(
               child: Text("Sign In"),
               onPressed: () async {
