@@ -12,6 +12,12 @@ class AuthService {
     else return false;
   }
 
+  static Stream<bool> isSignInStream() async* {
+    await for (var user in _auth.authStateChanges()) {
+      yield (user != null) ? true : false;
+    }
+  }
+
   static Future<AuthResult> signUp(String name, String email, String password, 
   List<String> favoriteGenre, List<String> favoriteCountry) async {
 
