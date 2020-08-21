@@ -9,7 +9,7 @@ class User extends Equatable{
   final List<String> favoriteGenre; 
   final List<String> favoriteCountry;
 
-  User(this.id, this.name, this.email,
+  const User(this.id, this.name, this.email,
   this.photoURL, this.favoriteGenre, this.favoriteCountry);
 
   @override
