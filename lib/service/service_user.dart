@@ -4,17 +4,17 @@ class UserService {
   static fireStore.CollectionReference _userCollection = fireStore.FirebaseFirestore
     .instance.collection('user'); 
 
-  static Future<void> updateUser(User user) async {
+  static Future<User> setUser(User user) async {
     String genres = '';
 
     for (String genre in user.favoriteGenre) {
-      genres += (genre != user.favoriteGenre.last) ? ',' : '';
+      genres += genre + ((genre != user.favoriteGenre.last) ? ',' : '');
     }
 
     String countries = '';
 
-    for (String country in user.favoriteGenre) {
-      countries += (country != user.favoriteGenre.last) ? ',' : '';
+    for (String country in user.favoriteCountry) {
+      countries += country + ((country != user.favoriteCountry.last) ? ',' : '');
     }
 
     await _userCollection.doc(user.id).set({
@@ -24,6 +24,8 @@ class UserService {
       'favoriteGenre': genres,
       'favoriteCountry': countries,
     });
+
+    return user;
   }
 
   static Future<User> getUser(String id) async {
@@ -34,9 +36,9 @@ class UserService {
       snapshot.data()["name"],
       snapshot.data()["email"],
       snapshot.data()["photoURL"],
-      (snapshot.data()['favoriteGenre'] as String)
+      snapshot.data()['favoriteGenre']
         .split(','),
-      (snapshot.data()['favoriteCountry'] as String)
+      snapshot.data()['favoriteCountry']
         .split(','),
     );
 
