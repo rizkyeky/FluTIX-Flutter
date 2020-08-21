@@ -2,22 +2,35 @@ import 'package:flutix_training/service/service.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
   
+  // Await services init
   await CoreService.init();
-  runApp(MyApp());
+  bool isSignIn = await AuthService.isSignIn();
+  
+  // Run App
+  runApp(MyApp(isSignIn));
 }
 
 class MyApp extends StatelessWidget {
+
+  final bool isSignIn;
+
+  MyApp(this.isSignIn);
+
   @override
   Widget build(BuildContext context) {
+
+    Widget home = (isSignIn) ? MyHomePage(title: 'Home Page',) : MyHomePage(title: 'SignUp Page',);
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: home
     );
   }
 }
@@ -44,24 +57,24 @@ class MyHomePage extends StatelessWidget {
               '1',
               style: Theme.of(context).textTheme.headline4,
             ),
-            RaisedButton(
-              child: Text("Sign Up"),
-              onPressed: () async {
-                AuthResult result = await AuthService.signUp(
-                  'Rizky Eky',
-                  'rizeky@gmail.com',
-                  '123456',
-                  ['Romace', 'Action', 'Adventure'],
-                  ['Western', 'Indonesia', 'Korea'],
-                );
+            // RaisedButton(
+            //   child: Text("Sign Up"),
+            //   onPressed: () async {
+            //     AuthResult result = await AuthService.signUp(
+            //       'Rizky Eky',
+            //       'rizeky@gmail.com',
+            //       '123456',
+            //       ['Romace', 'Action', 'Adventure'],
+            //       ['Western', 'Indonesia', 'Korea'],
+            //     );
 
-                if (result.user == null) {
-                  print(result.message);
-                } else {
-                  print(result.user.toString());
-                }
-              }
-            ),
+            //     if (result.user == null) {
+            //       print(result.message);
+            //     } else {
+            //       print(result.user.toString());
+            //     }
+            //   }
+            // ),
             RaisedButton(
               child: Text("Sign In"),
               onPressed: () async {
@@ -76,6 +89,10 @@ class MyHomePage extends StatelessWidget {
                   print(result.user.toString());
                 }
               }
+            ),
+            RaisedButton(
+              child: Text("Sign Out"),
+              onPressed: () async => AuthService.signOut(),
             )
           ],
         ),
