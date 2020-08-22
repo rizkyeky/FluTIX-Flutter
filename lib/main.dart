@@ -1,28 +1,33 @@
 import 'package:flutix_training/service/service.dart';
 import 'package:flutter/material.dart';
 
+import 'view/page/page.dart';
+
+CoreService coreService = CoreService();
+AuthService authService = AuthService();
+
 Future<void> main() async {
   
   WidgetsFlutterBinding.ensureInitialized();
   
   // Await services init
-  await CoreService.init();
-  bool isSignIn = await AuthService.isSignIn();
+  await coreService.init();
+  final bool isSignIn = await authService.isSignIn();
   
   // Run App
-  runApp(MyApp(isSignIn));
+  runApp(App(isSignIn: isSignIn));
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
 
   final bool isSignIn;
 
-  MyApp(this.isSignIn);
+  const App({this.isSignIn});
 
   @override
   Widget build(BuildContext context) {
 
-    Widget home = (isSignIn) ? MyHomePage(title: 'Home Page',) : MyHomePage(title: 'SignIn Page',);
+    final Widget home = isSignIn ? const HomePage(title: 'Home Page',) : const SignInPage();
 
     return MaterialApp(
       title: 'Flutter Demo',
@@ -35,8 +40,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
@@ -44,46 +49,16 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("$title"),
+        title: Text(title),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            StreamBuilder<bool>(
-              stream: AuthService.isSignInStream(),
-              builder: (context, snapshot) {
-                return Text(
-                  (snapshot.hasData) 
-                  ? (snapshot.data) 
-                    ? 'You Already Sign In' 
-                    : 'You Sign Out'
-                  : 'Loading',
-                );
-              }
-            ),
-            Text(
-              '1',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            const Text('Home Page'),
             RaisedButton(
-              child: Text("Sign In"),
-              onPressed: () async {
-                AuthResult result = await AuthService.signIn(
-                  'rizeky@gmail.com',
-                  '123456',
-                );
-
-                if (result.user == null) {
-                  print(result.message);
-                } else {
-                  print(result.user.toString());
-                }
-              }
-            ),
-            RaisedButton(
-              child: Text("Sign Out"),
-              onPressed: () async => AuthService.signOut(),
+              onPressed: () async => authService.signOut(),
+              child: const Text('Sign Out'),
             )
           ],
         ),

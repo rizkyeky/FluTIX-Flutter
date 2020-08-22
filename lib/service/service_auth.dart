@@ -1,31 +1,35 @@
 part of 'service.dart';
 
 class AuthService {
-  static fireAuth.FirebaseAuth _auth = fireAuth.FirebaseAuth.instance;
-  static Stream<fireAuth.User> get userAuth => _auth.authStateChanges();
+  final fire_auth.FirebaseAuth _auth = fire_auth.FirebaseAuth.instance;
+  final UserService _userService = UserService();
 
-  static Future<bool> isSignIn() async {
+  Future<bool> isSignIn() async {
 
-    fireAuth.User user = await _auth.authStateChanges().first;
+    final fire_auth.User user = await _auth.authStateChanges().first;
  
-    if (user != null) return true;
-    else return false;
-  }
-
-  static Stream<bool> isSignInStream() async* {
-    await for (var user in _auth.authStateChanges()) {
-      yield (user != null) ? true : false;
+    if (user != null) {
+      return true;
+    }
+    else {
+      return false;
     }
   }
 
-  static Future<AuthResult> signUp(String name, String email, String password, 
+  Stream<bool> isSignInStream() async* {
+    await for (final fire_auth.User user in _auth.authStateChanges()) {
+      yield user != null;
+    }
+  }
+
+  Future<AuthResult> signUp(String name, String email, String password, 
   List<String> favoriteGenre, List<String> favoriteCountry) async {
 
     try {
-      fireAuth.UserCredential result = await _auth.createUserWithEmailAndPassword(
+      final fire_auth.UserCredential result = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
       
-      User user = await UserService.setUser(User(
+      final User user = await _userService.setUser(User(
         result.user.uid,
         name,
         email,
@@ -36,35 +40,38 @@ class AuthService {
       
       return AuthResult(user: user);
     
-    } on fireAuth.FirebaseAuthException catch (e) {
+    } on fire_auth.FirebaseAuthException catch (e) {
+      
       String errorType;
       
-      if (e.code == 'weak-password') 
+      if (e.code == 'weak-password') {
         errorType = 'password is too weak';
-      else if (e.code == 'email-already-in-use') 
+      }
+      else if (e.code == 'email-already-in-use') {
         errorType = 'email is already in use';
+      }
       
-      return AuthResult(message: 'Error signUp: ' + errorType);
+      return AuthResult(message: 'Error signUp: $errorType');
     
     } catch (e) {
-      return AuthResult(message: 'Error signUp: ' + e.toString());
+      return AuthResult(message: 'Error signUp: $e');
     }
   }
 
-  static Future<AuthResult> signIn(String email, String password) async {
+  Future<AuthResult> signIn(String email, String password) async {
     try {
-      fireAuth.UserCredential result = await _auth.signInWithEmailAndPassword(
+      final fire_auth.UserCredential result = await _auth.signInWithEmailAndPassword(
         email: email, password: password);
       
-      User user = await UserService.getUser(result.user.uid);
+      final User user = await _userService.getUser(result.user.uid);
       return AuthResult(user: user);
 
     } catch (e) {
-      return AuthResult(message: 'Error signIn: ' + e.toString());
+      return AuthResult(message: 'Error signIn: $e');
     }
   }
 
-  static Future<void> signOut() async {
+  Future<void> signOut() async {
     await _auth.signOut();
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutix_training/main.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 

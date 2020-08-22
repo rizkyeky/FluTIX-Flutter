@@ -1,20 +1,19 @@
 part of 'service.dart';
 
 class UserService {
-  static fireStore.CollectionReference _userCollection = fireStore.FirebaseFirestore
+  final fire_store.CollectionReference _userCollection = fire_store.FirebaseFirestore
     .instance.collection('user'); 
 
-  static Future<User> setUser(User user) async {
-    String genres = '';
+  Future<User> setUser(User user) async {
 
-    for (String genre in user.favoriteGenre) {
-      genres += genre + ((genre != user.favoriteGenre.last) ? ',' : '');
+    final StringBuffer genres = StringBuffer();
+    for (final String genre in user.favoriteGenre) {
+      genres.write(genre + ((genre != user.favoriteGenre.last) ? ',' : ''));
     }
 
-    String countries = '';
-
-    for (String country in user.favoriteCountry) {
-      countries += country + ((country != user.favoriteCountry.last) ? ',' : '');
+    final StringBuffer countries = StringBuffer();
+    for (final String country in user.favoriteCountry) {
+      countries.write(country + ((country != user.favoriteCountry.last) ? ',' : ''));
     }
 
     await _userCollection.doc(user.id).set({
@@ -22,25 +21,24 @@ class UserService {
       'name': user.name,
       'photoURL': user.photoURL,
       'favoriteGenre': genres,
-      'favoriteCountry': countries,
+      'favoriteCountry': countries.toString(),
     });
 
     return user;
   }
 
-  static Future<User> getUser(String id) async {
-    fireStore.DocumentSnapshot snapshot = await _userCollection.doc(id).get();
+  Future<User> getUser(String id) async {
+    final fire_store.DocumentSnapshot snapshot = await _userCollection.doc(id).get();
 
     return User(
       id,
-      snapshot.data()["name"],
-      snapshot.data()["email"],
-      snapshot.data()["photoURL"],
+      snapshot.data()["name"] as String,
+      snapshot.data()["email"] as String,
+      snapshot.data()["photoURL"] as String,
       snapshot.data()['favoriteGenre']
-        .split(','),
+        .split(',') as List<String>,
       snapshot.data()['favoriteCountry']
-        .split(','),
+        .split(',') as List<String>,
     );
-
   }
 }
