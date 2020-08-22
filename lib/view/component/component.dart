@@ -163,26 +163,48 @@ class XGrid<T> extends StatelessWidget {
 }
 
 class XSelectedBox extends StatefulWidget {
-  XSelectedBox({Key key}) : super(key: key);
+
+  final String text;
+
+  const XSelectedBox({
+    Key key,
+    this.text,
+
+  }) : super(key: key);
 
   @override
   _XSelectedBoxState createState() => _XSelectedBoxState();
 }
 
 class _XSelectedBoxState extends State<XSelectedBox> {
+
+  bool isSelected;
+
+  @override
+  void initState() {
+    isSelected = false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      height: 48,
-      decoration: BoxDecoration(
+    return Material(
+      clipBehavior: Clip.antiAlias,
+      type: MaterialType.card,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6),
-        border: Border.all(
-          color: accentColor,
-          width: 3
-        )
+        side: BorderSide(width: 3, color: isSelected ? mainColor : accentColor)
       ),
-      child: Text('Text'),
+      child: InkWell(
+        onTap: () => setState(() {
+          isSelected = !isSelected; 
+        }),
+        child: Container(
+          alignment: Alignment.center,
+          height: 48,
+          child: Text(widget.text, style: blueSubtitle,),
+        ),
+      ),
     );
   }
 }
