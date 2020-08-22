@@ -1,6 +1,32 @@
 import 'package:flutix_training/share/share.dart';
 import 'package:flutter/material.dart';
 
+class BlueRectButton extends StatelessWidget {
+
+  final String text;
+  final VoidCallback onTap;
+
+  const BlueRectButton({
+  Key key,
+  this.text,
+  this.onTap
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return XButton(
+      width: 120,
+      height: 42,
+      color: mainColor,
+      isBorder: true,
+      onTap: () {},
+      child: Text(text,
+        style: whiteSubtitle,
+      ),
+    );
+  }
+}
+
 class XButton extends StatelessWidget {
   final VoidCallback onTap;
   final Widget child;
@@ -44,6 +70,135 @@ class XButton extends StatelessWidget {
           child: child,
         ),
       ),
+    );
+  }
+}
+
+class XTextField extends StatelessWidget {
+
+  final String text;
+  final TextEditingController controller;
+
+  const XTextField({ 
+  Key key,
+  this.text,
+  this.controller,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: text,
+        labelStyle: blackSubtitle,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(
+            color: accentColor,
+            width: 3
+          )
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6),
+          borderSide: const BorderSide(
+            color: mainColor,
+            width: 3
+          )
+        ),
+      ),
+    );
+  }
+}
+
+class XGrid<T> extends StatelessWidget {
+
+  final Widget Function(BuildContext, int, List<T>) builder;
+  final int columnCount;
+  final EdgeInsets padding;
+  final List<T> list;
+
+  const XGrid({
+    Key key,
+    this.builder,
+    this.padding = const EdgeInsets.all(6),
+    @required this.list,
+    @required this.columnCount
+  }) : super(key: key);
+
+  List<Widget> _buildChildren(BuildContext context) {
+    final children = <Widget>[];
+    int index = -1;
+    
+    for (int i = 0; i < list.length/columnCount; i++) {
+      children.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            for (int j = 0; j < columnCount; j++) Builder(
+              builder: (context) {
+                index++;
+                return Container(
+                  color: Colors.amber,
+                  padding: padding,
+                  child: builder(context, index, list)
+                );
+              },
+            ),
+          ]
+        )
+      );
+    } 
+
+    return children;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: _buildChildren(context)
+    );
+  }
+}
+class TopLinearProgressIndicator extends StatelessWidget
+    implements PreferredSizeWidget {
+
+  final double value;
+  final Color backgroundColor;
+  final Color valueColor;
+  final bool isShow;
+  final Stream<bool> stream;
+  
+  @override
+  Size get preferredSize => const Size.fromHeight(6);
+  
+  TopLinearProgressIndicator({
+    Key key,
+    this.value,
+    this.backgroundColor,
+    this.valueColor,
+    this.stream,
+    this.isShow = true
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        const SizedBox(height: 24,),
+        StreamBuilder<bool>(
+          initialData: false,
+          stream: stream,
+          builder: (context, snapshot) {
+            if (snapshot.data) return LinearProgressIndicator(
+              value: value,
+              backgroundColor: backgroundColor,
+              valueColor: AlwaysStoppedAnimation<Color>(valueColor),
+            );
+            else return Container(height: 6,);
+          }
+        ),
+      ],
     );
   }
 }
