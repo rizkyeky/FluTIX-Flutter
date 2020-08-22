@@ -133,14 +133,15 @@ class XGrid<T> extends StatelessWidget {
     for (int i = 0; i < list.length/columnCount; i++) {
       children.add(
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             for (int j = 0; j < columnCount; j++) Builder(
               builder: (context) {
                 index++;
                 return Container(
-                  color: Colors.amber,
+                  // color: Colors.amber,
                   padding: padding,
+                  width: (MediaQuery.of(context).size.width/2) - 60,
                   child: builder(context, index, list)
                 );
               },
@@ -160,6 +161,32 @@ class XGrid<T> extends StatelessWidget {
     );
   }
 }
+
+class XSelectedBox extends StatefulWidget {
+  XSelectedBox({Key key}) : super(key: key);
+
+  @override
+  _XSelectedBoxState createState() => _XSelectedBoxState();
+}
+
+class _XSelectedBoxState extends State<XSelectedBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      height: 48,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: accentColor,
+          width: 3
+        )
+      ),
+      child: Text('Text'),
+    );
+  }
+}
+
 class TopLinearProgressIndicator extends StatelessWidget
     implements PreferredSizeWidget {
 
@@ -187,16 +214,14 @@ class TopLinearProgressIndicator extends StatelessWidget
       children: [
         const SizedBox(height: 24,),
         StreamBuilder<bool>(
-          initialData: false,
+          initialData: true,
           stream: stream,
-          builder: (context, snapshot) {
-            if (snapshot.data) return LinearProgressIndicator(
-              value: value,
-              backgroundColor: backgroundColor,
-              valueColor: AlwaysStoppedAnimation<Color>(valueColor),
-            );
-            else return Container(height: 6,);
-          }
+          builder: (context, snapshot) => (snapshot.data) ? LinearProgressIndicator(
+            value: value,
+            backgroundColor: backgroundColor,
+            valueColor: AlwaysStoppedAnimation<Color>(valueColor),
+          )
+          : const SizedBox(height: 6,)
         ),
       ],
     );

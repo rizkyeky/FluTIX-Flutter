@@ -22,14 +22,12 @@ class FavoritePage extends StatelessWidget {
               style: blueTitle,
             ),
             XGrid<String>(
-              padding: EdgeInsets.only(top: 28),
+              padding: const EdgeInsets.only(top: 36),
               columnCount: 2,
               list: const ['Romance', 'Action', 'Adventure', 'Family', 'Horror', 'Crime', 'Comedy', 'Sci-Fi'],
               builder: (context, index, list) => Container(
-                height: 60,
-                width: 120,
                 alignment: Alignment.center,
-                child: Text(list[index], style: blueSubtitle,),
+                height: 48,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
@@ -37,21 +35,20 @@ class FavoritePage extends StatelessWidget {
                     width: 3
                   )
                 ),
+                child: Text(list[index], style: blueSubtitle,),
               ),
             ),
-            SizedBox(height: 36,),
+            const SizedBox(height: 36,),
             Text('Choose your favorite countries',
               style: blueTitle,
             ),
             XGrid<String>(
-              padding: EdgeInsets.only(top: 36),
+              padding: const EdgeInsets.only(top: 36),
               columnCount: 2,
-              list: const ['Romance', 'Action', 'Adventure', 'Family'],
+              list: const ['Indonesia', 'Western', 'Korea', 'Japan'],
               builder: (context, index, list) => Container(
-                height: 60,
-                width: 120,
                 alignment: Alignment.center,
-                child: Text(list[index], style: blueSubtitle,),
+                height: 48,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
@@ -59,12 +56,13 @@ class FavoritePage extends StatelessWidget {
                     width: 3
                   )
                 ),
+                child: Text(list[index], style: blueSubtitle,),
               ),
             ),
-            SizedBox(height: 36,),
-            FlatButton(
-              onPressed: () {},
-              child: Text('Finish'),
+            const SizedBox(height: 36,),
+            BlueRectButton(
+              onTap: () {},
+              text: 'Finish',
             )
           ],
         ),
