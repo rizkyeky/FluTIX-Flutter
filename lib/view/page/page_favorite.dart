@@ -37,14 +37,18 @@ class FavoritePage extends StatelessWidget {
               list: const ['Indonesia', 'Western', 'Korea', 'Japan'],
               builder: (context, index, list) => XSelectedBox(text: list[index]),
             ),
-            const SizedBox(height: 36,),
-            BlueRectButton(
-              onTap: () {},
-              text: 'Finish',
-            )
+            const SizedBox(height: 48,),
           ],
         ),
-      ) 
+      ),
+      floatingActionButton: FloatingActionButton(
+        elevation: 0,
+        highlightElevation: 0,
+        backgroundColor: mainColor,
+        onPressed: () {},
+        child: const Icon(Icons.arrow_forward),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
