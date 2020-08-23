@@ -70,6 +70,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
+                      onTap: () {},
                       title: Text('Coming Soon', style: blueTitle,),
                       trailing: IconButton(
                         icon: const Icon(Icons.arrow_forward, color: mainColor,), 
