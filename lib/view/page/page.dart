@@ -6,3 +6,4 @@ import 'package:flutix_training/share/share.dart';
 part 'page_signin.dart';
 part 'page_signup.dart';
 part 'page_favorite.dart';
+part 'page_home.dart';

@@ -139,7 +139,6 @@ class XGrid<T> extends StatelessWidget {
               builder: (context) {
                 index++;
                 return Container(
-                  // color: Colors.amber,
                   padding: padding,
                   width: (MediaQuery.of(context).size.width/2) - 60,
                   child: builder(context, index, list)
@@ -232,20 +231,17 @@ class TopLinearProgressIndicator extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 24,),
-        StreamBuilder<bool>(
-          initialData: true,
-          stream: stream,
-          builder: (context, snapshot) => (snapshot.data) ? LinearProgressIndicator(
-            value: value,
-            backgroundColor: backgroundColor,
-            valueColor: AlwaysStoppedAnimation<Color>(valueColor),
-          )
-          : const SizedBox(height: 6,)
-        ),
-      ],
+    return SafeArea(
+      child: StreamBuilder<bool>(
+        initialData: true,
+        stream: stream,
+        builder: (context, snapshot) => (snapshot.data) ? LinearProgressIndicator(
+          value: value,
+          backgroundColor: backgroundColor,
+          valueColor: AlwaysStoppedAnimation<Color>(valueColor),
+        )
+        : const SizedBox(height: 6,)
+      ),
     );
   }
 }
