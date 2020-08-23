@@ -1,6 +1,8 @@
 import 'package:flutix_training/share/share.dart';
 import 'package:flutter/material.dart';
 
+part 'xtopbar.dart';
+
 class BlueRectButton extends StatelessWidget {
 
   final String text;
