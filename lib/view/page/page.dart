@@ -10,3 +10,4 @@ part 'page_signup.dart';
 part 'page_favorite.dart';
 part 'page_home.dart';
 part 'page_detail_movie.dart';
+part 'page_book_time.dart';
