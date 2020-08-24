@@ -77,12 +77,6 @@ class DetailMoviePage extends StatelessWidget {
                           children: [
                             Column(
                               children: [
-                                Icon(Icons.star, color: starColor,),
-                                Text('7/10', style: blackContentRegular),
-                              ],
-                            ),
-                            Column(
-                              children: [
                                 Icon(Icons.favorite, color: Colors.red,),
                                 Text('1K+', style: blackContentRegular),
                               ],
