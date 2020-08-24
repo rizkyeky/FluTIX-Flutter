@@ -16,7 +16,11 @@ class DetailMoviePage extends StatelessWidget {
             expandedHeight: 200.0,
             actions: [
               IconButton(
-                icon: Icon(Icons.favorite_border,),
+                icon: const Icon(Icons.favorite_border,),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.bookmark_border,),
                 onPressed: () {},
               )
             ],
