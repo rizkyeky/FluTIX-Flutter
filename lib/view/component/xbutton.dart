@@ -2,22 +2,21 @@ part of 'component.dart';
 
 
 class XButton extends StatelessWidget {
+  
   final VoidCallback onTap;
   final Widget child;
   final double width;
   final double height;
   final Color color;
   final bool isBorder;
-  final double margin;
 
   const XButton({
     Key key,
     @required this.child,
     @required this.onTap,
     this.color,
-    this.margin = 4,
-    this.width = double.infinity,
-    this.height = 54,
+    this.width,
+    this.height,
     this.isBorder = false,
   }) : super(key: key);
 
@@ -35,11 +34,9 @@ class XButton extends StatelessWidget {
         onTap: onTap,
         child: Container(
           alignment: Alignment.center,
-          constraints: BoxConstraints(
-            minWidth: 30,
-            minHeight: 30,
-            maxWidth: width,
-            maxHeight: height
+          constraints: BoxConstraints.expand(
+            width: width ?? 240,
+            height: height ?? 42
           ),
           child: child,
         ),
