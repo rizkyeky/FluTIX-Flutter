@@ -8,18 +8,21 @@ class BookTimePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: TopLinearProgressIndicator(
+        backgroundColor: mainColor,
+        valueColor:accentColor,
+        ),
       body: SingleChildScrollView(
         padding: paddingPage,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Choose the date',
+            Text('Choose Time and Place',
               style: blueTitle,
             ),
             const SizedBox(height: 36,),
             Container(
-              // color: Colors.amber,
-              height: 60,
+              height: 48,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 7,
@@ -33,16 +36,36 @@ class BookTimePage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 36,),
-            Text('Choose your favorite countries',
-              style: blueTitle,
-            ),
-            XGrid<String>(
-              padding: const EdgeInsets.only(top: 36),
-              columnCount: 2,
-              list: const ['Indonesia', 'Western', 'Korea', 'Japan'],
-              builder: (context, index, list) => XSelectedBox(text: list[index]),
-            ),
-            const SizedBox(height: 48,),
+            Container(
+              height: 1000,
+              child: ListView.builder(
+                itemCount: 3,
+                itemBuilder: (context, index) => Container(
+                  margin: EdgeInsets.symmetric(vertical: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Paris Van Java', style: blackSubtitle,),
+                      Container(
+                        margin: EdgeInsets.only(top: 12),
+                        height: 48,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 7,
+                          itemBuilder: (context, index) => Container(
+                            margin: EdgeInsets.only(right: 12),
+                            child: XSelectedBox(
+                              width: 96,
+                              text: '19:20'
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ) 
+              ),
+            )
           ],
         ),
       ),
