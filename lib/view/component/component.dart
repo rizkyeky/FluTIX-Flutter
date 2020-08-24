@@ -10,15 +10,10 @@ part 'xselectedbox.dart';
 part 'xtopprogressindicator.dart';
 
 class BlueRectButton extends StatelessWidget {
-
   final String text;
   final VoidCallback onTap;
 
-  const BlueRectButton({
-  Key key,
-  this.text,
-  this.onTap
-  }) : super(key: key);
+  const BlueRectButton({Key key, this.text, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +23,82 @@ class BlueRectButton extends StatelessWidget {
       color: mainColor,
       isBorder: true,
       onTap: () {},
-      child: Text(text,
+      child: Text(
+        text,
         style: whiteSubtitle,
       ),
     );
   }
 }
 
+class ContentList extends StatelessWidget {
+  final String title;
+  final Widget child;
+  final double height;
+  final int itemCount;
+
+  const ContentList({
+    Key key,
+    this.title,
+    this.child,
+    this.height,
+    this.itemCount,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.topLeft,
+      margin: const EdgeInsets.only(top: 18),
+      height: 180,
+      child: Material(
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ListTile(
+              onTap: () {},
+              title: Text(
+                title,
+                style: blueTitle,
+              ),
+              trailing: const Icon(
+                Icons.arrow_forward,
+                color: mainColor,
+              ),
+            ),
+            Container(
+              height: height ?? 120,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: itemCount ?? 4,
+                itemBuilder: (context, index) => XCard(
+                    color: mainColor,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: child ??
+                        Container(
+                          width: 120,
+                        )),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class XRenderView extends StatelessWidget {
+  final Widget child;
+  final Color color;
+
+  const XRenderView({Key key, this.child, this.color}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: color ?? Colors.blue,
+      child: child,
+    );
+  }
+}

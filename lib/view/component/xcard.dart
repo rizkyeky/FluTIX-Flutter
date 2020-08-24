@@ -18,7 +18,7 @@ class XCard extends StatelessWidget {
     this.onTap,
     this.backgroundImage,
     this.isBorder = false,
-    this.radiusBorder = 6,
+    this.radiusBorder = 12,
     this.height = 100,
     this.width = double.infinity,
     this.color = Colors.white,
@@ -35,7 +35,7 @@ class XCard extends StatelessWidget {
         type: MaterialType.card,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radiusBorder),
-          side: isBorder ? BorderSide(color: Theme.of(context).dividerColor) : BorderSide.none
+          side: isBorder ? const BorderSide(color: accentColor, width: 3) : BorderSide.none
         ),
         child: InkWell(
           onTap: onTap ?? () {},
