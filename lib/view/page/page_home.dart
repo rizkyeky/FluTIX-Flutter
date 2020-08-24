@@ -6,7 +6,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF6F7F8),
+      backgroundColor: canvasColor,
       appBar: XTopBar(),
       body: SingleChildScrollView(
         child: Column(
@@ -22,78 +22,18 @@ class HomePage extends StatelessWidget {
                 viewportFraction: 0.6,
                 height: 180
               ),
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  color: Colors.white,
-                );
-              }, 
+              itemBuilder: (context, index) => const XCard(
+                // color: Colors.white,
+                isBorder: true,
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                // child: Container(
+                //   height: 120,
+                //   width: 120,
+                // )
+              ), 
             ),
-            Container(
-              alignment: Alignment.topLeft,
-              margin: const EdgeInsets.symmetric(vertical: 18),
-              height: 200,
-              child: Material(
-              color: Colors.white,
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text('Recomended for you', style: blueTitle,),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.arrow_forward, color: mainColor,), 
-                        onPressed: () {}
-                      ),
-                    ),
-                    Container(
-                      height: 120,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 4,
-                        itemBuilder: (context, index) => Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 12),
-                          width: 120,
-                          height: 120,
-                          color: Colors.amber,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              margin: const EdgeInsets.symmetric(vertical: 18),
-              height: 200,
-              child: Material(
-              color: Colors.white,
-                child: Column(
-                  children: [
-                    ListTile(
-                      onTap: () {},
-                      title: Text('Coming Soon', style: blueTitle,),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.arrow_forward, color: mainColor,), 
-                        onPressed: () {}
-                      ),
-                    ),
-                    Container(
-                      height: 120,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 4,
-                        itemBuilder: (context, index) => Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 12),
-                          width: 120,
-                          height: 120,
-                          color: Colors.amber,
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            const ContentList(title: 'Recomended for you',),
+            const ContentList(title: 'Coming Soong',)
           ],
         ),
       ),
