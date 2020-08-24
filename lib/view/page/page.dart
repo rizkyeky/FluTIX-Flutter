@@ -11,3 +11,4 @@ part 'page_favorite.dart';
 part 'page_home.dart';
 part 'page_detail_movie.dart';
 part 'page_book_time.dart';
+part 'page_book_seat.dart';
