@@ -1,5 +1,6 @@
 import 'package:flutix_training/share/share.dart';
 import 'package:flutter/material.dart';
+import 'package:flutix_training/model/model.dart';
 
 part 'xtopbar.dart';
 part 'xbutton.dart';
@@ -8,6 +9,8 @@ part 'xtextfield.dart';
 part 'xgrid.dart';
 part 'xselectedbox.dart';
 part 'xtopprogressindicator.dart';
+
+part 'movie_card.dart';
 
 class BlueRectButton extends StatelessWidget {
   final String text;
@@ -32,10 +35,12 @@ class BlueRectButton extends StatelessWidget {
 }
 
 class ContentList extends StatelessWidget {
+  
   final String title;
   final Widget child;
   final double height;
   final int itemCount;
+  final List<Movie> movies;
 
   const ContentList({
     Key key,
@@ -43,6 +48,7 @@ class ContentList extends StatelessWidget {
     this.child,
     this.height,
     this.itemCount,
+    this.movies,
   }) : super(key: key);
 
   @override
@@ -50,7 +56,7 @@ class ContentList extends StatelessWidget {
     return Container(
       alignment: Alignment.topLeft,
       margin: const EdgeInsets.only(top: 18),
-      height: 180,
+      height: 240,
       child: Material(
         color: Colors.white,
         child: Column(
@@ -68,17 +74,17 @@ class ContentList extends StatelessWidget {
               ),
             ),
             Container(
-              height: height ?? 120,
+              height: height ?? 162,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: itemCount ?? 4,
                 itemBuilder: (context, index) => XCard(
-                    color: mainColor,
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: child ??
-                        Container(
-                          width: 120,
-                        )),
+                  color: mainColor,
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  child: child ?? Container(
+                    width: 120,
+                  )
+                ),
               ),
             )
           ],
