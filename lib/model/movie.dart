@@ -40,7 +40,7 @@ class Movie {
     json['backdrop_path'] as String,
     json['overview'] as String,
     json['vote_count'] as int,
-    json['vote_average'] as double,
+    (json['vote_average'] as num).toDouble(),
     json['original_language'] as String,
 
     (json['genre_ids'] as List)
@@ -48,4 +48,7 @@ class Movie {
       
     '',
   );
+
+  @override
+  String toString() => 'movie: $id - $title';
 }
