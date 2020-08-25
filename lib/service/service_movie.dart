@@ -30,12 +30,8 @@ class MovieService {
       final Map data = json.decode(response.body) as Map;
       final List result = data['results'] as List;
       
-      print(result.length);
+      print('respone success');
       
-      // for (final movie in result) {
-      //   print(movie['id']);
-      // }
-
       return result.map<Movie>((e) => Movie.fromJson(e as Map<String, dynamic>)).toList();
     }
   }
