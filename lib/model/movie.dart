@@ -1,4 +1,4 @@
-part of 'model.dart';
+part of model;
 
 class Movie {
   int id;
@@ -9,7 +9,7 @@ class Movie {
   String backdropPath;
   String overview;
   String status;
-  List<String> genres;
+  List<Genre> genres;
 
   int favorite;
   double rating;
@@ -23,12 +23,12 @@ class Movie {
     this.posterPath,
     this.backdropPath,
     this.overview,
-    this.status,
-
     this.favorite,
     this.rating,
     this.country,
-    this.genres
+
+    this.genres,
+    this.status,
   );
 
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
@@ -39,13 +39,13 @@ class Movie {
     json['poster_path'] as String,
     json['backdrop_path'] as String,
     json['overview'] as String,
-    json['status'] as String,
-
     json['vote_count'] as int,
     json['vote_average'] as double,
     json['original_language'] as String,
-    
-    (json['genres'] as List<Map<String, dynamic>>)
-      .map((e) => e['name'] as String).toList()
+
+    (json['genre_ids'] as List)
+      .map((e) => Genre.fromID(e as int)).toList(),
+      
+    '',
   );
 }

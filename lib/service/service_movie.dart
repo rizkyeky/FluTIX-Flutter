@@ -3,8 +3,8 @@ part of 'service.dart';
 class MovieService {
   
   final http.Client _client = http.Client();
-  final String _homeBase = 'https://api.themoviedb.org/3/discover';
-  final String _subBase = 'movie';
+  final String _homeBase = 'api.themoviedb.org';
+  final String _subBase = '3/discover/movie';
   
   Future<List<Movie>> getMovies() async {
     
@@ -27,9 +27,16 @@ class MovieService {
     }
     else {
       // Respone success
-      final data = json.decode(response.body);
-      final List<Map<String, dynamic>> result = data['results'] as List<Map<String, dynamic>>;
-      return result.map((e) => Movie.fromJson(e)).toList();
+      final Map data = json.decode(response.body) as Map;
+      final List result = data['results'] as List;
+      
+      print(result.length);
+      
+      // for (final movie in result) {
+      //   print(movie['id']);
+      // }
+
+      return result.map<Movie>((e) => Movie.fromJson(e as Map<String, dynamic>)).toList();
     }
   }
 }
