@@ -15,7 +15,10 @@ class HomeBloc {
     }
   }
 
-  Future<void> getMovieFromIndex() async {
+  Stream<Movie> getMovieFromIndex(int index) async* {
     
+    await getMoviesFromService();
+
+    yield _movies[index];
   }
 }
