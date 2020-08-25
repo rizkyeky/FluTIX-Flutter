@@ -33,4 +33,4 @@ TextStyle blackContentBold = GoogleFonts.ptSans(
     color: blackColor, fontSize: 16, fontWeight: FontWeight.bold);
 
 TextStyle whiteContent = GoogleFonts.ptSans(
-    color: whiteColor, fontSize: 18, fontWeight: FontWeight.bold);
+    color: whiteColor, fontSize: 16, fontWeight: FontWeight.normal);

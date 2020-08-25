@@ -1,7 +1,9 @@
 part of 'page.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key key}) : super(key: key);
+  HomePage({Key key}) : super(key: key);
+
+  final HomeBloc _bloc = HomeBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -16,24 +18,26 @@ class HomePage extends StatelessWidget {
               margin: const EdgeInsets.all(18),
               child: Text('Playing now', style: blueTitle,)
             ),
-            CarouselSlider.builder(
-              itemCount: 5,
-              options: CarouselOptions(
-                viewportFraction: 0.6,
-                height: 180
+            FutureBuilder<List<Movie>>(
+              future: _bloc.getMoviesCarousel(),
+              builder: (context, snapshot) => (snapshot.hasData) ? CarouselSlider.builder(
+                itemCount: 5,
+                options: CarouselOptions(
+                  height: 180
+                ),
+                itemBuilder: (context, index)=> MovieCard(
+                  snapshot.data[index]
+                ), 
+              )
+              : Container(
+                height: 180,
+                color: whiteColor, 
+                alignment: Alignment.center, 
+                child: const CircularProgressIndicator(),
               ),
-              itemBuilder: (context, index) => const XCard(
-                // color: Colors.white,
-                isBorder: true,
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                // child: Container(
-                //   height: 120,
-                //   width: 120,
-                // )
-              ), 
             ),
             const ContentList(title: 'Recomended for you',),
-            const ContentList(title: 'Coming Soong',)
+            const ContentList(title: 'Coming Soon',)
           ],
         ),
       ),
