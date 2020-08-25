@@ -4,21 +4,31 @@ class HomeBloc {
 
   final MovieService _movieService = MovieService();
 
-  final BehaviorSubject<bool> _isLoadingController = BehaviorSubject();
-  Stream<bool> get isLoadingStream => _isLoadingController.stream;
+  final BehaviorSubject<List<Movie>> _movieCarouselController = BehaviorSubject();
+  Stream<List<Movie>> get movieCarouselStream => _movieCarouselController.stream;
 
   List<Movie> _movies = [];
 
-  Future<void> getMoviesFromService() async {
-    if (_movies.isEmpty) {
-      _movies = await _movieService.getMovies();
+  bool isInit = false;
+
+  Future<void> init() async {
+    if (!isInit) {
+      isInit = true;
+
+      await getMoviesFromService();
     }
   }
 
-  Stream<Movie> getMovieFromIndex(int index) async* {
-    
-    await getMoviesFromService();
+  Future<void> getMoviesFromService() async {
+    _movies = await _movieService.getMovies();
+  }
 
-    yield _movies[index];
+  Future<Movie> getMovieCarousel(int index) async {
+    
+    if (_movies.isEmpty) {
+      await init();
+    }
+
+    return _movies[index];
   }
 }
