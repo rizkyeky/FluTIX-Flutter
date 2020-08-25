@@ -50,5 +50,5 @@ class Movie {
   );
 
   @override
-  String toString() => 'movie: $id - $title';
+  String toString() => 'movie: $title ($rating)';
 }
