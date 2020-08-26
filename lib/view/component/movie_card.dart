@@ -9,11 +9,11 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final int starCount = (_movie.rating/2).round();
+    final int starCount = (_movie.voteAverage/2).round();
 
     return XCard(
       padding: const EdgeInsets.symmetric(horizontal: 6),
-      backgroundImage: NetworkImage('${imageBaseURL}w500${_movie.backdropPath}'),
+      backgroundImage: NetworkImage('${imageBaseURL}w300${_movie.backdropPath}'),
       onTap: () {
         Navigator.pushNamed(context, '/detailmovie', arguments: _movie);
       },
@@ -51,7 +51,7 @@ class MovieCard extends StatelessWidget {
                       color: starColor
                     ),
                     const SizedBox(width: 6,),
-                    Text('${_movie.rating}/10', style: whiteContent)
+                    Text('${_movie.voteAverage}/10', style: whiteContent)
                   ],
                 )
               ],
