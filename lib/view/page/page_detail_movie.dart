@@ -100,7 +100,7 @@ class DetailMoviePage extends StatelessWidget {
                 ContentList(
                   title: 'Cast',
                   height: 90,
-                  itemCount: 10,
+                  // itemCount: 10,
                   child: Container(
                     height: 90,
                     width: 90,
