@@ -37,7 +37,7 @@ class App extends StatelessWidget {
         accentColor: accentColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage()
+      home: MainTabBarPage()
     );
   }
 }

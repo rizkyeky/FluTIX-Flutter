@@ -1,3 +1,5 @@
+library page;
+
 import 'package:flutix_training/bloc/bloc.dart';
 import 'package:flutix_training/locator.dart';
 import 'package:flutix_training/view/component/component.dart';
@@ -14,3 +16,4 @@ part 'page_detail_movie.dart';
 part 'page_book_time.dart';
 part 'page_book_seat.dart';
 part 'page_checkout.dart';
+part 'page_maintabbar.dart';

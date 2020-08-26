@@ -11,6 +11,8 @@ void setupLocator() {
   // Waiting for first launch
   locator.registerLazySingleton(() => CoreService(), instanceName: 'Core Service');
   locator.registerLazySingleton(() => AuthService(), instanceName: 'Auth Service');
+  
+  locator.registerLazySingleton(() => MainTabBarBloc(), instanceName: 'MainTabBar Bloc');
   locator.registerLazySingleton(() => HomeBloc(), instanceName: 'Home Bloc');
   
   locator.registerLazySingleton(() => SignInBloc());
