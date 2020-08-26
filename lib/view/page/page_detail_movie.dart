@@ -1,7 +1,10 @@
 part of 'page.dart';
 
 class DetailMoviePage extends StatelessWidget {
-  const DetailMoviePage({Key key}) : super(key: key);
+  
+  final Movie movie;
+  
+  const DetailMoviePage(this.movie, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,15 +100,15 @@ class DetailMoviePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                ContentList(
-                  title: 'Cast',
-                  height: 90,
-                  // itemCount: 10,
-                  child: Container(
-                    height: 90,
-                    width: 90,
-                  ),
-                ),
+                // ContentList<Cast>(
+                //   title: 'Cast',
+                //   height: 90,
+                //   // itemCount: 10,
+                //   child: Container(
+                //     height: 90,
+                //     width: 90,
+                //   ),
+                // ),
                 Container(
                   alignment: Alignment.topLeft,
                   margin: const EdgeInsets.only(top: 18),

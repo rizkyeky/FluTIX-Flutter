@@ -14,6 +14,7 @@ void setupLocator() {
   
   locator.registerLazySingleton(() => MainTabBarBloc(), instanceName: 'MainTabBar Bloc');
   locator.registerLazySingleton(() => HomeBloc(), instanceName: 'Home Bloc');
+  locator.registerLazySingleton(() => DetailMovieBloc());
   
   locator.registerLazySingleton(() => SignInBloc());
   locator.registerLazySingleton(() => SignUpBloc());
