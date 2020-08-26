@@ -84,12 +84,13 @@ class ContentList extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) => XCard(
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
                       backgroundImage: NetworkImage('${imageBaseURL}w500${snapshot.data[index].posterPath}'),
-                      // color: mainColor,
-                      // padding: const EdgeInsets.symmetric(horizontal: 6),
-                      // child: child ?? Container(
-                      //   width: 120,
-                      // )
+                      child: Container(
+                        width: 120,
+                        padding: const EdgeInsets.all(12),
+                        alignment: Alignment.bottomCenter,
+                      )
                     ),
                   ),
                 ): Container(
