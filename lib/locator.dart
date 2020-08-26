@@ -9,9 +9,9 @@ GetIt locator = GetIt.instance;
 void setupLocator() {
 
   // Waiting for first launch
-  locator.registerSingleton(() => CoreService(), instanceName: 'Core Service');
-  locator.registerSingleton(() => AuthService(), instanceName: 'Auth Service');
-  locator.registerSingleton(() => HomeBloc(), instanceName: 'Home Bloc');
+  locator.registerLazySingleton(() => CoreService(), instanceName: 'Core Service');
+  locator.registerLazySingleton(() => AuthService(), instanceName: 'Auth Service');
+  locator.registerLazySingleton(() => HomeBloc(), instanceName: 'Home Bloc');
   
   locator.registerLazySingleton(() => SignInBloc());
   locator.registerLazySingleton(() => SignUpBloc());
