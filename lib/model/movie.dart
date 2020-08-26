@@ -34,12 +34,12 @@ class Movie {
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
     json['id'] as int,
     json['title'] as String,
-    json['popularity'] as double,
+    (json['popularity'] as num).toDouble(),
     json['release_date'] as String,
     json['poster_path'] as String,
     json['backdrop_path'] as String,
     json['overview'] as String,
-    json['vote_count'] as int,
+    (json['vote_count'] as num).toInt(),
     (json['vote_average'] as num).toDouble(),
     json['original_language'] as String,
 
