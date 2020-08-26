@@ -7,6 +7,7 @@ import 'package:flutix_training/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutix_training/share/share.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/src/foundation/diagnostics.dart';
 
 part 'page_signin.dart';
 part 'page_signup.dart';
@@ -17,3 +18,53 @@ part 'page_book_time.dart';
 part 'page_book_seat.dart';
 part 'page_checkout.dart';
 part 'page_maintabbar.dart';
+
+abstract class Page<T extends Bloc> extends StatefulWidget {
+
+  // final String instanceName;
+
+  T bloc = locator<T>();
+  
+  Page({
+    Key key,
+    // this.instanceName
+  }) : super(key: key);
+
+  @override
+  _PageState<T> createState() => _PageState<T>();
+
+  @protected
+  void init();
+
+  @protected
+  void dispose();
+
+  @protected
+  Widget build(BuildContext context);
+}
+
+class _PageState<T extends Bloc> extends State<Page<T>> {
+  
+  @override
+  void initState() {
+    if (widget.init != null) {
+      widget.init();
+      widget.bloc.init();
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (widget.dispose != null) {
+      widget.dispose();
+      widget.bloc.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return widget.build(context);
+  }
+}

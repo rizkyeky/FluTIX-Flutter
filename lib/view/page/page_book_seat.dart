@@ -63,7 +63,7 @@ class BookSeatPage extends StatelessWidget {
                         height: 24,
                         width: 24,
                         decoration: BoxDecoration(
-                          border: Border.all(color: greyColor, width: 3),
+                          border: Border.all(color: borderColor, width: 3),
                           borderRadius: BorderRadius.circular(6)
                         ),
                       ),
