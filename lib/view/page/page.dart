@@ -1,4 +1,5 @@
 import 'package:flutix_training/bloc/bloc.dart';
+import 'package:flutix_training/locator.dart';
 import 'package:flutix_training/view/component/component.dart';
 import 'package:flutix_training/model/model.dart';
 import 'package:flutter/material.dart';
