@@ -8,12 +8,13 @@ class Movie {
   String posterPath;
   String backdropPath;
   String overview;
-  String status;
   List<Genre> genres;
-
-  int favorite;
-  double rating;
+  double voteAverage;
+  int voteCount;
   String country;
+
+  String status;
+  int runtime;
 
   Movie(
     this.id,
@@ -23,12 +24,29 @@ class Movie {
     this.posterPath,
     this.backdropPath,
     this.overview,
-    this.favorite,
-    this.rating,
+    this.voteCount,
+    this.voteAverage,
     this.country,
-
     this.genres,
+
     this.status,
+    this.runtime
+  );
+
+  factory Movie.initial() => Movie(
+    0,
+    '',
+    0.0,
+    '',
+    '',
+    '',
+    '',
+    0,
+    0.0,
+    '',
+    [],
+    '',
+    0
   );
 
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
@@ -43,12 +61,23 @@ class Movie {
     (json['vote_average'] as num).toDouble(),
     json['original_language'] as String,
 
-    (json['genre_ids'] as List)
-      .map((e) => Genre.fromID(e as int)).toList(),
-      
-    '',
+    ((json['genre_ids'] as List) ?? (json['genres'] as List))
+      .map((e) {
+        if (e is int) {
+          return Genre.fromID(e);
+        }
+        else if (e is Map) {
+          return Genre.fromID(e['id'] as int);
+        }
+        else {
+          return Genre.fromID(0);
+        } 
+      }).toList(),
+
+    (json['status'] as String) ?? '',
+    (json['runtime'] as int) ?? 0,
   );
 
   @override
-  String toString() => 'movie: $title ($rating)';
+  String toString() => 'movie: $title ($genres)';
 }
