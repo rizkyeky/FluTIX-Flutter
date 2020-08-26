@@ -48,6 +48,7 @@ class HomePage extends StatelessWidget {
               end: 13,
               movies: _bloc.getMoviesCarousel,
             ),
+            const SizedBox(height: 54,)
           ],
         ),
       ),
