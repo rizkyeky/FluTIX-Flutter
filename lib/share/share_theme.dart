@@ -9,7 +9,8 @@ const Color blackColor = Color(0xFF505152);
 const Color whiteColor = Color(0xFFFFFFFF);
 const Color canvasColor = Color(0xFFF4F4F4);
 const Color starColor = Color(0xFFF2C94C);
-const Color greyColor = Color(0xFFDBDBDB);
+const Color borderColor = Color(0xFFDBDBDB);
+const Color greyColor = Color(0xFF737373);
 
 TextStyle blueTitle = GoogleFonts.ptSans(
     color: mainColor, fontSize: 24, fontWeight: FontWeight.bold);
