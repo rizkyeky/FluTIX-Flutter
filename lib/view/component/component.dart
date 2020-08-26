@@ -9,6 +9,7 @@ part 'xtextfield.dart';
 part 'xgrid.dart';
 part 'xselectedbox.dart';
 part 'xtopprogressindicator.dart';
+part 'xswitchicon.dart';
 
 part 'movie_card.dart';
 
