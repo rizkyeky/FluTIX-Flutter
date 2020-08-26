@@ -1,7 +1,7 @@
 
 part of 'bloc.dart';
 
-enum SwitchTab {home, search, cart, profile}
+enum SwitchTab {home, search, favorite, promo, profile}
 
 class MainTabBarBloc {
 
@@ -34,16 +34,6 @@ class MainTabBarBloc {
     if (val != _tab) {
       _tab = val;
       _tabController.sink.add(_tab);
-
-      switch(val) {
-        case SwitchTab.home: print("tab home");
-        break;
-        case SwitchTab.cart: print("tab cart");
-        break;
-        case SwitchTab.search: print("tab search");
-        break;
-        case SwitchTab.profile: print("tab profile");
-      }
     }
   } 
 }

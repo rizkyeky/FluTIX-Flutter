@@ -31,8 +31,11 @@ class MainTabBarPage extends StatelessWidget {
               case SwitchTab.search: 
                 return const Center(child: Icon(Icons.search));
                 break;
-              case SwitchTab.cart: 
-                return const Center(child: Icon(Icons.shopping_cart),);
+              case SwitchTab.favorite: 
+                return const Center(child: Icon(Icons.favorite),);
+                break;
+              case SwitchTab.promo: 
+                return const Center(child: Icon(Icons.card_giftcard));
                 break;
               case SwitchTab.profile: 
                 return const Center(child: Icon(Icons.account_circle),);
@@ -43,16 +46,17 @@ class MainTabBarPage extends StatelessWidget {
           }
         ),
       ),
-      bottomNavigationBar: XBottomNavigator(_bloc)
+      bottomNavigationBar: XBottomNavigator(_bloc.tabStream, _bloc.setTab)
     );
   }
 }
 
 class XBottomNavigator extends StatelessWidget {
 
-  final MainTabBarBloc bloc;
+  final Stream<SwitchTab> stream;
+  final Function(SwitchTab) setTab;
 
-  const XBottomNavigator(this.bloc, {Key key}) : super(key: key);
+  const XBottomNavigator(this.stream, this.setTab, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,64 +65,93 @@ class XBottomNavigator extends StatelessWidget {
       alignment: Alignment.center,
       height: 48,
       child: Material(
-        color: mainColor,
+        color: whiteColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             IconButton(
+              splashColor: accentColor,
               icon: StreamBuilder<SwitchTab>(
-                stream: bloc.tabStream,
+                stream: stream,
                 builder: (context, stream) => AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 800),
+                  switchInCurve: Curves.fastOutSlowIn,
+                  switchOutCurve: Curves.fastOutSlowIn,
+                  duration: const Duration(milliseconds: 600),
                   child: (stream.data == SwitchTab.home) 
-                    ? const Icon( Icons.home, key: Key("active"), color: Colors.white,)
-                    : const Icon(Icons.home, key: Key("notactive")),
+                    ? const Icon( Icons.home, key: Key("active"), color: mainColor,)
+                    : const Icon(Icons.home, key: Key("notactive"), color: greyColor),
                 )
               ), 
               onPressed: () {
-                bloc.setTab(SwitchTab.home);
+                setTab(SwitchTab.home);
               },
             ),
             IconButton(
+              splashColor: accentColor,
               icon:StreamBuilder<SwitchTab>(
-                stream: bloc.tabStream,
+                stream: stream,
                 builder: (context, stream) => AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 800),
+                  switchInCurve: Curves.fastOutSlowIn,
+                  switchOutCurve: Curves.fastOutSlowIn,
+                  duration: const Duration(milliseconds: 600),
                   child: (stream.data == SwitchTab.search) 
-                    ? const Icon( Icons.search, key: Key("active"), color: Colors.white,)
-                    : const Icon(Icons.search, key: Key("notactive")),
+                    ? const Icon( Icons.search, key: Key("active"), color: mainColor,)
+                    : const Icon(Icons.search, key: Key("notactive"), color: greyColor),
                 )
               ), 
               onPressed: () {
-                bloc.setTab(SwitchTab.search);
+                setTab(SwitchTab.search);
               },
             ),
             IconButton(
+              splashColor: accentColor,
               icon:StreamBuilder<SwitchTab>(
-                stream: bloc.tabStream,
+                stream: stream,
                 builder: (context, stream) => AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 800),
-                  child: (stream.data == SwitchTab.cart) 
-                    ? const Icon( Icons.shopping_cart, key: Key("active"), color: Colors.white,)
-                    : const Icon(Icons.shopping_cart, key: Key("notactive")),
+                  switchInCurve: Curves.fastOutSlowIn,
+                  switchOutCurve: Curves.fastOutSlowIn,
+                  duration: const Duration(milliseconds: 600),
+                  child: (stream.data == SwitchTab.favorite) 
+                    ? const Icon( Icons.favorite, key: Key("active"), color: mainColor,)
+                    : const Icon(Icons.favorite_border, key: Key("notactive"), color: greyColor),
                 )
               ),  
               onPressed: () {
-                bloc.setTab(SwitchTab.cart);
+                setTab(SwitchTab.favorite);
               },
             ),
             IconButton(
+              splashColor: accentColor,
               icon:StreamBuilder<SwitchTab>(
-                stream: bloc.tabStream,
+                stream: stream,
                 builder: (context, stream) => AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 800),
+                  switchInCurve: Curves.fastOutSlowIn,
+                  switchOutCurve: Curves.fastOutSlowIn,
+                  duration: const Duration(milliseconds: 600),
+                  child: (stream.data == SwitchTab.promo) 
+                    ? const Icon( Icons.card_giftcard, key: Key("active"), color: mainColor,)
+                    : const Icon(Icons.card_giftcard, key: Key("notactive"), color: greyColor),
+                )
+              ),  
+              onPressed: () {
+                setTab(SwitchTab.promo);
+              },
+            ),
+            IconButton(
+              splashColor: accentColor,
+              icon:StreamBuilder<SwitchTab>(
+                stream: stream,
+                builder: (context, stream) => AnimatedSwitcher(
+                  switchInCurve: Curves.fastOutSlowIn,
+                  switchOutCurve: Curves.fastOutSlowIn,
+                  duration: const Duration(milliseconds: 600),
                   child: (stream.data == SwitchTab.profile) 
-                    ? const Icon( Icons.account_circle, key: Key("active"), color: Colors.white,)
-                    : const Icon(Icons.account_circle, key: Key("notactive")),
+                    ? const Icon( Icons.account_circle, key: Key("active"), color: mainColor,)
+                    : const Icon(Icons.account_circle, key: Key("notactive"), color: greyColor),
                 )
               ), 
               onPressed: () {
-                bloc.setTab(SwitchTab.profile);
+                setTab(SwitchTab.profile);
               },
             ),
           ],
