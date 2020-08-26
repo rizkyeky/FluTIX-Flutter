@@ -21,13 +21,10 @@ part 'page_maintabbar.dart';
 
 abstract class Page<T extends Bloc> extends StatefulWidget {
 
-  // final String instanceName;
-
-  T bloc = locator<T>();
+  final T bloc = locator<T>();
   
   Page({
     Key key,
-    // this.instanceName
   }) : super(key: key);
 
   @override
