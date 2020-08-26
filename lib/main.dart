@@ -1,21 +1,21 @@
-import 'package:flutix_training/service/service.dart';
 import 'package:flutter/material.dart';
 
+import 'locator.dart';
+// import 'service/service.dart';
+import 'share/share.dart';
 import 'view/page/page.dart';
-
-CoreService coreService = CoreService();
-AuthService authService = AuthService();
 
 Future<void> main() async {
   
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Await services init
-  // await coreService.init();
-  // final bool isSignIn = await authService.isSignIn();
+  setupLocator();
+  await awaitSetupLocator();
+
+  // bool isSignIn = locator.get<AuthService>(instanceName: 'Auth Service').isSignIn;
   
   // Run App
-  runApp(App(isSignIn: true));
+  runApp(const App(isSignIn: true));
 }
 
 class App extends StatelessWidget {
@@ -33,7 +33,8 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: mainColor,
+        accentColor: accentColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage()
