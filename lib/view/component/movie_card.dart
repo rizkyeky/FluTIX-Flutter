@@ -14,6 +14,9 @@ class MovieCard extends StatelessWidget {
     return XCard(
       padding: const EdgeInsets.symmetric(horizontal: 6),
       backgroundImage: NetworkImage('${imageBaseURL}w500${_movie.backdropPath}'),
+      onTap: () {
+        Navigator.pushNamed(context, '/detailmovie', arguments: _movie);
+      },
       child: Container(
         width: 360,
         padding: const EdgeInsets.all(12),
