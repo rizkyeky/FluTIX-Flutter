@@ -22,15 +22,16 @@ class HomeBloc {
   Future<void> getMoviesFromService() async {
     _movies = await _movieService.getMovies();
     print('get movies from service success');
+    print('${_movies.length} movies');
   }
 
   Future<List<Movie>> getMoviesCarousel(int start, int end) async {
     
-    if (_movies.isEmpty) {
-      await init();
-    }
+    // if (_movies.isEmpty) {
+    //   await init();
+    // }
 
-    print('${_movies.length} get movies from $start to $end success');
+    print('get ${_movies.length} movies from $start to $end success');
     return _movies.sublist(start, end);
   }
 }
