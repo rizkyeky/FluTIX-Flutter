@@ -3,7 +3,7 @@ part of 'page.dart';
 class HomePage extends StatelessWidget {
   HomePage({Key key}) : super(key: key);
 
-  final HomeBloc _bloc = HomeBloc();
+  final HomeBloc _bloc = locator.get<HomeBloc>(instanceName: 'Home Bloc');
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
               child: Text('Playing now', style: blueTitle,)
             ),
             FutureBuilder<List<Movie>>(
-              future: _bloc.getMoviesCarousel(0, 4),
+              future: _bloc.getMoviesCarousel(0, 5),
               builder: (context, snapshot) => (snapshot.hasData) ? CarouselSlider.builder(
                 itemCount: snapshot.data.length,
                 options: CarouselOptions(
@@ -39,13 +39,13 @@ class HomePage extends StatelessWidget {
             ContentList(
               title: 'Recomended for you',
               start: 5,
-              end: 8,
+              end: 9,
               movies: _bloc.getMoviesCarousel,
             ),
             ContentList(
               title: 'Coming Soon',
               start: 9,
-              end: 12,
+              end: 13,
               movies: _bloc.getMoviesCarousel,
             ),
           ],
