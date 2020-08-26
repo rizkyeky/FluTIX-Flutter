@@ -19,9 +19,9 @@ class HomePage extends StatelessWidget {
               child: Text('Playing now', style: blueTitle,)
             ),
             FutureBuilder<List<Movie>>(
-              future: _bloc.getMoviesCarousel(),
+              future: _bloc.getMoviesCarousel(0, 4),
               builder: (context, snapshot) => (snapshot.hasData) ? CarouselSlider.builder(
-                itemCount: 5,
+                itemCount: snapshot.data.length,
                 options: CarouselOptions(
                   height: 180
                 ),
@@ -36,8 +36,18 @@ class HomePage extends StatelessWidget {
                 child: const CircularProgressIndicator(),
               ),
             ),
-            const ContentList(title: 'Recomended for you',),
-            const ContentList(title: 'Coming Soon',)
+            ContentList(
+              title: 'Recomended for you',
+              start: 5,
+              end: 8,
+              movies: _bloc.getMoviesCarousel,
+            ),
+            ContentList(
+              title: 'Coming Soon',
+              start: 9,
+              end: 12,
+              movies: _bloc.getMoviesCarousel,
+            ),
           ],
         ),
       ),
