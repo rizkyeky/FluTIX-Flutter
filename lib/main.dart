@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'locator.dart';
 // import 'service/service.dart';
+import 'router.dart';
 import 'share/share.dart';
 import 'view/page/page.dart';
 
@@ -37,7 +38,8 @@ class App extends StatelessWidget {
         accentColor: accentColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MainTabBarPage()
+      initialRoute: '/',
+      onGenerateRoute: Router.generateRoute,
     );
   }
 }
