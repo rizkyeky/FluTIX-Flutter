@@ -53,7 +53,11 @@ class MovieCard extends StatelessWidget {
                 )
               ],
             ),
-            IconButton(icon: Icon(Icons.favorite, color: whiteColor,), onPressed: () {},)
+            XSwitchIcon(
+              activeIcon: Icons.favorite, 
+              nonactiveIcon: Icons.favorite_border, 
+              onSelected: () {},
+            )
           ],
         )
       ),
