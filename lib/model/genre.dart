@@ -84,6 +84,10 @@ class Genre {
       {
         "id": 37,
         "name": "Western"
+      },
+      {
+        "id": 0,
+        "name": ""
       }
     ];
     
