@@ -40,6 +40,8 @@ class _XSwitchIconState extends State<XSwitchIcon> {
         setState(() => isSelected = !isSelected);
       },
       icon: AnimatedSwitcher(
+        switchInCurve: Curves.fastOutSlowIn,
+        switchOutCurve: Curves.fastOutSlowIn,
         duration: const Duration(milliseconds: 300),
         child : isSelected
           ? Icon(widget.activeIcon, key: const Key("active"), color: widget.activeColor ?? Colors.white,)
