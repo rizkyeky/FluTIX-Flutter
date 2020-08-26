@@ -39,15 +39,17 @@ class ContentList extends StatelessWidget {
   final String title;
   final Widget child;
   final double height;
-  final int itemCount;
-  final List<Movie> movies;
+  final int start;
+  final int end;
+  final Future<List<Movie>> Function(int, int) movies;
 
   const ContentList({
     Key key,
     this.title,
     this.child,
     this.height,
-    this.itemCount,
+    this.start,
+    this.end,
     this.movies,
   }) : super(key: key);
 
@@ -73,19 +75,30 @@ class ContentList extends StatelessWidget {
                 color: mainColor,
               ),
             ),
-            Container(
-              height: height ?? 162,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: itemCount ?? 4,
-                itemBuilder: (context, index) => XCard(
-                  color: mainColor,
-                  padding: const EdgeInsets.symmetric(horizontal: 6),
-                  child: child ?? Container(
-                    width: 120,
-                  )
-                ),
-              ),
+            FutureBuilder<List<Movie>>(
+              future: movies(start, end),
+              builder: (context, snapshot) {
+                return (snapshot.hasData) ? Container(
+                  height: height ?? 162,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) => XCard(
+                      backgroundImage: NetworkImage('${imageBaseURL}w500${snapshot.data[index].posterPath}'),
+                      // color: mainColor,
+                      // padding: const EdgeInsets.symmetric(horizontal: 6),
+                      // child: child ?? Container(
+                      //   width: 120,
+                      // )
+                    ),
+                  ),
+                ): Container(
+                  height: height ?? 162,
+                  child: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
             )
           ],
         ),
