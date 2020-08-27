@@ -10,6 +10,7 @@ part 'xgrid.dart';
 part 'xselectedbox.dart';
 part 'xtopprogressindicator.dart';
 part 'xswitchicon.dart';
+part 'xchip.dart';
 
 part 'movie_card.dart';
 
@@ -35,27 +36,26 @@ class BlueRectButton extends StatelessWidget {
   }
 }
 
-class ContentList extends StatelessWidget {
+class ContentList<T> extends StatelessWidget {
   
   final String title;
   final Widget child;
   final double height;
-  final int start;
-  final int end;
-  final Future<List<Movie>> Function(int, int) movies;
+  final List<T> list;
+  final ImageProvider<dynamic> Function(T, int) imageBuilder;  
 
   const ContentList({
     Key key,
     this.title,
     this.child,
     this.height,
-    this.start,
-    this.end,
-    this.movies,
+    this.list,
+    this.imageBuilder
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       alignment: Alignment.topLeft,
       margin: const EdgeInsets.only(top: 18),
@@ -76,33 +76,23 @@ class ContentList extends StatelessWidget {
                 color: mainColor,
               ),
             ),
-            FutureBuilder<List<Movie>>(
-              future: movies(start, end),
-              builder: (context, snapshot) {
-                return (snapshot.hasData) ? Container(
-                  height: height ?? 162,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) => XCard(
-                      padding: const EdgeInsets.symmetric(horizontal: 6),
-                      backgroundImage: NetworkImage('${imageBaseURL}w500${snapshot.data[index].posterPath}'),
-                      child: Container(
-                        width: 120,
-                        padding: const EdgeInsets.all(12),
-                        alignment: Alignment.bottomCenter,
-                      )
-                    ),
-                  ),
-                ): Container(
-                  height: height ?? 162,
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
-            )
-          ],
+            Container(
+              height: height ?? 162,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: list.length,
+                itemBuilder: (context, index) => XCard(
+                  padding: const EdgeInsets.symmetric(horizontal: 6),
+                  backgroundImage: imageBuilder(list[index], index),
+                  child: Container(
+                    width: 120,
+                    padding: const EdgeInsets.all(12),
+                    alignment: Alignment.bottomCenter,
+                  )
+                ),
+              ),
+            ),
+          ]
         ),
       ),
     );
