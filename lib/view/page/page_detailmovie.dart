@@ -4,22 +4,26 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
   
   final Movie movie;
 
-   @override
+  @override
   void dispose() {
     // TODO: implement dispose
   }
 
   @override
   void init() {
-    bloc.getMovieFromService(movie.id);
+    // bloc.getMovieFromService(movie.id);
   }
   
   DetailMoviePage(this.movie, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: bloc.init(),
+
+    final int starCount = (movie.voteAverage/2).round();
+    final String favoriteCount = NumberFormat.compact().format(movie.voteCount);
+    
+    return FutureBuilder<void>(
+      future: bloc.getMovieFromService(movie.id),
       builder: (context, index) => Scaffold(
         backgroundColor: canvasColor,
         body: CustomScrollView(
@@ -40,7 +44,6 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                 )
               ],
               backgroundColor: mainColor,
-              title: Text(movie.title, style: whiteTitle,),
               leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () {
                 Navigator.pop(context);
               }),
@@ -56,81 +59,97 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
               delegate: SliverChildListDelegate(
                 <Widget>[
                   Container(
-                    height: 150, 
                     color: whiteColor,
+                    height: 180,
                     padding: const EdgeInsets.all(12),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('IDR 120.000', style: blueTitle,),
-                              Text('${movie.country} . PG-13 . 2h 29m', style: blackContentRegular,),
-                              Wrap(
-                                spacing: 3,
-                                children: [
-                                  for (int i = 0; i < 5; i++) const Icon(Icons.star, color: starColor,),
-                                  Text(' 7/10', style: blackContentRegular),
-                                ],
-                              ),
-                              Wrap(
-                                spacing: 6,
-                                children: [
-                                for (int i = 0; i < 3; i++) 
-                                  ActionChip(
-                                    elevation: 0,
-                                    pressElevation: 0,
-                                    onPressed: () {},
-                                    label: Text('Action', style: blackContentBold),
-
-                                  ),
-                                ],
-                              ),
-                            ]
-                          ),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.network('${imageBaseURL}w92${movie.posterPath}')
                         ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column(
-                                children: [
-                                  Icon(Icons.favorite, color: Colors.red,),
-                                  Text('1K+', style: blackContentRegular),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Icon(Icons.bookmark, color: Colors.blue,),
-                                  Text('5K+', style: blackContentRegular),
-                                ],
-                              ),
-                            ],
-                          ),
+                        const SizedBox(width: 12),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(movie.title, style: blueTitle,),
+                            Text('${movie.country} . PG-13 . 2h 29m', style: blackContentRegular,),
+                            Row(
+                              children: [
+                                for (int i = 0; i < starCount; i++) const Icon(Icons.star, 
+                                  size: 18,
+                                  color: starColor
+                                ),
+                                const SizedBox(width: 6,),
+                                Text('${movie.voteAverage}/10', style: blackContentRegular)
+                              ],
+                            ),
+                            Row(
+                              children: [
+                              for (Genre genre in movie.genres) 
+                                XChip(
+                                  text: genre.name,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.only(top: 18),
+                    padding: const EdgeInsets.all(12),
+                    color: whiteColor,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            const Icon(Icons.favorite, color: mainColor, size: 30),
+                            Text('${movie.voteCount}\nlikes', style: blackContentRegular, textAlign: TextAlign.center,),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            const Icon(Icons.bookmark, color: mainColor, size: 30),
+                            Text('1000\nwatchlist', style: blackContentRegular, textAlign: TextAlign.center,),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            const Icon(Icons.confirmation_number, color: mainColor, size: 30),
+                            Text('1000\nbooked', style: blackContentRegular, textAlign: TextAlign.center,),
+                          ],
                         )
                       ],
                     ),
                   ),
-                  // ContentList<Cast>(
-                  //   title: 'Cast',
-                  //   height: 90,
-                  //   // itemCount: 10,
-                  //   child: Container(
-                  //     height: 90,
-                  //     width: 90,
-                  //   ),
-                  // ),
+                  FutureBuilder<List<Cast>>(
+                    future: bloc.getCasts(movie.id),
+                    builder: (context, snapshot) => (snapshot.hasData) ? ContentList<Cast>(
+                      title: 'Recomended for you',
+                      list: snapshot.data,
+                      imageBuilder: (e, index) => NetworkImage('${imageBaseURL}w92${e.profilePath}'),
+                    ) 
+                    : Container(
+                      height: 240,
+                      color: whiteColor,
+                      alignment: Alignment.center,
+                      child: const CircularProgressIndicator(),
+                      )
+                  ),
                   Container(
                     alignment: Alignment.topLeft,
                     margin: const EdgeInsets.only(top: 18),
-                    height: 180,
+                    // height: 180,
                     child: Material(
                       color: Colors.white,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ListTile(
                             onTap: () {},
@@ -141,11 +160,11 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                           ),
                           Container(
                             // color: Colors.amber,
-                            padding: EdgeInsets.all(14),
-                            child: Text(
-                              "Marvel's The Avengers (classified under the name Marvel Avengers) "
-                              "Assemble in the United Kingdom and Ireland), or simply The Avengers, is "
-                              "a 2012 American superhero film based on the Marvel Comics superhero",
+                            padding: const EdgeInsets.only(left: 12, right: 12, bottom: 18),
+                            child: Text( movie.overview,
+                              // "Marvel's The Avengers (classified under the name Marvel Avengers) "
+                              // "Assemble in the United Kingdom and Ireland), or simply The Avengers, is "
+                              // "a 2012 American superhero film based on the Marvel Comics superhero",
                               style: blackContentRegular,                                
                             ),
                           ),
