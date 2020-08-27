@@ -36,6 +36,7 @@ dependencies:
   carousel_slider: ^2.2.1
   http: ^0.12.2
   get_it: ^4.0.4
+  intl: ^0.16.1
 
 dev_dependencies:
   lint: ^1.2.0
