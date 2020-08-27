@@ -13,9 +13,21 @@ import 'package:flutix_training/service/service.dart';
 
 Future<void> main() async {
 
-  final MovieService _movieService = MovieService();
-  final List movies = await _movieService.getMovies();
-  print(movies);
+  int minute = 120;
+
+  var str = StringBuffer();
+
+    if (minute > 60) {
+      str.write((minute / 60).floor());
+      str.write('h ');
+      // print(str.toString());
+    }
+    if (minute % 60 != 0) {
+      str.write(minute % 60);
+      str.write('m');
+    }
+      print(str.toString());
+
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.
   //   await tester.pumpWidget( const App(isSignIn: true));
