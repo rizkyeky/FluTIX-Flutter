@@ -43,6 +43,7 @@ class ContentList<T> extends StatelessWidget {
   final double height;
   final List<T> list;
   final ImageProvider<dynamic> Function(T, int) imageBuilder;  
+  final Text Function(T, int) textBuilder;  
 
   const ContentList({
     Key key,
@@ -50,8 +51,20 @@ class ContentList<T> extends StatelessWidget {
     this.child,
     this.height,
     this.list,
-    this.imageBuilder
+    this.imageBuilder,
+    this.textBuilder
   }) : super(key: key);
+
+  Widget buildCard(int index) => XCard(
+    padding: const EdgeInsets.symmetric(horizontal: 6),
+    backgroundImage: imageBuilder(list[index], index),
+    child: Container(
+      width: 120,
+      height: 150,
+      padding: const EdgeInsets.all(12),
+      alignment: Alignment.bottomCenter,
+    )
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +72,7 @@ class ContentList<T> extends StatelessWidget {
     return Container(
       alignment: Alignment.topLeft,
       margin: const EdgeInsets.only(top: 18),
-      height: 240,
+      height: (height ?? 174) + 78,
       child: Material(
         color: Colors.white,
         child: Column(
@@ -77,19 +90,18 @@ class ContentList<T> extends StatelessWidget {
               ),
             ),
             Container(
-              height: height ?? 162,
+              height: height ?? 174,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: list.length,
-                itemBuilder: (context, index) => XCard(
-                  padding: const EdgeInsets.symmetric(horizontal: 6),
-                  backgroundImage: imageBuilder(list[index], index),
-                  child: Container(
-                    width: 120,
-                    padding: const EdgeInsets.all(12),
-                    alignment: Alignment.bottomCenter,
-                  )
-                ),
+                itemBuilder: (context, index) => (textBuilder != null) ? Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buildCard(index),
+                    textBuilder(list[index], index) 
+                  ],
+                )
+                : buildCard(index),
               ),
             ),
           ]

@@ -34,13 +34,15 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
               elevation: 0,
               expandedHeight: 200.0,
               actions: [
-                IconButton(
-                  icon: const Icon(Icons.favorite_border,),
-                  onPressed: () {},
+                XSwitchIcon(
+                  activeIcon: Icons.favorite, 
+                  nonactiveIcon: Icons.favorite_border, 
+                  onSelected: () {}
                 ),
-                IconButton(
-                  icon: const Icon(Icons.bookmark_border,),
-                  onPressed: () {},
+                XSwitchIcon(
+                  activeIcon: Icons.bookmark, 
+                  nonactiveIcon: Icons.bookmark_border, 
+                  onSelected: () {}
                 )
               ],
               backgroundColor: mainColor,
@@ -131,9 +133,23 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                   FutureBuilder<List<Cast>>(
                     future: bloc.getCasts(movie.id),
                     builder: (context, snapshot) => (snapshot.hasData) ? ContentList<Cast>(
-                      title: 'Recomended for you',
+                      title: 'Cast',
                       list: snapshot.data,
-                      imageBuilder: (e, index) => NetworkImage('${imageBaseURL}w92${e.profilePath}'),
+                      height: 192,
+                      textBuilder: (e, index) => Text(e.name, 
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: blackContentRegular, 
+                        textAlign: TextAlign.center,
+                      ),
+                      imageBuilder: (e, index) {
+                        if (e.profilePath != null) {
+                          return NetworkImage('${imageBaseURL}w92${e.profilePath}');
+                        }
+                        else {
+                          return const AssetImage('assets/no_image.png');
+                        }
+                      },
                     ) 
                     : Container(
                       height: 240,

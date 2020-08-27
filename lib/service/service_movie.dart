@@ -86,8 +86,6 @@ class MovieService {
       // Respone success
       final Map data = json.decode(response.body) as Map;
       final List result = data['cast'] as List;
-
-      print('respone get cast success');
       
       return result.map((e) => Cast.fromJson(e as Map<String, dynamic>))
         .take(8).toList();
