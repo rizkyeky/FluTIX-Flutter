@@ -19,21 +19,28 @@ class MovieService {
     
     const String _subBase = '3/discover/movie';
 
-    final Uri _uri = Uri.https(_homeBase, _subBase, query);
-    final http.Response response = await _client.get(_uri);
+    // print('request api from $_homeBase');
 
-    if (response.statusCode != 200) {
-      // Respone not success
+    try {
+      final Uri _uri = Uri.https(_homeBase, _subBase, query);
+      final http.Response response = await _client.get(_uri).timeout(const Duration(seconds: 10));
+
+      if (response.statusCode != 200) {
+        // Respone not success
+        return [];
+      }
+      else {
+        // Respone success
+        final Map data = json.decode(response.body) as Map;
+        final List result = data['results'] as List;
+        
+        // print('respone success');
+        
+        return result.map<Movie>((e) => Movie.fromJson(e as Map<String, dynamic>)).toList();
+      }
+    } catch (e) {
+      // print('request was failed');
       return [];
-    }
-    else {
-      // Respone success
-      final Map data = json.decode(response.body) as Map;
-      final List result = data['results'] as List;
-      
-      // print('respone success');
-      
-      return result.map<Movie>((e) => Movie.fromJson(e as Map<String, dynamic>)).toList();
     }
   }
 
@@ -58,6 +65,32 @@ class MovieService {
       // print('respone success');
       
       return Movie.fromJson(data as Map<String, dynamic>);
+    }
+  }
+
+  Future<List<Cast>> getCasts(int id) async {
+    final Map<String, String> query = {
+      'api_key': apiKey,
+    };
+
+    final String _subBase = '3/movie/$id/credits';
+
+    final Uri _uri = Uri.https(_homeBase, _subBase, query);
+    final http.Response response = await _client.get(_uri);
+
+    if (response.statusCode != 200) {
+      // Respone not success
+      return [];
+    }
+    else {
+      // Respone success
+      final Map data = json.decode(response.body) as Map;
+      final List result = data['cast'] as List;
+
+      print('respone get cast success');
+      
+      return result.map((e) => Cast.fromJson(e as Map<String, dynamic>))
+        .take(8).toList();
     }
   }
 }
