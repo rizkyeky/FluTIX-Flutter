@@ -13,6 +13,21 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
   void init() {
     // bloc.getMovieFromService(movie.id);
   }
+
+  String convertTime(int minute) {
+   
+    final str = StringBuffer();
+
+    if (minute > 60) {
+      str.write((minute / 60).floor());
+      str.write('h ');
+    }
+    if (minute % 60 != 0) {
+      str.write(minute % 60);
+      str.write('m');
+    }
+    return str.toString();
+  }
   
   DetailMoviePage(this.movie, {Key key}) : super(key: key);
 
@@ -20,11 +35,10 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
   Widget build(BuildContext context) {
 
     final int starCount = (movie.voteAverage/2).round();
-    final String favoriteCount = NumberFormat.compact().format(movie.voteCount);
     
-    return FutureBuilder<void>(
-      future: bloc.getMovieFromService(movie.id),
-      builder: (context, index) => Scaffold(
+    return FutureBuilder<Movie>(
+      future: bloc.getDetailMovie(movie),
+      builder: (context, snapshot) => (snapshot.hasData) ? Scaffold(
         backgroundColor: canvasColor,
         body: CustomScrollView(
           slivers: <Widget>[
@@ -89,7 +103,7 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                                 overflow: TextOverflow.ellipsis,
                               )
                             ),
-                            Text('${movie.country} . PG-13 . 2h 29m', style: blackContentRegular,),
+                            Text('${movie.country} . PG-13 . ${convertTime(snapshot.data.runtime)}', style: blackContentRegular,),
                             Row(
                               children: [
                                 for (int i = 0; i < starCount; i++) const Icon(Icons.star, 
@@ -218,9 +232,12 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
           elevation: 0,
           highlightElevation: 0,
           backgroundColor: mainColor, 
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, '/booktime'),
           label: Text('Book now', style: whiteSubtitle),
         ),
+      ) 
+      : const Scaffold(
+        body: Center(child: CircularProgressIndicator(),),
       ),
     );
   }

@@ -7,7 +7,7 @@ class DetailMovieBloc implements Bloc {
   final BehaviorSubject<List<Movie>> _movieCarouselController = BehaviorSubject();
   Stream<List<Movie>> get movieCarouselStream => _movieCarouselController.stream;
 
-  Movie _movie = Movie.initial();
+  Movie _movie;
   List<Cast> _casts = [];
 
   bool isInit = false;
@@ -30,12 +30,18 @@ class DetailMovieBloc implements Bloc {
     _movie = await _movieService.getMovie(id);
   }
 
-  Future<Movie> getMovie(int id) async {
-    if (_movie == null) {
-      await getMovieFromService(id);
-    }
+  Future<Movie> getDetailMovie(Movie movie) async {
+    // if (_movie == null) {
+    await getMovieFromService(movie.id);
+    // }
 
-    return _movie;
+    // print('get movie detail');
+
+    movie.runtime = _movie.runtime;
+
+    print(movie.runtime);
+
+    return movie;
   }
 
   Future<void> getCastFromService(int id) async {

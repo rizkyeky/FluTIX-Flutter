@@ -63,6 +63,7 @@ class MovieService {
       final Map data = json.decode(response.body) as Map;
 
       // print('respone success');
+      // print(data['runtime']);
       
       return Movie.fromJson(data as Map<String, dynamic>);
     }

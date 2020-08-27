@@ -49,7 +49,11 @@ class Movie {
     0
   );
 
-  factory Movie.fromJson(Map<String, dynamic> json) => Movie(
+  factory Movie.fromJson(Map<String, dynamic> json) {
+
+    // print(json['runtime']);
+
+    return Movie(
     json['id'] as int,
     json['title'] as String,
     (json['popularity'] as num).toDouble(),
@@ -77,6 +81,7 @@ class Movie {
     (json['status'] as String) ?? '',
     (json['runtime'] as int) ?? 0,
   );
+  }
 
   @override
   String toString() => 'movie: $title ($genres)';
