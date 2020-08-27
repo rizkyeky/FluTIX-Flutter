@@ -62,7 +62,8 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                 <Widget>[
                   Container(
                     color: whiteColor,
-                    height: 180,
+                    // height: 180,
+                    width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.all(12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +77,18 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(movie.title, style: blueTitle,),
+                            Container(
+                              constraints: const BoxConstraints(
+                                minWidth: 180,
+                                maxWidth: 240
+                              ),
+                              child: Text(movie.title, 
+                                style: blueTitle, 
+                                maxLines: 3,
+                                textAlign: TextAlign.left, 
+                                overflow: TextOverflow.ellipsis,
+                              )
+                            ),
                             Text('${movie.country} . PG-13 . 2h 29m', style: blackContentRegular,),
                             Row(
                               children: [
@@ -88,13 +100,18 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                                 Text('${movie.voteAverage}/10', style: blackContentRegular)
                               ],
                             ),
-                            Row(
-                              children: [
-                              for (Genre genre in movie.genres) 
-                                XChip(
-                                  text: genre.name,
-                                ),
-                              ],
+                            Container(
+                              constraints: const BoxConstraints(
+                                minWidth: 180,
+                                maxWidth: 240
+                              ),
+                              child: Wrap(
+                                spacing: 6,
+                                children: [
+                                for (Genre genre in movie.genres) 
+                                  Chip(label: Text(genre.name), labelStyle: blackContentBold,),
+                                ],
+                              ),
                             ),
                           ],
                         ),

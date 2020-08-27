@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 12,),
             Container(
               alignment: Alignment.centerLeft,
               margin: const EdgeInsets.all(18),
