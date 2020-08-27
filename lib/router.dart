@@ -11,10 +11,9 @@ class Router {
       case '/detailmovie':
         final Movie movie = settings.arguments as Movie;
         return MaterialPageRoute(builder: (_) => DetailMoviePage(movie));
-      // case '/details':
-      //   String walletName = settings.arguments;
-      //   return MaterialPageRoute(builder: (_) => Details(walletName));
-      //   break;
+      case '/booktime':
+        return MaterialPageRoute(builder: (_) => BookTimePage());
+        break;
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
