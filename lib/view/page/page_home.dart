@@ -36,17 +36,33 @@ class HomePage extends StatelessWidget {
                 child: const CircularProgressIndicator(),
               ),
             ),
-            ContentList(
-              title: 'Recomended for you',
-              start: 5,
-              end: 9,
-              movies: _bloc.getMoviesCarousel,
+            FutureBuilder<List<Movie>>(
+              future: _bloc.getMoviesCarousel(5, 9),
+              builder: (context, snapshot) => (snapshot.hasData) ? ContentList<Movie>(
+                title: 'Recomended for you',
+                list: snapshot.data,
+                imageBuilder: (e, index) => NetworkImage('${imageBaseURL}w92${e.posterPath}'),
+              ) 
+              : Container(
+                height: 240,
+                color: whiteColor,
+                alignment: Alignment.center,
+                child: const CircularProgressIndicator(),
+              )
             ),
-            ContentList(
-              title: 'Coming Soon',
-              start: 9,
-              end: 13,
-              movies: _bloc.getMoviesCarousel,
+            FutureBuilder<List<Movie>>(
+              future: _bloc.getMoviesCarousel(9, 12),
+              builder: (context, snapshot) => (snapshot.hasData) ? ContentList<Movie>(
+                title: 'Coming Soon',
+                list: snapshot.data,
+                imageBuilder: (e, index) => NetworkImage('${imageBaseURL}w92${e.posterPath}'),
+              ) 
+              : Container(
+                height: 240,
+                color: whiteColor,
+                alignment: Alignment.center,
+                child: const CircularProgressIndicator(),
+              )
             ),
             const SizedBox(height: 54,)
           ],
