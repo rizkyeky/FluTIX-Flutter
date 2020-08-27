@@ -43,7 +43,8 @@ class ContentList<T> extends StatelessWidget {
   final double height;
   final List<T> list;
   final ImageProvider<dynamic> Function(T, int) imageBuilder;  
-  final Text Function(T, int) textBuilder;  
+  final Text Function(T, int) textBuilder;
+  final bool disableNavigate; 
 
   const ContentList({
     Key key,
@@ -52,10 +53,14 @@ class ContentList<T> extends StatelessWidget {
     this.height,
     this.list,
     this.imageBuilder,
-    this.textBuilder
+    this.textBuilder,
+    this.disableNavigate,
   }) : super(key: key);
 
-  Widget buildCard(int index) => XCard(
+  Widget buildCard(BuildContext context, int index) => XCard(
+    onTap: (!(disableNavigate ?? false) ) ? () {
+      Navigator.pushNamed(context, '/detailmovie', arguments: list[index]);
+    } : () {},
     padding: const EdgeInsets.symmetric(horizontal: 6),
     backgroundImage: imageBuilder(list[index], index),
     child: Container(
@@ -97,11 +102,11 @@ class ContentList<T> extends StatelessWidget {
                 itemBuilder: (context, index) => (textBuilder != null) ? Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildCard(index),
+                    buildCard(context, index),
                     textBuilder(list[index], index) 
                   ],
                 )
-                : buildCard(index),
+                : buildCard(context, index),
               ),
             ),
           ]
