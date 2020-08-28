@@ -2,13 +2,18 @@ part of 'component.dart';
 
 class XTopBar extends AppBar {
   
-  
-  XTopBar({Key key}) : super(
+  XTopBar({
+    Key key,
+    String textTitle,
+    Widget leading,
+    Color backgroundColor,
+    TextStyle textStyle, 
+  }) : super(
     key: key,
-    backgroundColor: mainColor,
+    backgroundColor: backgroundColor ?? mainColor,
     centerTitle: true,
     elevation: 0,
-    title: Text('FluTIX', style: whiteTitle,),
-
+    title: Text(textTitle, style: textStyle ?? whiteTitle,),
+    leading: leading
   );
 }
