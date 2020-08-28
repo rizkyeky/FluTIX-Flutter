@@ -12,21 +12,62 @@ import 'package:flutix_training/main.dart';
 import 'package:flutix_training/service/service.dart';
 
 Future<void> main() async {
+  
+  DateTime _thisDate = DateTime.now();
+  List<Map<String, dynamic>> _daysInWeek = [];
 
-  int minute = 120;
 
-  var str = StringBuffer();
+  void getDaysInWeek() {
 
-    if (minute > 60) {
-      str.write((minute / 60).floor());
-      str.write('h ');
-      // print(str.toString());
+    final Map<String, dynamic> day = {};
+    
+    int date = _thisDate.day;
+    int weekday = _thisDate.weekday;
+
+    final lastDateOfThisMonth = DateTime(_thisDate.year, _thisDate.month, 0);
+
+    for (int i = 0; i < 7 ; i++) {
+
+      if (weekday > 7) {
+        weekday = 1;
+      }
+
+      if (date > lastDateOfThisMonth.day) {
+        date = 1;
+      }
+      
+      switch (weekday) {
+        case 1: 
+          day['name'] = 'Mon';
+          break;
+        case 2: 
+          day['name'] = 'Tus';
+          break;
+        case 3: 
+          day['name'] = 'Wed';
+          break;
+        case 4: 
+          day['name'] = 'Thus';
+          break;
+        case 5: 
+          day['name'] = 'Fri';
+          break;
+        case 6: 
+          day['name'] = 'Sat';
+          break;
+        default: day['name'] = 'Sun';
+      }
+        day['date'] = date;
+        
+        print(day);
+        
+        _daysInWeek.add(day);
+        
+        weekday++;
+        date++;
     }
-    if (minute % 60 != 0) {
-      str.write(minute % 60);
-      str.write('m');
-    }
-      print(str.toString());
+  }
+    getDaysInWeek();
 
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.
