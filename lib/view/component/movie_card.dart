@@ -39,10 +39,13 @@ class MovieCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(_movie.title,
-                  maxLines: 2,
-                  style: whiteTitle,
-                  overflow: TextOverflow.ellipsis,
+                Container(
+                  width: 240,
+                  child: Text(_movie.title,
+                    maxLines: 2,
+                    style: whiteTitle,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
                 Row(
                   children: [
