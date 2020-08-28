@@ -4,11 +4,15 @@ class BookTimeBloc implements Bloc {
 
   // final MovieService _movieService = MovieService();
 
-  final BehaviorSubject<List<Movie>> _movieCarouselController = BehaviorSubject();
-  Stream<List<Movie>> get movieCarouselStream => _movieCarouselController.stream;
+  final BehaviorSubject<int> _selectedDateController = BehaviorSubject();
+  Stream<int> get selectedDateStream => _selectedDateController.stream;
 
   final DateTime _thisDate = DateTime.now();
-  final List<Map<String, dynamic>> daysInWeek = [];
+  
+  final List<Map<String, dynamic>> _daysInWeek = [];
+  List<Map<String, dynamic>> get daysInWeek => _daysInWeek;
+  
+  Map<String, dynamic> selectedDate;
 
   bool isInit = false;
 
@@ -16,6 +20,8 @@ class BookTimeBloc implements Bloc {
   void dispose() {
     if (isInit) {
       isInit = false;
+
+      _selectedDateController.close();
     }
   }
 
@@ -25,6 +31,20 @@ class BookTimeBloc implements Bloc {
       isInit = true;
 
       getDaysInWeek();
+      _selectedDateController.sink.add(-1);
+    }
+  }
+
+  void selectDate(int index) {
+
+    if (index == -1) {
+      _selectedDateController.sink.add(index);
+
+    }
+    else if (selectedDate != _daysInWeek[index]) {
+      selectedDate = _daysInWeek[index];
+      _selectedDateController.sink.add(index);
+      print(index);
     }
   }
 
@@ -49,29 +69,29 @@ class BookTimeBloc implements Bloc {
       
       switch (weekday) {
         case 1: 
-          day['name'] = 'Mon';
+          day['name'] = 'Mon'.toUpperCase();
           break;
         case 2: 
-          day['name'] = 'Tus';
+          day['name'] = 'Tus'.toUpperCase();
           break;
         case 3: 
-          day['name'] = 'Wed';
+          day['name'] = 'Wed'.toUpperCase();
           break;
         case 4: 
-          day['name'] = 'Thus';
+          day['name'] = 'Thus'.toUpperCase();
           break;
         case 5: 
-          day['name'] = 'Fri';
+          day['name'] = 'Fri'.toUpperCase();
           break;
         case 6: 
-          day['name'] = 'Sat';
+          day['name'] = 'Sat'.toUpperCase();
           break;
-        default: day['name'] = 'Sun';
+        default: day['name'] = 'Sun'.toUpperCase();
       }
 
       day['date'] = date;
       
-      daysInWeek.add(day);
+      _daysInWeek.add(day);
       
       weekday++;
       date++;

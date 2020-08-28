@@ -42,16 +42,29 @@ class BookTimePage extends Page<BookTimeBloc>{
               margin: const EdgeInsets.only(top: 12),
               height: 48,
               child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: bloc.daysInWeek.length,
-                itemBuilder: (context, index) => Container(
-                  margin: const EdgeInsets.only(right: 12),
-                  child: XSelectedBox(
-                    width: 96,
-                    text: '${bloc.daysInWeek[index]['name']} ${bloc.daysInWeek[index]['date']}'
+                  scrollDirection: Axis.horizontal,
+                  itemCount: bloc.daysInWeek.length,
+                  itemBuilder: (context, index) => StreamBuilder<int>(
+                    stream: bloc.selectedDateStream,
+                    builder: (context, snapshot) {
+                      return Container(
+                        margin: const EdgeInsets.only(right: 12),
+                        child: XSelectedBox(
+                          isSelected: index == snapshot.data,
+                          onSelected: (isSelected) {
+                            if (isSelected) {
+                              bloc.selectDate(index);
+                            } else {
+                              bloc.selectDate(-1);
+                            }
+                          },
+                          width: 96,
+                          text: '${bloc.daysInWeek[index]['name']} ${bloc.daysInWeek[index]['date']}'
+                        ),
+                      );
+                    }
                   ),
                 ),
-              ),
             ),
             const SizedBox(height: 36,),
             Container(
@@ -59,23 +72,36 @@ class BookTimePage extends Page<BookTimeBloc>{
               child: ListView.builder(
                 itemCount: 3,
                 itemBuilder: (context, index) => Container(
-                  margin: EdgeInsets.symmetric(vertical: 12),
+                  margin: const EdgeInsets.symmetric(vertical: 12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Paris Van Java', style: blackSubtitle,),
                       Container(
-                        margin: EdgeInsets.only(top: 12),
+                        margin: const EdgeInsets.only(top: 12),
                         height: 48,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: 7,
-                          itemBuilder: (context, index) => Container(
-                            margin: EdgeInsets.only(right: 12),
-                            child: XSelectedBox(
-                              width: 96,
-                              text: '19:20'
-                            ),
+                          itemBuilder: (context, index) => StreamBuilder<int>(
+                            stream: bloc.selectedDateStream,
+                            builder: (context, snapshot) {
+                              return Container(
+                                margin: const EdgeInsets.only(right: 12),
+                                child: XSelectedBox(
+                                  isSelected: index == snapshot.data,
+                                  onSelected: (isSelected) {
+                                    if (isSelected) {
+                                      bloc.selectDate(index);
+                                    } else {
+                                      bloc.selectDate(-1);
+                                    }
+                                  },
+                                  width: 96,
+                                  text: '${bloc.daysInWeek[index]['name']} ${bloc.daysInWeek[index]['date']}'
+                                ),
+                              );
+                            }
                           ),
                         ),
                       ),
