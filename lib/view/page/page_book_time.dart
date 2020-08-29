@@ -67,73 +67,71 @@ class BookTimePage extends Page<BookTimeBloc>{
                 ),
             ),
             const SizedBox(height: 36,),
-            Container(
-              height: 1000,
-              child: ListView.builder(
-                itemCount: bloc.timePlace.keys.toList().length,
-                itemBuilder: (context, indexPlace) {
-                  
-                  final String place = bloc.timePlace.keys.toList()[indexPlace];
+            ColumnBuilder(
+              itemCount: bloc.timePlace.keys.toList().length,
+              itemBuilder: (context, indexPlace) {
+                
+                final String place = bloc.timePlace.keys.toList()[indexPlace];
 
-                  return Container(
-                  margin: const EdgeInsets.symmetric(vertical: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(bloc.timePlace.keys.toList()[indexPlace], style: blackSubtitle,),
-                      Container(
-                        margin: const EdgeInsets.only(top: 12),
-                        height: 48,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: bloc.items.length,
-                          itemBuilder: (context, index) => StreamBuilder<Map<String, int>>(
-                            initialData: const {},
-                            stream: bloc.selectedTimePlaceStream,
-                            builder: (context, snapshot) {
+                return Container(
+                margin: const EdgeInsets.symmetric(vertical: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(bloc.timePlace.keys.toList()[indexPlace], style: blackSubtitle,),
+                    Container(
+                      margin: const EdgeInsets.only(top: 12),
+                      height: 48,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: bloc.items.length,
+                        itemBuilder: (context, index) => StreamBuilder<Map<String, int>>(
+                          initialData: const {},
+                          stream: bloc.selectedTimePlaceStream,
+                          builder: (context, snapshot) {
 
-                              // final List<String> selectedItems = [];
-                              // selectedItems.addAll(snapshot.data);
+                            // final List<String> selectedItems = [];
+                            // selectedItems.addAll(snapshot.data);
 
-                              // return Card(
-                              //   color: (selectedItems.contains(bloc.items[index])) ? Colors.amber : Colors.grey,
-                              //   child: InkWell(
-                              //     onTap : () {
-                              //       if (selectedItems.contains(bloc.items[index])) {
-                              //         bloc.removeItem(bloc.items[index]);
-                              //       }
-                              //       else {
-                              //         bloc.addItem(bloc.items[index]);
-                              //       }
-                              //     },
-                              //     child: Container(height: 100, width: 100, child: Text(bloc.items[index]),),
-                              //   ),
-                              // );
-                              return Container(
-                                margin: const EdgeInsets.only(right: 12),
-                                child: XSelectedBox(
-                                  isSelected: snapshot.data.containsKey(place) && snapshot.data.containsValue(index),
-                                  onSelected: (isSelected) {
-                                    if (isSelected) {
-                                      bloc.selectTimePlace(place, index);
-                                    } else {
-                                      bloc.selectTimePlace('', -1);
-                                    }
-                                  },
-                                  width: 96,
-                                  text: bloc.timePlace[place][index]
-                                ),
-                              );
-                            }
-                          ),
+                            // return Card(
+                            //   color: (selectedItems.contains(bloc.items[index])) ? Colors.amber : Colors.grey,
+                            //   child: InkWell(
+                            //     onTap : () {
+                            //       if (selectedItems.contains(bloc.items[index])) {
+                            //         bloc.removeItem(bloc.items[index]);
+                            //       }
+                            //       else {
+                            //         bloc.addItem(bloc.items[index]);
+                            //       }
+                            //     },
+                            //     child: Container(height: 100, width: 100, child: Text(bloc.items[index]),),
+                            //   ),
+                            // );
+                            return Container(
+                              margin: const EdgeInsets.only(right: 12),
+                              child: XSelectedBox(
+                                isSelected: snapshot.data.containsKey(place) && snapshot.data.containsValue(index),
+                                onSelected: (isSelected) {
+                                  if (isSelected) {
+                                    bloc.selectTimePlace(place, index);
+                                  } else {
+                                    bloc.selectTimePlace('', -1);
+                                  }
+                                },
+                                width: 96,
+                                text: bloc.timePlace[place][index]
+                              ),
+                            );
+                          }
                         ),
                       ),
-                    ],
-                  ),
-                );
-                } 
-              ),
-            )
+                    ),
+                  ],
+                ),
+              );
+              } 
+            ),
+            const SizedBox(height: 54,),
           ],
         ),
       ),
@@ -141,7 +139,10 @@ class BookTimePage extends Page<BookTimeBloc>{
         elevation: 0,
         highlightElevation: 0,
         backgroundColor: mainColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/bookseat');
+          bloc.printSelected();
+        },
         child: const Icon(Icons.arrow_forward),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
