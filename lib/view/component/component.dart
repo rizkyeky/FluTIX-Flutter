@@ -130,3 +130,22 @@ class XRenderView extends StatelessWidget {
     );
   }
 }
+
+class ColumnBuilder extends StatelessWidget {
+  final IndexedWidgetBuilder itemBuilder;
+  final int itemCount;
+
+  const ColumnBuilder({
+    Key key,
+    @required this.itemBuilder,
+    @required this.itemCount,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: List.generate(
+        itemCount, (index) => itemBuilder(context, index)).toList(),
+    );
+  }
+}
