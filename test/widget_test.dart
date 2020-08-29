@@ -11,63 +11,23 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutix_training/main.dart';
 import 'package:flutix_training/service/service.dart';
 
+class Data {
+  final String name;
+  Data(this.name);
+
+  @override
+  bool operator == (Object other) => other is Data && name == other.name;
+
+  @override
+  int get hashCode => name.hashCode;
+}
+
 Future<void> main() async {
+
+  Data data1 = Data('satu');
+  Data data2 = Data('satu');
   
-  DateTime _thisDate = DateTime.now();
-  List<Map<String, dynamic>> _daysInWeek = [];
-
-
-  void getDaysInWeek() {
-
-    final Map<String, dynamic> day = {};
-    
-    int date = _thisDate.day;
-    int weekday = _thisDate.weekday;
-
-    final lastDateOfThisMonth = DateTime(_thisDate.year, _thisDate.month, 0);
-
-    for (int i = 0; i < 7 ; i++) {
-
-      if (weekday > 7) {
-        weekday = 1;
-      }
-
-      if (date > lastDateOfThisMonth.day) {
-        date = 1;
-      }
-      
-      switch (weekday) {
-        case 1: 
-          day['name'] = 'Mon';
-          break;
-        case 2: 
-          day['name'] = 'Tus';
-          break;
-        case 3: 
-          day['name'] = 'Wed';
-          break;
-        case 4: 
-          day['name'] = 'Thus';
-          break;
-        case 5: 
-          day['name'] = 'Fri';
-          break;
-        case 6: 
-          day['name'] = 'Sat';
-          break;
-        default: day['name'] = 'Sun';
-      }
-        day['date'] = date;
-        
-        print(day);
-        
-        _daysInWeek.add(day);
-        
-        weekday++;
-        date++;
-    }
-  }
-    getDaysInWeek();
+  print(data1 == data2);
 
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.

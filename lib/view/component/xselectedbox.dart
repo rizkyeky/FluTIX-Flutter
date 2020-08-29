@@ -36,7 +36,7 @@ class _XSelectedBoxState extends State<XSelectedBox> {
   @override
   Widget build(BuildContext context) {
 
-    isSelected = widget.isSelected;
+    isSelected = widget.isSelected ?? isSelected;
 
     return Material(
       clipBehavior: Clip.antiAlias,
