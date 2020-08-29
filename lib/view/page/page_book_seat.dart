@@ -1,17 +1,30 @@
 part of 'page.dart';
 
-class BookSeatPage extends StatelessWidget {
-  const BookSeatPage({Key key}) : super(key: key);
+class BookSeatPage extends Page<BookSeatBloc> {
+  BookSeatPage({Key key}) : super(key: key);
 
-  // final SignInBloc bloc = SignInBloc();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+  }
+
+  @override
+  void init() {
+    // TODO: implement init
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopLinearProgressIndicator(
-        backgroundColor: mainColor,
-        valueColor:accentColor,
+      appBar: XTopBar(
+        textTitle: 'Choose Seats',
+        textStyle: blueTitle,
+        backgroundColor: whiteColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: mainColor), 
+          onPressed: () => Navigator.pop(context)
         ),
+      ),
       body: SingleChildScrollView(
         padding: paddingPage,
         child: Column(

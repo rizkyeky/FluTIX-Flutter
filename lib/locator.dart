@@ -16,6 +16,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => HomeBloc(), instanceName: 'Home Bloc');
   locator.registerLazySingleton(() => DetailMovieBloc());
   locator.registerLazySingleton(() => BookTimeBloc());
+  locator.registerLazySingleton(() => BookSeatBloc());
   
   locator.registerLazySingleton(() => SignInBloc());
   locator.registerLazySingleton(() => SignUpBloc());
