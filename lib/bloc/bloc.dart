@@ -9,6 +9,7 @@ part 'bloc_home.dart';
 part 'bloc_maintabbar.dart';
 part 'bloc_detailmovie.dart';
 part 'bloc_booktime.dart';
+part 'bloc_bookseat.dart';
 
 abstract class Bloc {
   Future<void> init();

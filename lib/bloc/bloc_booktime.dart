@@ -15,7 +15,9 @@ class BookTimeBloc implements Bloc {
   final List<Map<String, dynamic>> _daysInWeek = [];
   List<Map<String, dynamic>> get daysInWeek => _daysInWeek;
   
-  Map<String, dynamic> selectedDate = {};
+  Map<String, dynamic> _selectedDate = {};
+  String _selectedPlace = '';
+  String _selectedTime = '';
 
   Map<String, List<String>> timePlace = {
     'XXI Paris Van Java Mall': ['10:00', '12:00', '14:00'],
@@ -47,6 +49,10 @@ class BookTimeBloc implements Bloc {
     }
   }
 
+  void printSelected() {
+    print('$_selectedDate $_selectedTime $_selectedPlace');
+  }
+
   final BehaviorSubject<List<String>> _selectedItemController = BehaviorSubject();
   Stream<List<String>> get selectedItemStream => _selectedItemController.stream;
 
@@ -70,8 +76,8 @@ class BookTimeBloc implements Bloc {
       _selectedDateController.sink.add(index);
 
     }
-    else if (selectedDate != _daysInWeek[index]) {
-      selectedDate = _daysInWeek[index];
+    else if (_selectedDate != _daysInWeek[index]) {
+      _selectedDate = _daysInWeek[index];
       _selectedDateController.sink.add(index);
     }
   }
@@ -134,6 +140,8 @@ class BookTimeBloc implements Bloc {
     }
     else {
       _selectedTimePlaceController.sink.add({place: indexTime});
+      _selectedPlace = place;
+      _selectedTime = timePlace[place][indexTime];
       // print('$place $indexTime');
     }
   }
