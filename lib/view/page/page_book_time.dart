@@ -119,23 +119,19 @@ class BookTimePage extends Page<BookTimeBloc>{
           ],
         ),
       ),
-      floatingActionButton: StreamBuilder<Object>(
-        stream: null,
-        builder: (context, snapshot) {
-          return FloatingActionButton(
-            elevation: 0,
-            highlightElevation: 0,
-            backgroundColor: mainColor,
-            onPressed: () {
-              Navigator.pushNamed(context, '/bookseat', arguments: {
-                'movie': movie, 
-                'book': bloc.selectedDateTimePlace
-              });
-            },
-            child: const Icon(Icons.arrow_forward),
-          );
-        }
-      ),
+      floatingActionButton:
+        FloatingActionButton(
+          elevation: 0,
+          highlightElevation: 0,
+          backgroundColor: mainColor,
+          onPressed: () {
+            Navigator.pushNamed(context, '/bookseat', arguments: {
+              'movie': movie, 
+              'book': bloc.selectedDateTimePlace
+            });
+          },
+          child: const Icon(Icons.arrow_forward),
+        ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
