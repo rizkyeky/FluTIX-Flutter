@@ -57,6 +57,7 @@ class BookTimeBloc implements Bloc {
   Stream<List<String>> get selectedItemStream => _selectedItemController.stream;
 
   final List<String> _selectedItem = [];
+  List<String> get selectedItem => _selectedItem;
   final List<String> _items = ['Nyamuk', 'Tikus', 'Kecoa'];
   List<String> get items => _items;
 
