@@ -2,14 +2,15 @@ part of 'bloc.dart';
 
 class TestBloc {
 
-  final StreamController<List<String>> _selectedItemController = StreamController.broadcast();
-  Stream<List<String>> get selectedItemStream => _selectedItemController.stream.asBroadcastStream();
+  final BehaviorSubject<List<String>> _selectedItemController = BehaviorSubject();
+  Stream<List<String>> get selectedItemStream => _selectedItemController.stream;
 
   final List<String> _selectedItem = [];
   List<String> get selectedItem => _selectedItem;
 
   Future<List<String>> getItems() async {
-    return Future<List<String>>.delayed(const Duration(seconds: 3)).then((value) => ['Nyamuk', 'Tikus', 'Kecoa']);
+    return Future<List<String>>.delayed(const Duration(seconds: 3))
+      .then((value) => List.generate(20, (index) => '$index'));
   }
 
   void addItem(String name) {
