@@ -30,10 +30,10 @@ class BookSeatPage extends Page<BookSeatBloc> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Choose Seat',
-              style: blueTitle,
-            ),
-            const SizedBox(height: 24,),
+            // Text('Choose Seat',
+            //   style: blueTitle,
+            // ),
+            // const SizedBox(height: 24,),
             Center(
               child: Container(
                 alignment: Alignment.center,
@@ -50,14 +50,29 @@ class BookSeatPage extends Page<BookSeatBloc> {
               height: 420,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) => Column(
+                itemCount: 9,
+                itemBuilder: (context, indexHuruf) => Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    for (int i = 0; i < 10; i++)
+                    for (int indexAngka = 0; indexAngka < 9; indexAngka++)
                       Container(
                         margin: const EdgeInsets.only(right: 6),
-                        child: const XSelectedBox(height: 36, width: 36, text: 'A0')
+                        child: XSelectedBox(
+                          isDisable: bloc.bookedSeats.contains(bloc.seats[indexHuruf][indexAngka]),
+                          disableColorBorder: mainColor,
+                          defaultColorBorder: borderColor,
+                          selectedColorBorder: accentColor,
+                          onSelected: (isSelected) {
+                            if (isSelected) {
+                              bloc.selectSeats(bloc.seats[indexHuruf][indexAngka]);
+                            } else {
+                              bloc.selectSeats(bloc.seats[indexHuruf][indexAngka]);
+                            }
+                          },
+                          height: 36, 
+                          width: 36, 
+                          text: bloc.seats[indexHuruf][indexAngka]
+                        )
                       )
                   ],
                 )   
@@ -67,7 +82,7 @@ class BookSeatPage extends Page<BookSeatBloc> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Center(
@@ -81,10 +96,11 @@ class BookSeatPage extends Page<BookSeatBloc> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 6,),
                     Text('  Available', style: blackContentRegular),
                   ],
                 ),
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Center(
@@ -98,10 +114,11 @@ class BookSeatPage extends Page<BookSeatBloc> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 6,),
                     Text('  Booked', style: blackContentRegular),
                   ],
                 ),
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Center(
@@ -115,6 +132,7 @@ class BookSeatPage extends Page<BookSeatBloc> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 6,),
                     Text('  Selected', style: blackContentRegular),
                   ],
                 )
@@ -128,10 +146,28 @@ class BookSeatPage extends Page<BookSeatBloc> {
         elevation: 0,
         highlightElevation: 0,
         backgroundColor: mainColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/checkout');
+        },
         child: const Icon(Icons.arrow_forward),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
+}
+
+Column generateSeat() {
+  final List<Widget> widgets = [];
+
+  for (int i = 0; i < 5; i++) {
+    widgets.add(Row(
+      children: List.generate(5, (index) => XSelectedBox(
+        onSelected: (isSelected) {},
+        height: 36, 
+        width: 36, 
+        text: 'A0'
+      ))
+    ));
+  }
+  return Column(children: widgets);
 }
