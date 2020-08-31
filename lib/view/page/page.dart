@@ -18,6 +18,7 @@ part 'page_book_time.dart';
 part 'page_book_seat.dart';
 part 'page_checkout.dart';
 part 'page_maintabbar.dart';
+// part 'page_test.dart';
 
 abstract class Page<T extends Bloc> extends StatefulWidget {
 
