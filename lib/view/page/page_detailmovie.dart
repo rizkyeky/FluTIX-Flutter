@@ -93,8 +93,8 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                           children: [
                             Container(
                               constraints: const BoxConstraints(
-                                minWidth: 180,
-                                maxWidth: 240
+                                minWidth: 120,
+                                maxWidth: 180
                               ),
                               child: Text(movie.title, 
                                 style: blueTitle, 
@@ -116,8 +116,8 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                             ),
                             Container(
                               constraints: const BoxConstraints(
-                                minWidth: 180,
-                                maxWidth: 240
+                                minWidth: 120,
+                                maxWidth: 180
                               ),
                               child: Wrap(
                                 spacing: 6,
@@ -232,7 +232,10 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
           elevation: 0,
           highlightElevation: 0,
           backgroundColor: mainColor, 
-          onPressed: () => Navigator.pushNamed(context, '/booktime'),
+          onPressed: () {
+            locator.get<Movie>(instanceName: 'Booked Movie');
+            Navigator.pushNamed(context, '/booktime');
+          },
           label: Text('Book now', style: whiteSubtitle),
         ),
       ) 
