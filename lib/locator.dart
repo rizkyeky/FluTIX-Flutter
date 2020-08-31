@@ -2,6 +2,7 @@ import 'package:flutix_training/main.dart';
 import 'package:get_it/get_it.dart';
 
 import 'bloc/bloc.dart';
+import 'model/model.dart';
 import 'service/service.dart';
 
 GetIt locator = GetIt.instance;
@@ -17,6 +18,9 @@ void setupLocator() {
   locator.registerLazySingleton(() => DetailMovieBloc());
   locator.registerLazySingleton(() => BookTimeBloc());
   locator.registerLazySingleton(() => BookSeatBloc());
+  locator.registerLazySingleton(() => CheckoutBloc());
+
+  locator.registerSingleton(() => Movie.initial(), instanceName: 'Booked Movie');
   
   locator.registerLazySingleton(() => SignInBloc());
   locator.registerLazySingleton(() => SignUpBloc());
