@@ -1,20 +1,29 @@
 part of 'page.dart';
 
-class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({Key key}) : super(key: key);
+class CheckoutPage extends Page<CheckoutBloc> {
+  CheckoutPage({Key key}) : super(key: key);
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+  }
+
+  @override
+  void init() {
+    // TODO: implement init
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: canvasColor,
-      appBar: AppBar(
-        elevation: 0,
-        leading: Icon(Icons.arrow_back, color: mainColor),
-        title: Text('Checkout Movie', style: blueTitle),
+      appBar: XTopBar(
+        textTitle: 'Choose Seats',
+        textStyle: blueTitle,
         backgroundColor: whiteColor,
-        bottom: TopLinearProgressIndicator(
-          backgroundColor: mainColor,
-          valueColor:accentColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: mainColor), 
+          onPressed: () => Navigator.pop(context)
         ),
       ),
       body: SingleChildScrollView(
@@ -29,7 +38,7 @@ class CheckoutPage extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      'https://cdn1-production-images-kly.akamaized.net/U0oYpcmerYqHr9vA9ZR2hFHG-vM=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2018163/original/090343100_1521625087-8._Hypebeast.jpg',
+                      '',
                       fit: BoxFit.cover,
                       height: 120,
                       width: 90,
