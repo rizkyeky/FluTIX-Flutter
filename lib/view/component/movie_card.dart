@@ -18,7 +18,7 @@ class MovieCard extends StatelessWidget {
         Navigator.pushNamed(context, '/detailmovie', arguments: _movie);
       },
       child: Container(
-        width: 360,
+        width: 300,
         padding: const EdgeInsets.all(12),
         alignment: Alignment.bottomCenter,
         decoration: BoxDecoration(
@@ -40,7 +40,7 @@ class MovieCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 240,
+                  width: 180,
                   child: Text(_movie.title,
                     maxLines: 2,
                     style: whiteTitle,
