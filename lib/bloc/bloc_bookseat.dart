@@ -42,6 +42,5 @@ class BookSeatBloc implements Bloc {
     else {
       _selectedSeats.remove(seatName);
     }
-    print(_selectedSeats);
   }
 }
