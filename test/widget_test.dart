@@ -13,10 +13,11 @@ import 'package:flutix_training/service/service.dart';
 
 class Data {
   final String name;
-  Data(this.name);
+  final int id;
+  Data(this.id, this.name);
 
   @override
-  bool operator == (Object other) => other is Data && name == other.name;
+  bool operator == (Object other) => other is Data && id == other.id;
 
   @override
   int get hashCode => name.hashCode;
@@ -24,10 +25,13 @@ class Data {
 
 Future<void> main() async {
 
-  Data data1 = Data('satu');
-  Data data2 = Data('satu');
-  
-  print(data1 == data2);
+  Data data1 = Data(1, 'satu');
+  Data data2 = Data(2, 'dua');
+
+  List<Data> datas = List.generate(10, (index) => Data(index, 'angka'));
+
+  print(datas.contains(data1));
+  print(datas.contains(data2));
 
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.

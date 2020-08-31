@@ -24,9 +24,11 @@ class TestPage extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(top: 12),
-              height: 48,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
+              height: 500,
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
                 itemCount: snapshotFuture.data.length,
                 itemBuilder: (context, index) => StreamBuilder<List<String>>(
                   initialData: const [],
