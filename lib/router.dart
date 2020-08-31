@@ -12,12 +12,17 @@ class Router {
         final Movie movie = settings.arguments as Movie;
         return MaterialPageRoute(builder: (_) => DetailMoviePage(movie));
       case '/booktime':
-        return MaterialPageRoute(builder: (_) => BookTimePage());
+        final Movie movie = settings.arguments as Movie;
+        return MaterialPageRoute(builder: (_) => BookTimePage(movie));
         break;
       case '/bookseat':
-        return MaterialPageRoute(builder: (_) => BookSeatPage());
+        final Movie movie = (settings.arguments as Map)['movie'] as Movie;
+        final Map<String, String> selectedBook = (settings.arguments as Map)['book'] as Map<String, String>;
+        return MaterialPageRoute(builder: (_) => BookSeatPage(movie, selectedBook));
       case '/checkout':
-        return MaterialPageRoute(builder: (_) => CheckoutPage());
+        final Movie movie = (settings.arguments as Map)['movie'] as Movie;
+        final Map<String, String> selectedBook = (settings.arguments as Map)['book'] as Map<String, String>;
+        return MaterialPageRoute(builder: (_) => CheckoutPage(movie, selectedBook));
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
