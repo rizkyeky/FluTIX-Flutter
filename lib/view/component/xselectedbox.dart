@@ -6,8 +6,11 @@ class XSelectedBox extends StatefulWidget {
   final double width;
   final EdgeInsets margin;
   final void Function(bool, ) onSelected;
-  final Color colorBorder;
   final bool isSelected;  
+  final Color selectedColorBorder;
+  final Color defaultColorBorder;
+  final Color disableColorBorder;
+  final bool isDisable;
 
   const XSelectedBox({
     Key key, 
@@ -16,8 +19,11 @@ class XSelectedBox extends StatefulWidget {
     this.width, 
     this.margin,
     this.onSelected,
-    this.colorBorder,
     this.isSelected,
+    this.selectedColorBorder,
+    this.defaultColorBorder,
+    this.disableColorBorder,
+    this.isDisable = false
   }) : super(key: key);
 
   @override
@@ -44,15 +50,23 @@ class _XSelectedBoxState extends State<XSelectedBox> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(6),
         side: BorderSide(
-          width: 3, color: isSelected ? mainColor : accentColor
-        )
+          width: 3, 
+          color: !widget.isDisable ? (
+            isSelected 
+              ? (widget.selectedColorBorder ?? mainColor) 
+              : (widget.defaultColorBorder ?? accentColor)
+            )
+          : widget.disableColorBorder ?? borderColor
+        ) 
       ),
       child: InkWell(
         onTap: () {
-          setState(() {
-            isSelected = !isSelected;
-            widget.onSelected(isSelected);
-          });
+          if (!widget.isDisable) {
+            setState(() {
+              isSelected = !isSelected;
+              widget.onSelected(isSelected);
+            });
+          }
         },
         child: Container(
           alignment: Alignment.center,
