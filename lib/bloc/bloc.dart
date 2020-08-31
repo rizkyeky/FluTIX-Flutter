@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutix_training/model/model.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -10,6 +12,8 @@ part 'bloc_maintabbar.dart';
 part 'bloc_detailmovie.dart';
 part 'bloc_booktime.dart';
 part 'bloc_bookseat.dart';
+part 'bloc_test.dart';
+part 'bloc_checkout.dart';
 
 abstract class Bloc {
   Future<void> init();
