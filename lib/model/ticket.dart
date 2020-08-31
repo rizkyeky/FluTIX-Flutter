@@ -8,4 +8,5 @@ class Ticket {
   String time;
   String place;
   List<String> seats;
+  String bookingCode;
 }

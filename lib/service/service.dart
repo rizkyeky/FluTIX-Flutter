@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:firebase_auth/firebase_auth.dart' as fire_auth;
 import 'package:cloud_firestore/cloud_firestore.dart'  as fire_store;
@@ -14,3 +15,4 @@ part 'service_auth.dart';
 part 'service_user.dart';
 part 'service_core.dart';
 part 'service_movie.dart';
+part 'service_ticket.dart';
