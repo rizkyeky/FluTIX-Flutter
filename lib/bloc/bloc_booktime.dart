@@ -10,6 +10,9 @@ class BookTimeBloc implements Bloc {
   final BehaviorSubject<Map<String, int>> _selectedTimePlaceController = BehaviorSubject();
   Stream<Map<String, int>> get selectedTimePlaceStream => _selectedTimePlaceController.stream;
 
+  final BehaviorSubject<Map<String, int>> _selectedBookController = BehaviorSubject();
+  Stream<Map<String, int>> get selectedBookStream => _selectedBookController.stream;
+
   final DateTime _thisDate = DateTime.now();
   
   final List<Map<String, dynamic>> _daysInWeek = [];
@@ -18,6 +21,12 @@ class BookTimeBloc implements Bloc {
   Map<String, dynamic> _selectedDate = {};
   String _selectedPlace = '';
   String _selectedTime = '';
+
+  Map<String, String> get selectedDateTimePlace => {
+    'date': '${_selectedDate['name'] as String} ${_selectedDate['date']} ${_thisDate.year}',
+    'time': _selectedTime,
+    'place': _selectedPlace
+  };
 
   Map<String, List<String>> timePlace = {
     'XXI Paris Van Java Mall': ['10:00', '12:00', '14:00'],
@@ -51,24 +60,6 @@ class BookTimeBloc implements Bloc {
 
   void printSelected() {
     print('$_selectedDate $_selectedTime $_selectedPlace');
-  }
-
-  final BehaviorSubject<List<String>> _selectedItemController = BehaviorSubject();
-  Stream<List<String>> get selectedItemStream => _selectedItemController.stream;
-
-  final List<String> _selectedItem = [];
-  List<String> get selectedItem => _selectedItem;
-  final List<String> _items = ['Nyamuk', 'Tikus', 'Kecoa'];
-  List<String> get items => _items;
-
-  void addItem(String name) {
-    _selectedItem.add(name);
-    _selectedItemController.sink.add(_selectedItem);
-  }
-
-  void removeItem(String name) {
-    _selectedItem.remove(name);
-    _selectedItemController.sink.add(_selectedItem);
   }
 
   void selectDate(int index) {
