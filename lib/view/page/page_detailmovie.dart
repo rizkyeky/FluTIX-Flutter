@@ -233,8 +233,8 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
           highlightElevation: 0,
           backgroundColor: mainColor, 
           onPressed: () {
-            locator.get<Movie>(instanceName: 'Booked Movie');
-            Navigator.pushNamed(context, '/booktime');
+            // locator.get<Movie>(instanceName: 'Booked Movie');
+            Navigator.pushNamed(context, '/booktime', arguments: movie);
           },
           label: Text('Book now', style: whiteSubtitle),
         ),

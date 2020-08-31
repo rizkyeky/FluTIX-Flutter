@@ -1,7 +1,9 @@
 part of 'page.dart';
 
 class BookTimePage extends Page<BookTimeBloc>{
-  BookTimePage({Key key}) : super(key: key);
+  BookTimePage(this.movie, {Key key}) : super(key: key);
+
+  final Movie movie;
 
   @override
   void dispose() {
@@ -84,29 +86,11 @@ class BookTimePage extends Page<BookTimeBloc>{
                       height: 48,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: bloc.items.length,
+                        itemCount: bloc.timePlace[place].length,
                         itemBuilder: (context, index) => StreamBuilder<Map<String, int>>(
                           initialData: const {},
                           stream: bloc.selectedTimePlaceStream,
                           builder: (context, snapshot) {
-
-                            // final List<String> selectedItems = [];
-                            // selectedItems.addAll(snapshot.data);
-
-                            // return Card(
-                            //   color: (selectedItems.contains(bloc.items[index])) ? Colors.amber : Colors.grey,
-                            //   child: InkWell(
-                            //     onTap : () {
-                            //       if (selectedItems.contains(bloc.items[index])) {
-                            //         bloc.removeItem(bloc.items[index]);
-                            //       }
-                            //       else {
-                            //         bloc.addItem(bloc.items[index]);
-                            //       }
-                            //     },
-                            //     child: Container(height: 100, width: 100, child: Text(bloc.items[index]),),
-                            //   ),
-                            // );
                             return Container(
                               margin: const EdgeInsets.only(right: 12),
                               child: XSelectedBox(
@@ -135,15 +119,22 @@ class BookTimePage extends Page<BookTimeBloc>{
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 0,
-        highlightElevation: 0,
-        backgroundColor: mainColor,
-        onPressed: () {
-          Navigator.pushNamed(context, '/bookseat');
-          bloc.printSelected();
-        },
-        child: const Icon(Icons.arrow_forward),
+      floatingActionButton: StreamBuilder<Object>(
+        stream: null,
+        builder: (context, snapshot) {
+          return FloatingActionButton(
+            elevation: 0,
+            highlightElevation: 0,
+            backgroundColor: mainColor,
+            onPressed: () {
+              Navigator.pushNamed(context, '/bookseat', arguments: {
+                'movie': movie, 
+                'book': bloc.selectedDateTimePlace
+              });
+            },
+            child: const Icon(Icons.arrow_forward),
+          );
+        }
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

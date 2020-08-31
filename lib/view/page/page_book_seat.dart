@@ -1,7 +1,10 @@
 part of 'page.dart';
 
 class BookSeatPage extends Page<BookSeatBloc> {
-  BookSeatPage({Key key}) : super(key: key);
+  BookSeatPage(this.movie, this.selectedBook, {Key key}) : super(key: key);
+
+  final Movie movie;
+  final Map<String, String> selectedBook;
 
   @override
   void dispose() {
@@ -147,27 +150,15 @@ class BookSeatPage extends Page<BookSeatBloc> {
         highlightElevation: 0,
         backgroundColor: mainColor,
         onPressed: () {
-          Navigator.pushNamed(context, '/checkout');
+          selectedBook['seats'] = bloc.selectedSeats.join(', ');
+          Navigator.pushNamed(context, '/checkout', arguments: {
+            'movie': movie,
+            'book': selectedBook,
+          });
         },
         child: const Icon(Icons.arrow_forward),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-}
-
-Column generateSeat() {
-  final List<Widget> widgets = [];
-
-  for (int i = 0; i < 5; i++) {
-    widgets.add(Row(
-      children: List.generate(5, (index) => XSelectedBox(
-        onSelected: (isSelected) {},
-        height: 36, 
-        width: 36, 
-        text: 'A0'
-      ))
-    ));
-  }
-  return Column(children: widgets);
 }
