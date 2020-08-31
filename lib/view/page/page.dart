@@ -7,7 +7,7 @@ import 'package:flutix_training/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutix_training/share/share.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 part 'page_signin.dart';
 part 'page_signup.dart';
@@ -18,6 +18,7 @@ part 'page_book_time.dart';
 part 'page_book_seat.dart';
 part 'page_checkout.dart';
 part 'page_maintabbar.dart';
+part 'page_success_checkout.dart';
 // part 'page_test.dart';
 
 abstract class Page<T extends Bloc> extends StatefulWidget {
