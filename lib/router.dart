@@ -16,6 +16,8 @@ class Router {
         break;
       case '/bookseat':
         return MaterialPageRoute(builder: (_) => BookSeatPage());
+      case '/checkout':
+        return MaterialPageRoute(builder: (_) => CheckoutPage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
