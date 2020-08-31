@@ -51,6 +51,17 @@ class Movie {
 
   factory Movie.fromJson(Map<String, dynamic> json) {
 
+    String bufferCountry;
+
+    switch (json['original_language'] as String) {
+      case 'en': bufferCountry = 'Western'; break;
+      case 'id': bufferCountry = 'Indonesia'; break;
+      case 'ja': bufferCountry = 'Japan'; break;
+      case 'la': bufferCountry = 'Latin'; break;
+      case 'ko': bufferCountry = 'Korea'; break;
+      default: bufferCountry = 'Other'; break;
+    }
+
     return Movie(
       json['id'] as int,
       json['title'] as String,
@@ -61,7 +72,7 @@ class Movie {
       json['overview'] as String,
       (json['vote_count'] as num).toInt(),
       (json['vote_average'] as num).toDouble(),
-      json['original_language'] as String,
+      bufferCountry,
 
       ((json['genre_ids'] as List) ?? (json['genres'] as List))
         .map((e) {
