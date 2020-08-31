@@ -1,7 +1,10 @@
 part of 'page.dart';
 
 class CheckoutPage extends Page<CheckoutBloc> {
-  CheckoutPage({Key key}) : super(key: key);
+  CheckoutPage(this.movie, this.selectedBook, {Key key}) : super(key: key);
+
+  final Movie movie;
+  final Map<String, String> selectedBook;
 
   @override
   void dispose() {
@@ -13,12 +16,31 @@ class CheckoutPage extends Page<CheckoutBloc> {
     // TODO: implement init
   }
 
+  String convertTime(int minute) {
+   
+    final str = StringBuffer();
+
+    if (minute > 60) {
+      str.write((minute / 60).floor());
+      str.write('h ');
+    }
+    if (minute % 60 != 0) {
+      str.write(minute % 60);
+      str.write('m');
+    }
+    return str.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    final int starCount = (movie.voteAverage/2).round();
+    final int seatsLen = selectedBook['seats'].split(", ").length;
+
     return Scaffold(
       backgroundColor: canvasColor,
       appBar: XTopBar(
-        textTitle: 'Choose Seats',
+        textTitle: 'Checkout Movie',
         textStyle: blueTitle,
         backgroundColor: whiteColor,
         leading: IconButton(
@@ -33,29 +55,41 @@ class CheckoutPage extends Page<CheckoutBloc> {
               height: 150,
               color: whiteColor,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      '',
+                      '${imageBaseURL}w92${movie.posterPath}',
                       fit: BoxFit.cover,
                       height: 120,
                       width: 90,
                       // isAntiAlias: true,
                     )
                   ),
+                  const SizedBox(width: 12),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Avengers: Infinity War', style: blueTitle,),
-                      Text('Western . PG-13 . 2h 29m', style: blackContentRegular,),
-                      Wrap(
-                        spacing: 3,
+                      Container(
+                        width: 180,
+                        child: Text(movie.title, 
+                          style: blueTitle, 
+                          maxLines: 3,
+                          textAlign: TextAlign.left, 
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      Text('${movie.country} . PG-13 . ${convertTime(movie.runtime)}', style: blackContentRegular,),
+                      Row(
                         children: [
-                          for (int i = 0; i < 5; i++) const Icon(Icons.star, color: starColor,),
-                          Text(' 7/10', style: blackContentRegular),
+                          for (int i = 0; i < starCount; i++) const Icon(Icons.star, 
+                            size: 18,
+                            color: starColor
+                          ),
+                          const SizedBox(width: 6,),
+                          Text('${movie.voteAverage}/10', style: blackContentRegular)
                         ],
                       ),
                     ]
@@ -84,21 +118,21 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Cinema', style: blackContentRegular),
-                      Text('Paris Van Java', style: blackContentBold),
+                      Text(selectedBook['place'], style: blackContentBold),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Date & Time', style: blackContentRegular),
-                      Text('Sat 23 2020, 19:20', style: blackContentBold),
+                      Text('${selectedBook['date']}, ${selectedBook['time']}', style: blackContentBold),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Seat Number', style: blackContentRegular),
-                      Text('A1, A2, A3', style: blackContentBold),
+                      Text(selectedBook['seats'], style: blackContentBold),
                     ],
                   )
                 ],
@@ -118,14 +152,14 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Price', style: blackContentRegular),
-                      Text('Rp20.000 x 3', style: blackContentBold),
+                      Text('Rp20.000 x $seatsLen', style: blackContentBold),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Fee', style: blackContentRegular),
-                      Text('Rp5.000 x 3', style: blackContentBold),
+                      Text('Rp5.000 x $seatsLen', style: blackContentBold),
                     ],
                   ),
                   Row(
@@ -138,22 +172,17 @@ class CheckoutPage extends Page<CheckoutBloc> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 12,
-            ),
-            XButton(
-              width: 138,
-              color: mainColor,
-              isBorder: true,
-              onTap: () {},
-              child: Text(
-                'Checkout now',
-                style: whiteSubtitle,
-              ),
-            )
           ],
         )
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        elevation: 0,
+        highlightElevation: 0,
+        backgroundColor: mainColor,
+        onPressed: () {},
+        label: Text('Checkout now', style: whiteSubtitle)
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
