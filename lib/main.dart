@@ -1,3 +1,4 @@
+import 'package:flutix_training/view/page/page_test.dart';
 import 'package:flutter/material.dart';
 
 import 'locator.dart';
@@ -36,6 +37,7 @@ class App extends StatelessWidget {
         accentColor: accentColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      // home: TestPage(),
       initialRoute: '/',
       onGenerateRoute: Router.generateRoute,
     );
