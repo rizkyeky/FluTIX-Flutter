@@ -13,7 +13,7 @@ class TicketService {
       "bookCode": ticket.bookingCode ?? "",
       "seats": ticket.seats ?? [],
       "name": ticket.movie.title,
-      "totalPrice": ticket.totalPrice
+      "totalPrice": ticket.price
     });
   }
 
