@@ -25,13 +25,8 @@ class Data {
 
 Future<void> main() async {
 
-  Data data1 = Data(1, 'satu');
-  Data data2 = Data(2, 'dua');
-
-  List<Data> datas = List.generate(10, (index) => Data(index, 'angka'));
-
-  print(datas.contains(data1));
-  print(datas.contains(data2));
+  DateTime now = DateTime.now();
+  print('${now.hour} : ${now.minute} : ${now.second}');
 
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.

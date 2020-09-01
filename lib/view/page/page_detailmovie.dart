@@ -6,12 +6,10 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
 
   @override
   void dispose() {
-    // TODO: implement dispose
   }
 
   @override
   void init() {
-    // bloc.getMovieFromService(movie.id);
   }
 
   String convertTime(int minute) {
@@ -187,7 +185,7 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                       color: whiteColor,
                       alignment: Alignment.center,
                       child: const CircularProgressIndicator(),
-                      )
+                    )
                   ),
                   Container(
                     alignment: Alignment.topLeft,
@@ -233,7 +231,7 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
           highlightElevation: 0,
           backgroundColor: mainColor, 
           onPressed: () {
-            // locator.get<Movie>(instanceName: 'Booked Movie');
+            locator.call<Ticket>(instanceName: 'Ticket').copyWith(movie: movie);
             Navigator.pushNamed(context, '/booktime', arguments: movie);
           },
           label: Text('Book now', style: whiteSubtitle),
