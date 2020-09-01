@@ -14,6 +14,7 @@ class BookTimeBloc implements Bloc {
   Stream<Map<String, int>> get selectedBookStream => _selectedBookController.stream;
 
   final DateTime _thisDate = DateTime.now();
+  DateTime get thisDate => _thisDate;
   
   final List<Map<String, dynamic>> _daysInWeek = [];
   List<Map<String, dynamic>> get daysInWeek => _daysInWeek;
