@@ -20,8 +20,8 @@ void setupLocator() {
   locator.registerLazySingleton(() => BookSeatBloc());
   locator.registerLazySingleton(() => CheckoutBloc());
 
-  locator.registerSingleton(() => Movie.initial(), instanceName: 'Booked Movie');
-  
+  locator.registerSingleton<Ticket>(Ticket.initial(), instanceName: 'Ticket');
+
   locator.registerLazySingleton(() => SignInBloc());
   locator.registerLazySingleton(() => SignUpBloc());
 
