@@ -1,10 +1,9 @@
 part of 'page.dart';
 
 class CheckoutPage extends Page<CheckoutBloc> {
-  CheckoutPage(this.movie, this.selectedBook, {Key key}) : super(key: key);
+  CheckoutPage({Key key}) : super(key: key);
 
-  final Movie movie;
-  final Map<String, String> selectedBook;
+  final ticket = locator.call<Ticket>(instanceName: 'Ticket');
 
   @override
   void dispose() {
@@ -34,8 +33,10 @@ class CheckoutPage extends Page<CheckoutBloc> {
   @override
   Widget build(BuildContext context) {
 
-    final int starCount = (movie.voteAverage/2).round();
-    final int seatsLen = selectedBook['seats'].split(", ").length;
+    final int starCount = (ticket.movie.voteAverage/2).round();
+    final int seatsLen = ticket.seats.length;
+
+    final date
 
     return Scaffold(
       backgroundColor: canvasColor,
@@ -60,7 +61,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      '${imageBaseURL}w92${movie.posterPath}',
+                      '${imageBaseURL}w92${ticket.movie.posterPath}',
                       fit: BoxFit.cover,
                       height: 120,
                       width: 90,
@@ -74,14 +75,14 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     children: [
                       Container(
                         width: 180,
-                        child: Text(movie.title, 
+                        child: Text(ticket.movie.title, 
                           style: blueTitle, 
                           maxLines: 3,
                           textAlign: TextAlign.left, 
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      Text('${movie.country} . PG-13 . ${convertTime(movie.runtime)}', style: blackContentRegular,),
+                      Text('${ticket.movie.country} . PG-13 . ${convertTime(ticket.movie.runtime)}', style: blackContentRegular,),
                       Row(
                         children: [
                           for (int i = 0; i < starCount; i++) const Icon(Icons.star, 
@@ -89,7 +90,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
                             color: starColor
                           ),
                           const SizedBox(width: 6,),
-                          Text('${movie.voteAverage}/10', style: blackContentRegular)
+                          Text('${ticket.movie.voteAverage}/10', style: blackContentRegular)
                         ],
                       ),
                     ]
@@ -118,14 +119,14 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Cinema', style: blackContentRegular),
-                      Text(selectedBook['place'], style: blackContentBold),
+                      Text(ticket.place, style: blackContentBold),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Date & Time', style: blackContentRegular),
-                      Text('${selectedBook['date']}, ${selectedBook['time']}', style: blackContentBold),
+                      Text('${ticket.dayDate[0]}:${ticket.dayDate[1]}, ${selectedBook['time']}', style: blackContentBold),
                     ],
                   ),
                   Row(
@@ -179,7 +180,9 @@ class CheckoutPage extends Page<CheckoutBloc> {
         elevation: 0,
         highlightElevation: 0,
         backgroundColor: mainColor,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/checkoutsuccess');
+        },
         label: Text('Checkout now', style: whiteSubtitle)
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
