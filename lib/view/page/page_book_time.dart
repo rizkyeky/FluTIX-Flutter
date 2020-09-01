@@ -1,9 +1,7 @@
 part of 'page.dart';
 
 class BookTimePage extends Page<BookTimeBloc>{
-  BookTimePage(this.movie, {Key key}) : super(key: key);
-
-  final Movie movie;
+  BookTimePage({Key key}) : super(key: key);
 
   @override
   void dispose() {
@@ -125,10 +123,11 @@ class BookTimePage extends Page<BookTimeBloc>{
           highlightElevation: 0,
           backgroundColor: mainColor,
           onPressed: () {
-            Navigator.pushNamed(context, '/bookseat', arguments: {
-              'movie': movie, 
-              'book': bloc.selectedDateTimePlace
-            });
+            locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
+              bloc.thisDate.weekday,
+              bloc.thisDate.day
+            ]);
+            Navigator.pushNamed(context, '/bookseat');
           },
           child: const Icon(Icons.arrow_forward),
         ),
