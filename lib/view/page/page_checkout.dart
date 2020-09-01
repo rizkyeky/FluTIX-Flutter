@@ -36,7 +36,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
     final int starCount = (ticket.movie.voteAverage/2).round();
     final int seatsLen = ticket.seats.length;
 
-    final date
+    // final date = 
 
     return Scaffold(
       backgroundColor: canvasColor,
@@ -126,14 +126,16 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Date & Time', style: blackContentRegular),
-                      Text('${ticket.dayDate[0]}:${ticket.dayDate[1]}, ${selectedBook['time']}', style: blackContentBold),
+                      Text('${ticket.dayDate[0]}:${ticket.dayDate[1]}, ${ticket.time[0]}:${ticket.time[1]}:${ticket.time[2]}',
+                        style: blackContentBold
+                      ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Seat Number', style: blackContentRegular),
-                      Text(selectedBook['seats'], style: blackContentBold),
+                      Text(ticket.seats.join(', '), style: blackContentBold),
                     ],
                   )
                 ],
