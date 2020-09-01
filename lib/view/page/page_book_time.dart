@@ -127,6 +127,11 @@ class BookTimePage extends Page<BookTimeBloc>{
               bloc.thisDate.weekday,
               bloc.thisDate.day
             ]);
+            locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
+              bloc.thisDate.hour,
+              bloc.thisDate.minute,
+              bloc.thisDate.second,
+            ]);
             Navigator.pushNamed(context, '/bookseat');
           },
           child: const Icon(Icons.arrow_forward),
