@@ -1,10 +1,7 @@
 part of 'page.dart';
 
 class BookSeatPage extends Page<BookSeatBloc> {
-  BookSeatPage(this.movie, this.selectedBook, {Key key}) : super(key: key);
-
-  final Movie movie;
-  final Map<String, String> selectedBook;
+  BookSeatPage({Key key}) : super(key: key);
 
   @override
   void dispose() {
@@ -33,10 +30,6 @@ class BookSeatPage extends Page<BookSeatBloc> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Text('Choose Seat',
-            //   style: blueTitle,
-            // ),
-            // const SizedBox(height: 24,),
             Center(
               child: Container(
                 alignment: Alignment.center,
@@ -150,11 +143,10 @@ class BookSeatPage extends Page<BookSeatBloc> {
         highlightElevation: 0,
         backgroundColor: mainColor,
         onPressed: () {
-          selectedBook['seats'] = bloc.selectedSeats.join(', ');
-          Navigator.pushNamed(context, '/checkout', arguments: {
-            'movie': movie,
-            'book': selectedBook,
-          });
+          locator.call<Ticket>(instanceName: 'Ticket').copyWith(
+            seats: bloc.selectedSeats
+          );
+          Navigator.pushNamed(context, '/checkout');
         },
         child: const Icon(Icons.arrow_forward),
       ),
