@@ -20,6 +20,10 @@ class Router {
         return MaterialPageRoute(builder: (_) => CheckoutPage());
       case '/checkoutsuccess':
         return MaterialPageRoute(builder: (_) => const SuccessCheckoutPage());
+      case '/signup':
+        return MaterialPageRoute(builder: (_) => SignUpPage());
+      case '/signin':
+        return MaterialPageRoute(builder: (_) => SignInPage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
