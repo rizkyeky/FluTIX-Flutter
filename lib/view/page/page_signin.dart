@@ -8,11 +8,11 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopLinearProgressIndicator(
-        backgroundColor: mainColor,
-        valueColor:accentColor,
-        stream: bloc.isLoadingStream,
-      ),
+      // appBar: TopLinearProgressIndicator(
+      //   backgroundColor: mainColor,
+      //   valueColor:accentColor,
+      //   stream: bloc.isLoadingStream,
+      // ),
       body: SingleChildScrollView(
         padding: paddingPage,
         child: Column(
@@ -47,7 +47,7 @@ class SignInPage extends StatelessWidget {
                   style: blackSubtitle,
                 ),
                 GestureDetector(
-                  onTap: () => print('tap'),
+                  onTap: () => Navigator.pushReplacementNamed(context, '/signup'),
                   child: Text('Join now',
                     style: blueSubtitle,
                   ),

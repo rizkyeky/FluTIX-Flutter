@@ -3,16 +3,14 @@ part of 'page.dart';
 class FavoritePage extends StatelessWidget {
   FavoritePage({Key key}) : super(key: key);
 
-  final SignInBloc bloc = SignInBloc();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: TopLinearProgressIndicator(
-        backgroundColor: mainColor,
-        valueColor:accentColor,
-        stream: bloc.isLoadingStream,
-      ),
+      // appBar: TopLinearProgressIndicator(
+      //   backgroundColor: mainColor,
+      //   valueColor:accentColor,
+      //   stream: bloc.isLoadingStream,
+      // ),
       body: SingleChildScrollView(
         padding: paddingPage,
         child: Column(

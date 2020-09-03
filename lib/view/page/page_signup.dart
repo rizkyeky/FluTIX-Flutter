@@ -1,9 +1,7 @@
 part of 'page.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends Page<SignUpBloc> {
   SignUpPage({Key key}) : super(key: key);
-
-  final SignInBloc bloc = SignInBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +9,7 @@ class SignUpPage extends StatelessWidget {
       appBar: TopLinearProgressIndicator(
         backgroundColor: mainColor,
         valueColor:accentColor,
-        stream: bloc.isLoadingStream,
+        stream: bloc.loadingStream,
       ),
       body: SingleChildScrollView(
         padding: paddingPage,
@@ -47,7 +45,7 @@ class SignUpPage extends StatelessWidget {
                   style: blackSubtitle,
                 ),
                 GestureDetector(
-                  onTap: () => print('tap'),
+                  onTap: () => Navigator.pushReplacementNamed(context, '/signin'),
                   child: Text('Join now',
                     style: blueSubtitle,
                   ),
@@ -58,5 +56,15 @@ class SignUpPage extends StatelessWidget {
         ),
       ) 
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+  }
+
+  @override
+  void init() {
+    // TODO: implement init
   }
 }
