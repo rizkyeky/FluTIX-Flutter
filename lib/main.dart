@@ -1,8 +1,7 @@
-import 'package:flutix_training/view/page/page_test.dart';
 import 'package:flutter/material.dart';
-
 import 'locator.dart';
 import 'router.dart';
+import 'service/service.dart';
 import 'share/share.dart';
 
 Future<void> main() async {
@@ -12,10 +11,11 @@ Future<void> main() async {
   setupLocator();
   await awaitSetupLocator();
 
-  // bool isSignIn = locator.get<AuthService>(instanceName: 'Auth Service').isSignIn;
+  // final bool isSignIn = locator.get<AuthService>(instanceName: 'Auth Service')
+  //   .isSignIn;
   
   // Run App
-  runApp(const App(isSignIn: true));
+  runApp(App(isSignIn: false));
 }
 
 class App extends StatelessWidget {
@@ -38,7 +38,7 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       // home: TestPage(),
-      initialRoute: '/',
+      initialRoute: isSignIn ? '/' : '/signin',
       onGenerateRoute: Router.generateRoute,
     );
   }
