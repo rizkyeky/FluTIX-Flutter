@@ -4,7 +4,7 @@ class AuthService {
   final fire_auth.FirebaseAuth _auth = fire_auth.FirebaseAuth.instance;
   final UserService _userService = UserService();
 
-  bool _isSignIn;
+  bool _isSignIn = false;
   bool get isSignIn => _isSignIn;
 
   Future<void> init() async {
