@@ -1,16 +1,18 @@
-# flutix_training
+# FluTIX-Flutter
 
-A new Flutter project.
+FluTIX App is app build by Flutter.
+Provide only executive movies for you
 
-## Getting Started
+## Inside The App
 
-This project is a starting point for a Flutter application.
+  - RXDart (for State Management)
+  - GetIt (for Depedency Injector)
+  - Bloc (for Design Pattern)
+  - http (for API Request)
+  - intl (for Currency Format)
+  - Firebase (for Authentication and Online Database)
+  - shared_preferences (for Local Database)
 
-A few resources to get you started if this is your first Flutter project:
+## Look up The App
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Alt]()
