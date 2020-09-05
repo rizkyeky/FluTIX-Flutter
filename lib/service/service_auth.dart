@@ -19,7 +19,7 @@ class AuthService {
   }
 
   Future<AuthResult> signUp(String name, String email, String password, 
-  List<String> favoriteGenre, List<String> favoriteCountry) async {
+  {List<String> favoriteGenre = const [], List<String> favoriteCountry = const []}) async {
 
     try {
       final fire_auth.UserCredential result = await _auth.createUserWithEmailAndPassword(
