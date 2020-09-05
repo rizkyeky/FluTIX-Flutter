@@ -21,56 +21,91 @@ class SignInPage extends Page<SignInBloc> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        // appBar: TopLinearProgressIndicator(
-        //   backgroundColor: mainColor,
-        //   valueColor:accentColor,
-        //   stream: bloc.isLoadingStream,
-        // ),
-        body: SingleChildScrollView(
-          padding: paddingPage,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Image.asset('assets/logo/flutix.png',
-                width: 100,
-              ),
-              const SizedBox(height: 36,),
-              Text('Exclusive movies are\nwaiting for you',
-                style: blueTitle,
-              ),
-              const SizedBox(height: 36,),
-              XTextField(
-                controller: _emailText,
-                text: 'Email',
-              ),
-              const SizedBox(height: 36,),
-              XTextField(
-                controller: _passwordText,
-                text: 'Password',
-              ),
-              const SizedBox(height: 36,),
-              BlueRectButton(
-                text: "Let's go",
-                onTap: () async{
-                  await bloc.signIn(_emailText.text, _passwordText.text);
-                  print('tap');
-                },
-              ),
-              const SizedBox(height: 36,),
-              Row(
-                children: [
-                  Text("Don't have account ? ",
-                    style: blackSubtitle,
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pushReplacementNamed(context, '/signup'),
-                    child: Text('Join now',
-                      style: blueSubtitle,
+        appBar: TopLinearProgressIndicator(
+          backgroundColor: mainColor,
+          valueColor:accentColor,
+          stream: bloc.isLoadingStream,
+        ),
+        body: Builder(
+          builder: (contextScaffold) => SingleChildScrollView(
+            padding: paddingPage,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Image.asset('assets/logo/flutix.png',
+                  width: 100,
+                ),
+                const SizedBox(height: 36,),
+                Text('Exclusive movies are\nwaiting for you',
+                  style: blueTitle,
+                ),
+                const SizedBox(height: 36,),
+                XTextField(
+                  controller: _emailText,
+                  text: 'Email',
+                ),
+                const SizedBox(height: 36,),
+                XTextField(
+                  obscureText: true,
+                  controller: _passwordText,
+                  text: 'Password',
+                ),
+                const SizedBox(height: 36,),
+                BlueRectButton(
+                  text: "Let's go",
+                  onTap: () async {
+
+                    final bool isValidEmail = _emailText.text.contains(
+                      RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$')
+                    ); 
+
+                    final bool isValidPassword = _passwordText.text.length > 6; 
+
+                    if (isValidEmail && isValidPassword) {
+                      await bloc.signIn(
+                        _emailText.text, _passwordText.text)
+                        .then((value) {
+                          if (value) {
+                            Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                              contentText: 'Valid',
+                              labelText: 'DISMISS',
+                              onPressed: () {}
+                            ));
+                          }
+                          else {
+                            Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                              contentText: 'Error Sign In User',
+                              labelText: 'DISMISS',
+                              onPressed: () {}
+                            ));
+                          }
+                        }
+                      );
+                    } else {
+                      Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                        contentText: 'Email or password not valid',
+                        labelText: 'DISMISS',
+                        onPressed: () {}
+                      ));
+                    }
+                  },
+                ),
+                const SizedBox(height: 36,),
+                Row(
+                  children: [
+                    Text("Don't have account ? ",
+                      style: blackSubtitle,
                     ),
-                  ),
-                ],
-              )
-            ],
+                    GestureDetector(
+                      onTap: () => Navigator.pushReplacementNamed(context, '/signup'),
+                      child: Text('Join now',
+                        style: blueSubtitle,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ) 
       ),
