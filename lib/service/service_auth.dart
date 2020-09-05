@@ -59,7 +59,7 @@ class AuthService {
       final fire_auth.UserCredential result = await _auth.signInWithEmailAndPassword(
         email: email, password: password);
       
-      final User user = await _userService.getUser(result.user.uid);
+      final User user = User.initial(); // await _userService.getUser(result.user.uid);
       return AuthResult(user: user);
 
     } catch (e) {
