@@ -27,7 +27,7 @@ class BlueRectButton extends StatelessWidget {
       height: 42,
       color: mainColor,
       isBorder: true,
-      onTap: () {},
+      onTap: onTap,
       child: Text(
         text,
         style: whiteSubtitle,
