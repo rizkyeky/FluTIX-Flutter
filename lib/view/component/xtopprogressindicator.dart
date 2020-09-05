@@ -26,7 +26,7 @@ class TopLinearProgressIndicator extends StatelessWidget
   Widget build(BuildContext context) {
     return SafeArea(
       child: StreamBuilder<bool>(
-        initialData: true,
+        initialData: false,
         stream: stream,
         builder: (context, snapshot) => (snapshot.data) ? LinearProgressIndicator(
           value: value,
