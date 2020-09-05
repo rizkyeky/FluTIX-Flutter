@@ -17,7 +17,7 @@ class SignInBloc implements Bloc {
   final BehaviorSubject<bool> _loadingController = BehaviorSubject();
   Stream<bool> get isLoadingStream => _loadingController.stream;
 
-  final Map<String, String> _registerData = {};
+  // final Map<String, String> _registerData = {};
 
   Future<bool> signIn(String name, String password) async {
     _loadingController.sink.add(true);
