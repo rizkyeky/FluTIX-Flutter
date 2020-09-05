@@ -14,10 +14,11 @@ class SignUpPage extends Page<SignUpBloc> {
       child: Scaffold(
         appBar: TopLinearProgressIndicator(
           backgroundColor: mainColor,
-          valueColor:accentColor,
-          stream: bloc.loadingStream,
+          valueColor: accentColor,
+          stream: bloc.isLoadingStream,
         ),
-        body: SingleChildScrollView(
+        body: Builder(
+          builder: (contextScaffold) => SingleChildScrollView(
           padding: paddingPage,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,31 +38,64 @@ class SignUpPage extends Page<SignUpBloc> {
               ),
               const SizedBox(height: 36,),
               XTextField(
+                obscureText: true,
                 controller: _passwordText,
                 text: 'Password',
               ),
               const SizedBox(height: 36,),
               BlueRectButton(
                 text: "Let's start",
-                onTap: () {
-                  bloc.signUp(_nameText.text, _emailText.text, _passwordText.text);
+                onTap: () async {
+
+                  final bool isValidEmail = _emailText.text.contains(
+                    RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$')
+                  ); 
+
+                  final bool isValidPassword = _passwordText.text.length >= 6; 
+
+                  if (isValidEmail && isValidPassword) {
+                    await bloc.signUp(
+                      _nameText.text, _emailText.text, _passwordText.text)
+                      .then((value) {
+                        if (value == 'User added') {
+                          Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                            contentText: value,
+                            labelText: 'DISMISS',
+                            onPressed: () {}
+                          ));
+                        } else {
+                          Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                            contentText: value,
+                            labelText: 'DISMISS',
+                            onPressed: () {}
+                          ));
+                        }
+                      });
+                  } else {
+                    Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                      contentText: 'Email or password not valid',
+                      labelText: 'DISMISS',
+                      onPressed: () {}
+                    ));
+                  }
                 },
               ),
-              const SizedBox(height: 36,),
-              Row(
-                children: [
-                  Text('Already have account ? ',
-                    style: blackSubtitle,
-                  ),
-                  GestureDetector(
-                    onTap: () => Navigator.pushReplacementNamed(context, '/signin'),
-                    child: Text('Join now',
-                      style: blueSubtitle,
+                const SizedBox(height: 36,),
+                Row(
+                  children: [
+                    Text('Already have account ? ',
+                      style: blackSubtitle,
                     ),
-                  ),
-                ],
-              )
-            ],
+                    GestureDetector(
+                      onTap: () => Navigator.pushReplacementNamed(context, '/signin'),
+                      child: Text('Join now',
+                        style: blueSubtitle,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ) 
       ),
