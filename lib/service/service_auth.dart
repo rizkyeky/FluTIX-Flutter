@@ -41,13 +41,13 @@ class AuthService {
       String errorType;
       
       if (e.code == 'weak-password') {
-        errorType = 'password is too weak';
+        errorType = 'Password is too weak';
       }
       else if (e.code == 'email-already-in-use') {
-        errorType = 'email is already in use';
+        errorType = 'Email is already in use';
       }
       
-      return AuthResult(message: 'Error signUp: $errorType');
+      return AuthResult(message: errorType);
     
     } catch (e) {
       return AuthResult(message: 'Error signUp: $e');
