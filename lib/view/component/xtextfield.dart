@@ -4,16 +4,19 @@ class XTextField extends StatelessWidget {
 
   final String text;
   final TextEditingController controller;
+  final bool obscureText;
 
   const XTextField({ 
   Key key,
   this.text,
   this.controller,
+  this.obscureText
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      obscureText: obscureText ?? false,
       controller: controller,
       decoration: InputDecoration(
         labelText: text,
