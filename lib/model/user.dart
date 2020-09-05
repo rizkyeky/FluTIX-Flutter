@@ -12,10 +12,9 @@ class User{
   const User(this.id, this.name, this.email,
   this.photoURL, this.favoriteGenre, this.favoriteCountry);
 
-  // @override
-  // List<Object> get props => [
-  //   id, name, email, photoURL, favoriteGenre, favoriteCountry
-  // ];
+  factory User.initial() => const User(
+    '','','','',[],[] 
+  );
 
   @override
   String toString() => '$id - $name, $email';
