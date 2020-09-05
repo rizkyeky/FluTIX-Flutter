@@ -6,22 +6,15 @@ class UserService {
 
   Future<User> setUser(User user) async {
 
-    final StringBuffer genres = StringBuffer();
-    for (final String genre in user.favoriteGenre) {
-      genres.write(genre + ((genre != user.favoriteGenre.last) ? ',' : ''));
-    }
-
-    final StringBuffer countries = StringBuffer();
-    for (final String country in user.favoriteCountry) {
-      countries.write(country + ((country != user.favoriteCountry.last) ? ',' : ''));
-    }
+    final String genres = user.favoriteGenre.join(',');
+    final String countries = user.favoriteCountry.join(',');
 
     await _userCollection.doc(user.id).set({
       'email': user.email,
       'name': user.name,
       'photoURL': user.photoURL,
       'favoriteGenre': genres,
-      'favoriteCountry': countries.toString(),
+      'favoriteCountry': countries,
     });
 
     return user;
