@@ -6,27 +6,34 @@ class SignInBloc implements Bloc {
 
   @override
   void dispose() {
+    _loadingController.close();
   }
 
   @override
   Future<void> init() async {
+    _loadingController.sink.add(false);
   }
 
   final BehaviorSubject<bool> _loadingController = BehaviorSubject();
-  Stream<bool> get loadingStream => _loadingController.stream;
+  Stream<bool> get isLoadingStream => _loadingController.stream;
 
   final Map<String, String> _registerData = {};
 
-  Future<void> signIn(String name, String password) async {
-    AuthResult result = await _authService.signIn(
-      name, password);
+  Future<bool> signIn(String name, String password) async {
+    _loadingController.sink.add(true);
+    final AuthResult result = await _authService.signIn(
+      name, password).whenComplete(() => _loadingController.sink.add(false));
     
     if (result.user != null) {
       print('user valid');
+      return true;
     }
     else {
       print(result.message);
+      return false;
     }
-  } 
+  }
+
+
   
 }
