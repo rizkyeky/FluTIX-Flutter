@@ -3,6 +3,7 @@ import 'package:flutix_training/model/model.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:flutix_training/service/service.dart';
+import 'package:flutix_training/locator.dart';
 
 part 'bloc_signin.dart';
 part 'bloc_signup.dart';
