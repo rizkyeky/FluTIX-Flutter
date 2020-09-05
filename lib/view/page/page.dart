@@ -21,6 +21,16 @@ part 'page_maintabbar.dart';
 part 'page_success_checkout.dart';
 // part 'page_test.dart';
 
+SnackBar snackBar({
+  String contentText, String labelText, VoidCallback onPressed
+}) => SnackBar(
+  content: Text(contentText),
+  action: SnackBarAction(
+    label: labelText,
+    onPressed: onPressed,
+  ),
+);
+
 abstract class Page<T extends Bloc> extends StatefulWidget {
 
   final T bloc = locator<T>();
