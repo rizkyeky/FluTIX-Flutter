@@ -6,7 +6,7 @@ import 'view/page/page.dart';
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/home':
+      case '/':
         return MaterialPageRoute(builder: (_) => HomePage());
       case '/detailmovie':
         final Movie movie = settings.arguments as Movie;
