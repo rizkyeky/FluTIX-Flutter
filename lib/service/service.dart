@@ -15,3 +15,4 @@ part 'service_user.dart';
 part 'service_core.dart';
 part 'service_movie.dart';
 part 'service_ticket.dart';
+part 'service_local.dart';
