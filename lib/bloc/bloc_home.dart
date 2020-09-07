@@ -2,12 +2,14 @@ part of 'bloc.dart';
 
 class HomeBloc implements Bloc {
 
-  final MovieService _movieService = MovieService();
+  final LocalService _localService = locator.get<LocalService>(instanceName: 'Local Service');
 
   final BehaviorSubject<List<Movie>> _movieCarouselController = BehaviorSubject();
   Stream<List<Movie>> get movieCarouselStream => _movieCarouselController.stream;
 
-  List<Movie> _movies = [];
+  List<Movie> _popularitymovies = [];
+  List<Movie> _comingSoonMovies = [];
+  List<Movie> _playingNowMovies = [];
 
   bool isInit = false;
 
@@ -26,11 +28,21 @@ class HomeBloc implements Bloc {
   }
 
   Future<void> getMoviesFromService() async {
-    _movies = await _movieService.getMovies();
+    _popularitymovies = _localService.popularMovies;
+    _comingSoonMovies = _localService.comingSoonMovies;
+    _playingNowMovies = _localService.playingNowMovies;
   }
 
-  Future<List<Movie>> getMoviesCarousel(int start, int end) async {
-    return _movies.sublist(start, end);
+  Future<List<Movie>> getPopularityMoviesList(int start, int end) async {
+    return _popularitymovies.sublist(start, end);
+  }
+
+  Future<List<Movie>> getComingSoonMoviesList(int start, int end) async {
+    return _comingSoonMovies.sublist(start, end);
+  }
+
+  Future<List<Movie>> getPlayingNowMoviesList(int start, int end) async {
+    return _playingNowMovies.sublist(start, end);
   }
 
 }

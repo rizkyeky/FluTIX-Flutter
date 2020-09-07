@@ -19,7 +19,7 @@ class HomePage extends Page<HomeBloc> {
               child: Text('Playing now', style: blueTitle,)
             ),
             FutureBuilder<List<Movie>>(
-              future: bloc.getMoviesCarousel(0, 5),
+              future: bloc.getPlayingNowMoviesList(0, 5),
               builder: (context, snapshot) => (snapshot.hasData) ? CarouselSlider.builder(
                 itemCount: snapshot.data.length,
                 options: CarouselOptions(
@@ -37,7 +37,7 @@ class HomePage extends Page<HomeBloc> {
               ),
             ),
             FutureBuilder<List<Movie>>(
-              future: bloc.getMoviesCarousel(5, 9),
+              future: bloc.getPopularityMoviesList(0, 5),
               builder: (context, snapshot) => (snapshot.hasData) ? ContentList<Movie>(
                 title: 'Recomended for you',
                 list: snapshot.data,
@@ -52,7 +52,7 @@ class HomePage extends Page<HomeBloc> {
               )
             ),
             FutureBuilder<List<Movie>>(
-              future: bloc.getMoviesCarousel(9, 12),
+              future: bloc.getComingSoonMoviesList(0, 5),
               builder: (context, snapshot) => (snapshot.hasData) ? ContentList<Movie>(
                 title: 'Coming Soon',
                 list: snapshot.data,
