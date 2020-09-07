@@ -1,6 +1,6 @@
 part of 'bloc.dart';
 
-class HomeBloc {
+class HomeBloc implements Bloc {
 
   final MovieService _movieService = MovieService();
 
@@ -11,12 +11,18 @@ class HomeBloc {
 
   bool isInit = false;
 
+  @override
   Future<void> init() async {
     if (!isInit) {
       isInit = true;
 
       await getMoviesFromService();
     }
+  }
+
+  @override
+  void dispose() {
+    _movieCarouselController.close();
   }
 
   Future<void> getMoviesFromService() async {
@@ -26,4 +32,5 @@ class HomeBloc {
   Future<List<Movie>> getMoviesCarousel(int start, int end) async {
     return _movies.sublist(start, end);
   }
+
 }
