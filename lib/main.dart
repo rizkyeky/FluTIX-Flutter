@@ -11,11 +11,11 @@ Future<void> main() async {
   setupLocator();
   await awaitSetupLocator();
 
-  // final bool isSignIn = locator.get<AuthService>(instanceName: 'Auth Service')
-  //   .isSignIn;
+  final bool isSignIn = locator.get<AuthService>(instanceName: 'Auth Service')
+    .isSignIn;
   
   // Run App
-  runApp(App(isSignIn: false));
+  runApp(App(isSignIn: isSignIn));
 }
 
 class App extends StatelessWidget {
@@ -31,13 +31,13 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'FluTIX',
       theme: ThemeData(
         primaryColor: mainColor,
         accentColor: accentColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: isSignIn ? '/home' : '/signin',
+      initialRoute: isSignIn ? '/' : '/signin',
       onGenerateRoute: Router.generateRoute,
     );
   }
