@@ -1,23 +1,34 @@
 part of 'service.dart';
 
+enum MovieSortType {popularity, comingsoon, playingnow}
+
 class MovieService {
   
   final http.Client _client = http.Client();
   final String _homeBase = 'api.themoviedb.org';
   
-  Future<List<Movie>> getMovies() async {
+  Future<List<Movie>> getMovies(MovieSortType type) async {
     
     final Map<String, String> query = {
       'page': '1',
-      'year': '2020',
       'api_key': apiKey,
       'language': 'en-US',
-      'include_adult': 'true',
-      'include_video': 'false',
-      'sort_by': 'popularity.desc',
     };
+
+    String typeBase = '';
+
+    switch (type) {
+      case MovieSortType.popularity:
+        typeBase = 'popular';
+        break;
+      case MovieSortType.playingnow:
+        typeBase = 'now_playing';
+        break;
+      case MovieSortType.comingsoon:
+        typeBase = 'upcoming';
+    }
     
-    const String _subBase = '3/discover/movie';
+    final String _subBase = '3/movie/$typeBase';
 
     // print('request api from $_homeBase');
 

@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutix_training/model/model.dart';
 import 'package:flutix_training/share/share.dart';
+import 'package:flutix_training/locator.dart';
 
 part 'service_auth.dart';
 part 'service_user.dart';
