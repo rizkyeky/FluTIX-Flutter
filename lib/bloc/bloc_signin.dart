@@ -23,8 +23,10 @@ class SignInBloc implements Bloc {
     _loadingController.sink.add(true);
     final AuthResult result = await _authService.signIn(
       name, password).whenComplete(() => _loadingController.sink.add(false));
-    
+
+      
     if (result.user != null) {
+      locator.call<User>(instanceName: 'User Active').duplicate(result.user);
       print('user valid');
       return true;
     }
