@@ -6,14 +6,13 @@ import 'view/page/page.dart';
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/':
+      case '/home':
         return MaterialPageRoute(builder: (_) => HomePage());
       case '/detailmovie':
         final Movie movie = settings.arguments as Movie;
         return MaterialPageRoute(builder: (_) => DetailMoviePage(movie));
       case '/booktime':
         return MaterialPageRoute(builder: (_) => BookTimePage());
-        break;
       case '/bookseat':
         return MaterialPageRoute(builder: (_) => BookSeatPage());
       case '/checkout':
@@ -24,6 +23,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => SignUpPage());
       case '/signin':
         return MaterialPageRoute(builder: (_) => SignInPage());
+      case '/preference':
+        return MaterialPageRoute(builder: (_) => PreferencePage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
