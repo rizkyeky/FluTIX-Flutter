@@ -13,10 +13,10 @@ void setupLocator() {
   locator.registerLazySingleton(() => CoreService(), instanceName: 'Core Service');
   locator.registerLazySingleton(() => AuthService(), instanceName: 'Auth Service');
   locator.registerLazySingleton(() => UserService(), instanceName: 'User Service');
+  locator.registerLazySingleton(() => HomeBloc());
   
-  locator.registerLazySingleton(() => MainTabBarBloc(), instanceName: 'MainTabBar Bloc');
-  locator.registerLazySingleton(() => HomeBloc(), instanceName: 'Home Bloc');
   
+  locator.registerFactory(() => MainTabBarBloc());
   locator.registerFactory(() => DetailMovieBloc());
   locator.registerFactory(() => BookTimeBloc());
   locator.registerFactory(() => BookSeatBloc());
@@ -38,7 +38,7 @@ Future<void> awaitSetupLocator() async {
   await locator.get<AuthService>(instanceName: 'Auth Service').init();
 
   // Setup first bloc
-  await locator.get<HomeBloc>(instanceName: 'Home Bloc').init();
+  await locator.get<HomeBloc>().init();
 
   // print("setup locator success");
 }
