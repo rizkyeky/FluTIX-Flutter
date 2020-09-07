@@ -14,6 +14,7 @@ part 'bloc_booktime.dart';
 part 'bloc_bookseat.dart';
 part 'bloc_test.dart';
 part 'bloc_checkout.dart';
+part 'bloc_preference.dart';
 
 abstract class Bloc {
   Future<void> init();
