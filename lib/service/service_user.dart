@@ -20,6 +20,27 @@ class UserService {
     return user;
   }
 
+  Future<void> updateUser(String id, {String email, String name, String photoURL, 
+  List<String> favGenres, List<String> favCountries}) async {
+    
+    final Map<String, dynamic> data = {};
+
+    if (email != null) {
+      data['email'] = email;
+    }
+    if (name != null) {
+      data['name'] = name;
+    }
+    if (favGenres != null) {
+      data['favoriteGenre'] = favGenres.join(',');
+    }
+    if (favCountries != null) {
+      data['favoriteCountry'] = favCountries.join(',');
+    }
+    
+    await _userCollection.doc(id).set(data);
+  }
+
   Future<User> getUser(String id) async {
     final fire_store.DocumentSnapshot snapshot = await _userCollection.doc(id).get();
 
