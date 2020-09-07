@@ -37,8 +37,7 @@ class App extends StatelessWidget {
         accentColor: accentColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      // home: TestPage(),
-      initialRoute: '/signin',
+      initialRoute: isSignIn ? '/home' : '/signin',
       onGenerateRoute: Router.generateRoute,
     );
   }
