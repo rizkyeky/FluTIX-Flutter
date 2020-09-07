@@ -1,9 +1,7 @@
 part of 'page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends Page<HomeBloc> {
   HomePage({Key key}) : super(key: key);
-
-  final HomeBloc _bloc = locator.get<HomeBloc>(instanceName: 'Home Bloc');
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +13,13 @@ class HomePage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 12,),
             Container(
               alignment: Alignment.centerLeft,
               margin: const EdgeInsets.all(18),
               child: Text('Playing now', style: blueTitle,)
             ),
             FutureBuilder<List<Movie>>(
-              future: _bloc.getMoviesCarousel(0, 5),
+              future: bloc.getMoviesCarousel(0, 5),
               builder: (context, snapshot) => (snapshot.hasData) ? CarouselSlider.builder(
                 itemCount: snapshot.data.length,
                 options: CarouselOptions(
@@ -40,13 +37,14 @@ class HomePage extends StatelessWidget {
               ),
             ),
             FutureBuilder<List<Movie>>(
-              future: _bloc.getMoviesCarousel(5, 9),
+              future: bloc.getMoviesCarousel(5, 9),
               builder: (context, snapshot) => (snapshot.hasData) ? ContentList<Movie>(
                 title: 'Recomended for you',
                 list: snapshot.data,
                 imageBuilder: (e, index) => NetworkImage('${imageBaseURL}w92${e.posterPath}'),
               ) 
               : Container(
+                margin: const EdgeInsets.only(top: 18),
                 height: 240,
                 color: whiteColor,
                 alignment: Alignment.center,
@@ -54,13 +52,14 @@ class HomePage extends StatelessWidget {
               )
             ),
             FutureBuilder<List<Movie>>(
-              future: _bloc.getMoviesCarousel(9, 12),
+              future: bloc.getMoviesCarousel(9, 12),
               builder: (context, snapshot) => (snapshot.hasData) ? ContentList<Movie>(
                 title: 'Coming Soon',
                 list: snapshot.data,
                 imageBuilder: (e, index) => NetworkImage('${imageBaseURL}w92${e.posterPath}'),
               ) 
               : Container(
+                margin: const EdgeInsets.only(top: 18),
                 height: 240,
                 color: whiteColor,
                 alignment: Alignment.center,
@@ -72,5 +71,15 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+  }
+
+  @override
+  void init() {
+    // TODO: implement init
   }
 }

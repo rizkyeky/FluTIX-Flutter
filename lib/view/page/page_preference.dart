@@ -65,7 +65,7 @@ class PreferencePage extends Page<PreferenceBloc> {
         backgroundColor: mainColor,
         onPressed: () {
           bloc.setUserPreference();
-          Navigator.pushReplacementNamed(context, '/home');
+          Navigator.pushReplacementNamed(context, '/');
         },
         child: const Icon(Icons.arrow_forward),
       ),
