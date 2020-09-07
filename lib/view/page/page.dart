@@ -11,7 +11,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 part 'page_signin.dart';
 part 'page_signup.dart';
-part 'page_favorite.dart';
+part 'page_preference.dart';
 part 'page_home.dart';
 part 'page_detailmovie.dart';
 part 'page_book_time.dart';

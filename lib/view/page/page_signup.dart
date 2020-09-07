@@ -58,16 +58,12 @@ class SignUpPage extends Page<SignUpBloc> {
                       _nameText.text, _emailText.text, _passwordText.text)
                       .then((value) {
                         if (value == 'User added') {
-                          Scaffold.of(contextScaffold).showSnackBar(snackBar(
-                            contentText: value,
-                            labelText: 'DISMISS',
-                            onPressed: () {}
-                          ));
+                          Navigator.pushReplacementNamed(context, '/preference');
                         } else {
                           Scaffold.of(contextScaffold).showSnackBar(snackBar(
                             contentText: value,
                             labelText: 'DISMISS',
-                            onPressed: () {}
+                            onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
                           ));
                         }
                       });
@@ -75,7 +71,7 @@ class SignUpPage extends Page<SignUpBloc> {
                     Scaffold.of(contextScaffold).showSnackBar(snackBar(
                       contentText: 'Email or password not valid',
                       labelText: 'DISMISS',
-                      onPressed: () {}
+                      onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
                     ));
                   }
                 },

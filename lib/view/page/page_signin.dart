@@ -66,17 +66,13 @@ class SignInPage extends Page<SignInBloc> {
                         _emailText.text, _passwordText.text)
                         .then((value) {
                           if (value) {
-                            Scaffold.of(contextScaffold).showSnackBar(snackBar(
-                              contentText: 'Valid',
-                              labelText: 'DISMISS',
-                              onPressed: () {}
-                            ));
+                            Navigator.pushReplacementNamed(context, '/home');
                           }
                           else {
                             Scaffold.of(contextScaffold).showSnackBar(snackBar(
                               contentText: 'Error Sign In User',
                               labelText: 'DISMISS',
-                              onPressed: () {}
+                              onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
                             ));
                           }
                         }
@@ -85,7 +81,7 @@ class SignInPage extends Page<SignInBloc> {
                       Scaffold.of(contextScaffold).showSnackBar(snackBar(
                         contentText: 'Email or password not valid',
                         labelText: 'DISMISS',
-                        onPressed: () {}
+                        onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
                       ));
                     }
                   },
