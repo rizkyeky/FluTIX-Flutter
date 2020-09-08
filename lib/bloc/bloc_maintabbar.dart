@@ -3,18 +3,18 @@ part of 'bloc.dart';
 
 enum SwitchTab {home, search, favorite, promo, profile}
 
-class MainTabBarBloc {
+class MainTabBarBloc implements Bloc {
 
-  // @override
-  // void init() {
-  //   _tab = SwitchTab.home;
-  //   _tabController.sink.add(_tab);
-  // }
+  @override
+  Future<void> init() async {
+    _tab = SwitchTab.home;
+    _tabController.sink.add(_tab);
+  }
 
-  // @override
-  // void dispose() {
-  //   _tabController.close();
-  // }
+  @override
+  void dispose() {
+    _tabController.close();
+  }
 
   MainTabBarBloc() {
     _tab = SwitchTab.home;
@@ -27,8 +27,8 @@ class MainTabBarBloc {
   SwitchTab _tab;
   SwitchTab get tab => _tab;
 
-  bool _activeIcon;
-  bool get activeIcon => _activeIcon;
+  // bool _activeIcon;
+  // bool get activeIcon => _activeIcon;
 
   void setTab(SwitchTab val) {
     if (val != _tab) {

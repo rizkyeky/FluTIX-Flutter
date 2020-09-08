@@ -1,28 +1,24 @@
 part of 'page.dart';
 
-class MainTabBarPage extends StatelessWidget {
+class MainTabBarPage extends Page<MainTabBarBloc> {
 
   final HomePage homePage = HomePage();
-  // final SearchView searchView = SearchView();
-
-  final MainTabBarBloc _bloc = locator.get<MainTabBarBloc>(instanceName: 'MainTabBar Bloc');
-
   MainTabBarPage({Key key}) : super(key: key);
 
-  // @override
-  // void init() {
-  // }
+  @override
+  void init() {
+  }
 
-  // @override
-  // void dispose() {
-  // }
+  @override
+  void dispose() {
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: StreamBuilder<SwitchTab>(
-          stream: _bloc.tabStream,
+          stream: bloc.tabStream,
           builder: (context, snap) {
             switch (snap.data) {
               case SwitchTab.home: 
@@ -46,7 +42,7 @@ class MainTabBarPage extends StatelessWidget {
           }
         ),
       ),
-      bottomNavigationBar: XBottomNavigator(_bloc.tabStream, _bloc.setTab)
+      bottomNavigationBar: XBottomNavigator(bloc.tabStream, bloc.setTab)
     );
   }
 }
@@ -66,6 +62,7 @@ class XBottomNavigator extends StatelessWidget {
       height: 48,
       child: Material(
         color: whiteColor,
+        shape: const Border(top: BorderSide(color: borderColor)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
