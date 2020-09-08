@@ -8,12 +8,13 @@ class User{
   String photoURL;
   List<String> favoriteGenre; 
   List<String> favoriteCountry;
+  List<Movie> favoriteMovie;
 
   User(this.id, this.name, this.email,
-  this.photoURL, this.favoriteGenre, this.favoriteCountry);
+  this.photoURL, this.favoriteGenre, this.favoriteCountry, this.favoriteMovie);
 
   factory User.initial() => User(
-    '','','','',[],[] 
+    '','','','',[],[],[]
   );
 
   @override
@@ -25,7 +26,8 @@ class User{
     String email,
     String photoURL, 
     List<String> favoriteGenre,
-    List<String> favoriteCountry
+    List<String> favoriteCountry,
+    List<Movie> favoriteMovie
   }) {
     this.id = id ?? this.id;
     this.name = name ?? this.name;
@@ -33,6 +35,7 @@ class User{
     this.photoURL = photoURL ?? this.photoURL;
     this.favoriteGenre = favoriteGenre ?? this.favoriteGenre;
     this.favoriteCountry = favoriteCountry ?? this.favoriteCountry;
+    this.favoriteMovie = favoriteMovie ?? this.favoriteMovie;
   }
 
   void duplicate(User user) {
@@ -42,5 +45,6 @@ class User{
     photoURL = user.photoURL;
     favoriteGenre = user.favoriteGenre;
     favoriteCountry = user.favoriteCountry;
+    favoriteMovie = user.favoriteMovie;
   }
 }
