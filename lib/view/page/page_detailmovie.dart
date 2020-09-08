@@ -206,7 +206,6 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                 Container(
                   alignment: Alignment.topLeft,
                   margin: const EdgeInsets.only(top: 18),
-                  // height: 180,
                   child: Material(
                     color: Colors.white,
                     child: Column(
@@ -220,16 +219,11 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                           ),
                         ),
                         Container(
-                          // color: Colors.amber,
                           padding: const EdgeInsets.only(left: 12, right: 12, bottom: 18),
                           child: Text( movie.overview,
-                            // "Marvel's The Avengers (classified under the name Marvel Avengers) "
-                            // "Assemble in the United Kingdom and Ireland), or simply The Avengers, is "
-                            // "a 2012 American superhero film based on the Marvel Comics superhero",
                             style: blackContentRegular,                                
                           ),
                         ),
-                        
                       ],
                     ),
                   ),
@@ -248,7 +242,7 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
         backgroundColor: mainColor, 
         onPressed: () {
           locator.call<Ticket>(instanceName: 'Ticket').copyWith(movie: movie);
-          Navigator.pushNamed(context, '/booktime', arguments: movie);
+          Navigator.pushNamed(context, '/booktime');
         },
         label: Text('Book now', style: whiteSubtitle),
       ),
