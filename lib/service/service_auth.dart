@@ -31,7 +31,8 @@ class AuthService {
         email,
         '',
         favoriteGenre,
-        favoriteCountry
+        favoriteCountry,
+        []
       ));  
       
       return AuthResult(user: user);

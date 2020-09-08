@@ -53,6 +53,8 @@ class UserService {
         .split(',') as List<String>,
       snapshot.data()['favoriteCountry']
         .split(',') as List<String>,
+      snapshot.data()['favoriteMovie']
+        .split(',') as List<Movie>,
     );
   }
 }
