@@ -3,9 +3,10 @@ part of 'bloc.dart';
 class DetailMovieBloc implements Bloc {
 
   final MovieService _movieService = MovieService();
-
-  final BehaviorSubject<List<Movie>> _movieCarouselController = BehaviorSubject();
-  Stream<List<Movie>> get movieCarouselStream => _movieCarouselController.stream;
+  final User _user = locator.get<User>(instanceName: 'User Active');
+  
+  final BehaviorSubject<bool> _favoriteController = BehaviorSubject();
+  Stream<bool> get favoriteStream => _favoriteController.stream;
 
   Movie _movie;
   List<Cast> _casts = [];
@@ -14,15 +15,19 @@ class DetailMovieBloc implements Bloc {
 
   @override
   void dispose() {
-    if (isInit) {
-      isInit = false;
-    }
+    _favoriteController.close();
   }
 
   @override
   Future<void> init() async {
-    if (!isInit) {
-      isInit = true;
+    _favoriteController.sink.add(false);
+  }
+
+  void checkFavoriteMovie(Movie movie) {
+    if (_user.favoriteMovie.contains(movie)) {
+      _favoriteController.sink.add(true);
+    } else {
+      _favoriteController.sink.add(false);
     }
   }
 
@@ -31,15 +36,10 @@ class DetailMovieBloc implements Bloc {
   }
 
   Future<Movie> getDetailMovie(Movie movie) async {
-    // if (_movie == null) {
+    
     await getMovieFromService(movie.id);
-    // }
-
-    // print('get movie detail');
 
     movie.runtime = _movie.runtime;
-
-    print(movie.runtime);
 
     return movie;
   }
@@ -51,5 +51,14 @@ class DetailMovieBloc implements Bloc {
   Future<List<Cast>> getCasts(int id) async {
     await getCastFromService(id);
     return _casts;
+  }
+
+  void setFavoriteMovie(Movie movie) {
+    if (!_user.favoriteMovie.contains(movie)) {
+      _user.favoriteMovie.add(movie);
+    }
+    else {
+      _user.favoriteMovie.remove(movie);
+    }
   }
 }
