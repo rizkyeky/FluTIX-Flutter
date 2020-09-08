@@ -38,7 +38,6 @@ class HomePage extends Page<HomeBloc> {
               )
               : Container(
                 height: 180,
-                color: whiteColor, 
                 alignment: Alignment.center, 
                 child: const CircularProgressIndicator(),
               ),
@@ -87,6 +86,5 @@ class HomePage extends Page<HomeBloc> {
 
   @override
   void init() {
-    // TODO: implement init
   }
 }
