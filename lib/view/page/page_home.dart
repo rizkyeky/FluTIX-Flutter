@@ -25,8 +25,15 @@ class HomePage extends Page<HomeBloc> {
                 options: CarouselOptions(
                   height: 180
                 ),
-                itemBuilder: (context, index)=> MovieCard(
-                  snapshot.data[index]
+                itemBuilder: (context, index) => MovieCard(
+                  snapshot.data[index],
+                  onSelected: (isSelected, movie) {
+                    if (isSelected) {
+                      bloc.setFavoriteMovie(movie);
+                    } else {
+                      bloc.setFavoriteMovie(movie);
+                    }
+                  } ,
                 ), 
               )
               : Container(

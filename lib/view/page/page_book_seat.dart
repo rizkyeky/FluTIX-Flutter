@@ -58,13 +58,7 @@ class BookSeatPage extends Page<BookSeatBloc> {
                           disableColorBorder: mainColor,
                           defaultColorBorder: borderColor,
                           selectedColorBorder: accentColor,
-                          onSelected: (isSelected) {
-                            if (isSelected) {
-                              bloc.selectSeats(bloc.seats[indexHuruf][indexAngka]);
-                            } else {
-                              bloc.selectSeats(bloc.seats[indexHuruf][indexAngka]);
-                            }
-                          },
+                          onSelected: (isSelected) => bloc.selectSeats(bloc.seats[indexHuruf][indexAngka]),
                           height: 36, 
                           width: 36, 
                           text: bloc.seats[indexHuruf][indexAngka]

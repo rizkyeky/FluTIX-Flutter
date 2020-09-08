@@ -49,12 +49,12 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                 XSwitchIcon(
                   activeIcon: Icons.favorite, 
                   nonactiveIcon: Icons.favorite_border, 
-                  onSelected: () {}
+                  onSelected: (isSelected) {}
                 ),
                 XSwitchIcon(
                   activeIcon: Icons.bookmark, 
                   nonactiveIcon: Icons.bookmark_border, 
-                  onSelected: () {}
+                  onSelected: (isSelected) {}
                 )
               ],
               backgroundColor: mainColor,
