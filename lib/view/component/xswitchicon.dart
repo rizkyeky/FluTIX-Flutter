@@ -6,7 +6,7 @@ class XSwitchIcon extends StatefulWidget {
   final IconData nonactiveIcon;
   final Color activeColor;
   final Color nonactiveColor;
-  final void Function() onSelected;
+  final void Function(bool) onSelected;
 
   const XSwitchIcon({
     Key key, 
@@ -36,8 +36,10 @@ class _XSwitchIconState extends State<XSwitchIcon> {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        widget.onSelected();
-        setState(() => isSelected = !isSelected);
+        setState(() {
+          isSelected = !isSelected;
+          widget.onSelected(isSelected);
+        });
       },
       icon: AnimatedSwitcher(
         switchInCurve: Curves.fastOutSlowIn,

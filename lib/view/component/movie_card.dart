@@ -3,8 +3,9 @@ part of 'component.dart';
 class MovieCard extends StatelessWidget {
 
   final Movie _movie;
+  final void Function(bool, Movie) onSelected;
 
-  const MovieCard(this._movie, {Key key}) : super(key: key);
+  const MovieCard(this._movie, {Key key, this.onSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,9 @@ class MovieCard extends StatelessWidget {
             XSwitchIcon(
               activeIcon: Icons.favorite, 
               nonactiveIcon: Icons.favorite_border, 
-              onSelected: () {},
+              onSelected: (isSelected) {
+                onSelected(isSelected, _movie);
+              },
             )
           ],
         )
