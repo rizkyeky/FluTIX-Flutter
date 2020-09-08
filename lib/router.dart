@@ -7,7 +7,7 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => MainTabBarPage());
       case '/detailmovie':
         final Movie movie = settings.arguments as Movie;
         return MaterialPageRoute(builder: (_) => DetailMoviePage(movie));
