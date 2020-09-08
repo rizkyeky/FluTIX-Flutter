@@ -3,9 +3,10 @@ part of 'bloc.dart';
 class HomeBloc implements Bloc {
 
   final LocalService _localService = locator.get<LocalService>(instanceName: 'Local Service');
+  final User _user = locator.call<User>(instanceName: 'User Active');
 
   final BehaviorSubject<List<Movie>> _movieCarouselController = BehaviorSubject();
-  Stream<List<Movie>> get movieCarouselStream => _movieCarouselController.stream;
+  // Stream<List<Movie>> get movieCarouselStream => _movieCarouselController.stream;
 
   List<Movie> _popularitymovies = [];
   List<Movie> _comingSoonMovies = [];
@@ -45,4 +46,12 @@ class HomeBloc implements Bloc {
     return _playingNowMovies.sublist(start, end);
   }
 
+  void setFavoriteMovie(Movie movie) {
+    if (!_user.favoriteMovie.contains(movie)) {
+      _user.favoriteMovie.add(movie);
+    }
+    else {
+      _user.favoriteMovie.remove(movie);
+    }
+  }
 }
