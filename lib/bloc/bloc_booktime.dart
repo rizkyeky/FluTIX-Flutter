@@ -20,8 +20,14 @@ class BookTimeBloc implements Bloc {
   List<Map<String, dynamic>> get daysInWeek => _daysInWeek;
   
   Map<String, dynamic> _selectedDate = {};
+  String get dayDate => '${_selectedDate['name'] as String} ${_selectedDate['date']} ${_thisDate.year}';
+  
   String _selectedPlace = '';
+  String get place => _selectedPlace;
+
   String _selectedTime = '';
+  String get time => _selectedTime;
+
 
   Map<String, String> get selectedDateTimePlace => {
     'date': '${_selectedDate['name'] as String} ${_selectedDate['date']} ${_thisDate.year}',
