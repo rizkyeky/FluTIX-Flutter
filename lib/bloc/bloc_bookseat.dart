@@ -44,7 +44,7 @@ class BookSeatBloc implements Bloc {
     }
   }
 
-  final String _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  final String _chars = '1234567890';
   final Random _rnd = Random();
 
   String getIDTicket(int length) => String.fromCharCodes(Iterable.generate(
