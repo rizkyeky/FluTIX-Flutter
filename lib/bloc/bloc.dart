@@ -1,3 +1,4 @@
+import 'dart:math';
 
 import 'package:flutix_training/model/model.dart';
 import 'package:rxdart/rxdart.dart';
@@ -15,6 +16,7 @@ part 'bloc_bookseat.dart';
 part 'bloc_test.dart';
 part 'bloc_checkout.dart';
 part 'bloc_preference.dart';
+part 'bloc_profile.dart';
 
 abstract class Bloc {
   Future<void> init();
