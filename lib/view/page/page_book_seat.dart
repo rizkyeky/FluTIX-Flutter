@@ -140,6 +140,9 @@ class BookSeatPage extends Page<BookSeatBloc> {
           locator.call<Ticket>(instanceName: 'Ticket').copyWith(
             seats: bloc.selectedSeats
           );
+          locator.call<Ticket>(instanceName: 'Ticket').copyWith(
+            bookingCode: bloc.getIDTicket(10)
+          );
           Navigator.pushNamed(context, '/checkout');
         },
         child: const Icon(Icons.arrow_forward),
