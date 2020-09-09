@@ -3,21 +3,25 @@ part of 'model.dart';
 class Ticket {
   String id;
   String bookingCode;
-  String place;
+  String bookingPlace;
   Movie movie;
   int price;
   List<int> time;
+  String bookingTime;
   List<int> dayDate;
+  String bookingDayDate;
   List<String> seats;
 
   Ticket(
     this.id, 
     this.bookingCode, 
-    this.place, 
+    this.bookingPlace, 
     this.movie, 
     this.price,
     this.time,
+    this.bookingTime,
     this.dayDate,
+    this.bookingDayDate,
     this.seats, 
   );
 
@@ -28,23 +32,29 @@ class Ticket {
     Movie.initial(),
     0,
     [],
+    '',
     [],
+    '',
     []
   );
 
   void copyWith({
     String id,
     String bookingCode,
-    String place,
+    String bookingPlace,
     Movie movie,
     int price,
     List<int> time,
+    String bookingTime,
     List<int> dayDate,
+    String bookingDayDate,
     List<String> seats
   }) {
     this.id = id ?? this.id;
     this.bookingCode = bookingCode ?? this.bookingCode;
-    this.place = place ?? this.place;
+    this.bookingTime = bookingTime ?? this.bookingTime;
+    this.bookingDayDate = bookingDayDate ?? this.bookingDayDate;
+    this.bookingPlace = bookingPlace ?? this.bookingPlace;
     this.movie = movie ?? this.movie;
     this.price = price ?? this.price;
     this.time = time ?? this.time;
