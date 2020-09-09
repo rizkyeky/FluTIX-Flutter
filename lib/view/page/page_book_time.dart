@@ -123,15 +123,22 @@ class BookTimePage extends Page<BookTimeBloc>{
           highlightElevation: 0,
           backgroundColor: mainColor,
           onPressed: () {
-            locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
-              bloc.thisDate.weekday,
-              bloc.thisDate.day
-            ]);
-            locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
-              bloc.thisDate.hour,
-              bloc.thisDate.minute,
-              bloc.thisDate.second,
-            ]);
+            // locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
+            //   bloc.thisDate.weekday,
+            //   bloc.thisDate.day
+            // ]);
+            // locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
+            //   bloc.thisDate.hour,
+            //   bloc.thisDate.minute,
+            //   bloc.thisDate.second,
+            // ]);
+            locator.call<Ticket>(instanceName: 'Ticket')
+              .copyWith(bookingDayDate: bloc.dayDate);
+            locator.call<Ticket>(instanceName: 'Ticket')
+              .copyWith(bookingPlace: bloc.place);
+            locator.call<Ticket>(instanceName: 'Ticket')
+              .copyWith(bookingTime: bloc.time);
+            
             Navigator.pushNamed(context, '/bookseat');
           },
           child: const Icon(Icons.arrow_forward),
