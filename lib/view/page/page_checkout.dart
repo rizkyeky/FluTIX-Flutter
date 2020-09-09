@@ -35,8 +35,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
 
     final int starCount = (ticket.movie.voteAverage/2).round();
     final int seatsLen = ticket.seats.length;
-
-    // final date = 
+    final int totalPrice = (20000 * seatsLen) + (5000 * seatsLen);
 
     return Scaffold(
       backgroundColor: canvasColor,
@@ -112,21 +111,21 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('ID Order', style: blackContentRegular),
-                      Text('220881212', style: blackContentBold),
+                      Text(ticket.bookingCode, style: blackContentBold),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Cinema', style: blackContentRegular),
-                      Text(ticket.place, style: blackContentBold),
+                      Text(ticket.bookingPlace, style: blackContentBold),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Date & Time', style: blackContentRegular),
-                      Text('${ticket.dayDate[0]}:${ticket.dayDate[1]}, ${ticket.time[0]}:${ticket.time[1]}:${ticket.time[2]}',
+                      Text(ticket.bookingDayDate,
                         style: blackContentBold
                       ),
                     ],
@@ -169,7 +168,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Total', style: blackContentRegular),
-                      Text('Rp75.000', style: blackContentBold),
+                      Text('Rp$totalPrice', style: blackContentBold),
                     ],
                   ),
                 ],
@@ -183,11 +182,23 @@ class CheckoutPage extends Page<CheckoutBloc> {
         highlightElevation: 0,
         backgroundColor: mainColor,
         onPressed: () {
+
+          locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
+            bloc.thisDate.weekday,
+            bloc.thisDate.day
+          ]);
+          locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
+            bloc.thisDate.hour,
+            bloc.thisDate.minute,
+            bloc.thisDate.second,
+          ]);
+
           Navigator.pushNamed(context, '/checkoutsuccess');
         },
         label: Text('Checkout now', style: whiteSubtitle)
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      
     );
   }
 }
