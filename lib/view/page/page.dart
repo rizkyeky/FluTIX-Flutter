@@ -19,6 +19,7 @@ part 'page_book_seat.dart';
 part 'page_checkout.dart';
 part 'page_maintabbar.dart';
 part 'page_success_checkout.dart';
+part 'page_profile.dart';
 // part 'page_test.dart';
 
 SnackBar snackBar({
