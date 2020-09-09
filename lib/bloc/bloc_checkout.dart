@@ -4,6 +4,9 @@ class CheckoutBloc implements Bloc {
 
   bool isInit = false;
 
+  final DateTime _thisDate = DateTime.now();
+  DateTime get thisDate => _thisDate;
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -11,9 +14,5 @@ class CheckoutBloc implements Bloc {
 
   @override
   Future<void> init() async {
-    if (!isInit) {
-      isInit = true;
-    }
   }
-
 }
