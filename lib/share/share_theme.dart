@@ -28,10 +28,10 @@ TextStyle whiteSubtitle = GoogleFonts.ptSans(
     color: whiteColor, fontSize: 18, fontWeight: FontWeight.bold);
 
 TextStyle blackContentRegular = GoogleFonts.ptSans(
-    color: blackColor, fontSize: 12, fontWeight: FontWeight.normal);
+    color: blackColor, fontSize: 16, fontWeight: FontWeight.normal);
 
 TextStyle blackContentBold = GoogleFonts.ptSans(
-    color: blackColor, fontSize: 12, fontWeight: FontWeight.bold);
+    color: blackColor, fontSize: 14, fontWeight: FontWeight.bold);
 
 TextStyle whiteContent = GoogleFonts.ptSans(
-    color: whiteColor, fontSize: 12, fontWeight: FontWeight.normal);
+    color: whiteColor, fontSize: 16, fontWeight: FontWeight.normal);
