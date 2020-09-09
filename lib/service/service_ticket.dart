@@ -8,7 +8,7 @@ class TicketService {
     await ticketCollection.doc().set({
       "movieID": ticket.movie.id ?? "",
       "userID": id ?? "",
-      "place": ticket.place ?? "",
+      "place": ticket.bookingPlace ?? "",
       "time": ticket.time ?? DateTime.now().millisecondsSinceEpoch,
       "bookCode": ticket.bookingCode ?? "",
       "seats": ticket.seats ?? [],
