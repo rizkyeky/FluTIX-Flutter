@@ -3,6 +3,8 @@ part of 'page.dart';
 class MainTabBarPage extends Page<MainTabBarBloc> {
 
   final HomePage homePage = HomePage();
+  final ProfilePage profilePage = ProfilePage();
+
   MainTabBarPage({Key key}) : super(key: key);
 
   @override
@@ -34,7 +36,7 @@ class MainTabBarPage extends Page<MainTabBarBloc> {
                 return const Center(child: Icon(Icons.card_giftcard));
                 break;
               case SwitchTab.profile: 
-                return const Center(child: Icon(Icons.account_circle),);
+                return profilePage;
                 break;
               default:
                 return const Center(child: CircularProgressIndicator(),);

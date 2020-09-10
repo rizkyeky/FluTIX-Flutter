@@ -26,6 +26,7 @@ void setupLocator() {
   locator.registerFactory(() => SignInBloc());
   locator.registerFactory(() => SignUpBloc());
   locator.registerFactory(() => PreferenceBloc());
+  locator.registerFactory(() => ProfileBloc());
 
   locator.registerSingleton<Ticket>(Ticket.initial(), instanceName: 'Ticket');
   locator.registerSingleton<User>(User.initial(), instanceName: 'User Active');
