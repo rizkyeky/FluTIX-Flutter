@@ -1,8 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/painting.dart';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 part 'share_variable.dart';
 part 'share_key.dart';
 
 part 'share_theme.dart';
+part 'share_method.dart';

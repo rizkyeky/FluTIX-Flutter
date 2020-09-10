@@ -15,38 +15,41 @@ class ProfilePage extends Page<ProfileBloc> {
     // TODO: implement init
   }
 
-  String convertTime(int minute) {
-   
-    final str = StringBuffer();
-
-    if (minute > 60) {
-      str.write((minute / 60).floor());
-      str.write('h ');
-    }
-    if (minute % 60 != 0) {
-      str.write(minute % 60);
-      str.write('m');
-    }
-    return str.toString();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: canvasColor,
       appBar: XTopBar(
-        textTitle: 'Checkout Movie',
+        textTitle: 'Profile',
         textStyle: blueTitle,
         backgroundColor: whiteColor,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: mainColor), 
-          onPressed: () => Navigator.pop(context)
-        ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            
+            Container(
+              height: 150,
+              color: whiteColor,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Center(
+                    child: InkWell(
+                      onTap: () {},
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('assets/no_image.png'),
+                        radius: 36,
+                      ),
+                    ),
+                  ),
+                  Text('Rizky Eky', style: blueSubtitle),
+                ],
+              ),
+            ),
+            SizedBox(height: 24),
+            Container(
+              
+            )
           ],
         )
       ),
