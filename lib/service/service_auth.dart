@@ -8,15 +8,20 @@ class AuthService {
   bool get isSignIn => _isSignIn;
 
   Future<void> init() async {
-    final fire_auth.User user = await _auth.authStateChanges().first;
-    _isSignIn = user != null;
-  }
+    final fire_auth.User authUser = await _auth.authStateChanges().first;
+    _isSignIn = authUser != null;
 
-  Stream<bool> isSignInStream() async* {
-    await for (final fire_auth.User user in _auth.authStateChanges()) {
-      yield user != null;
+    if (_isSignIn) {
+      final User user = await _userService.getUser(authUser.uid);
+      locator.call<User>(instanceName: 'User Active').duplicate(user);
     }
   }
+
+  // Stream<bool> isSignInStream() async* {
+  //   await for (final fire_auth.User user in _auth.authStateChanges()) {
+  //     yield user != null;
+  //   }
+  // }
 
   Future<AuthResult> signUp(String name, String email, String password, 
   {List<String> favoriteGenre = const [], List<String> favoriteCountry = const []}) async {
@@ -60,7 +65,7 @@ class AuthService {
       final fire_auth.UserCredential result = await _auth.signInWithEmailAndPassword(
         email: email, password: password);
       
-      final User user = User.initial(); // await _userService.getUser(result.user.uid);
+      final User user = await _userService.getUser(result.user.uid);
       return AuthResult(user: user);
 
     } catch (e) {

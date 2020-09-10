@@ -8,6 +8,7 @@ class UserService {
 
     final String genres = user.favoriteGenre.join(',');
     final String countries = user.favoriteCountry.join(',');
+    final String moviesID = user.favoriteMovie.join(',');
 
     await _userCollection.doc(user.id).set({
       'email': user.email,
@@ -15,6 +16,7 @@ class UserService {
       'photoURL': user.photoURL,
       'favoriteGenre': genres,
       'favoriteCountry': countries,
+      'favoriteMovie': moviesID
     });
 
     return user;
@@ -54,7 +56,7 @@ class UserService {
       snapshot.data()['favoriteCountry']
         .split(',') as List<String>,
       snapshot.data()['favoriteMovie']
-        .split(',') as List<Movie>,
+        .split(',') as List<String>,
     );
   }
 }
