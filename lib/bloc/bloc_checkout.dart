@@ -15,4 +15,16 @@ class CheckoutBloc implements Bloc {
   @override
   Future<void> init() async {
   }
+
+  void onCheckOut() {
+    locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
+      _thisDate.weekday,
+      _thisDate.day
+    ]);
+    locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
+      _thisDate.hour,
+      _thisDate.minute,
+      _thisDate.second,
+    ]);
+  }
 }
