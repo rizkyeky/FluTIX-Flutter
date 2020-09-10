@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'locator.dart';
+import 'model/model.dart';
 import 'router.dart';
 import 'service/service.dart';
 import 'share/share.dart';
@@ -26,9 +27,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    // final Widget home = isSignIn ? const HomePage(title: 'Home Page',) : FavoritePage();
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FluTIX',
