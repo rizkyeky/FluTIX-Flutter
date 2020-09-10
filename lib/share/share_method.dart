@@ -17,3 +17,12 @@ Future<String> uploadImage(File image) async {
   return snapshot.ref.getDownloadURL() as String;
 }
 
+
+// Future<String> getImageFromFirebase(String imageName) async {
+//   final FirebaseStorage storage = FirebaseStorage.instance;
+//   final StorageReference ref = storage.ref();
+//   final StorageUploadTask task = ref.child().;
+//   final StorageTaskSnapshot snapshot = await task.onComplete;
+
+//   return snapshot.ref.getDownloadURL() as String;
+// }

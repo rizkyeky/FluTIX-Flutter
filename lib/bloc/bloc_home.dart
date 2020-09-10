@@ -48,10 +48,10 @@ class HomeBloc implements Bloc {
 
   void setFavoriteMovie(Movie movie) {
     if (!_user.favoriteMovie.contains(movie)) {
-      _user.favoriteMovie.add(movie);
+      _user.favoriteMovie.add(movie.id.toString());
     }
     else {
-      _user.favoriteMovie.remove(movie);
+      _user.favoriteMovie.remove(movie.id.toString());
     }
   }
 }

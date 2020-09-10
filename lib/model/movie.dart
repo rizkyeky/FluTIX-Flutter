@@ -110,5 +110,5 @@ class Movie {
   }
 
   @override
-  String toString() => 'movie: $title ($genres)';
+  String toString() => id.toString();
 }

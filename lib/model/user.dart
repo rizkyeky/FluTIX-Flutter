@@ -8,7 +8,7 @@ class User{
   String photoURL;
   List<String> favoriteGenre; 
   List<String> favoriteCountry;
-  List<Movie> favoriteMovie;
+  List<String> favoriteMovie;
 
   User(this.id, this.name, this.email,
   this.photoURL, this.favoriteGenre, this.favoriteCountry, this.favoriteMovie);
@@ -18,7 +18,7 @@ class User{
   );
 
   @override
-  String toString() => '$id - $name, $email';
+  String toString() => '$id - $name, $email, $favoriteGenre, $favoriteCountry';
 
   void copyWith({
     String id,
@@ -27,7 +27,7 @@ class User{
     String photoURL, 
     List<String> favoriteGenre,
     List<String> favoriteCountry,
-    List<Movie> favoriteMovie
+    List<String> favoriteMovie
   }) {
     this.id = id ?? this.id;
     this.name = name ?? this.name;
