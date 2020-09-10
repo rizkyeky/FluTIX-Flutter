@@ -177,28 +177,53 @@ class CheckoutPage extends Page<CheckoutBloc> {
           ],
         )
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        elevation: 0,
-        highlightElevation: 0,
-        backgroundColor: mainColor,
-        onPressed: () {
-
-          locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
-            bloc.thisDate.weekday,
-            bloc.thisDate.day
-          ]);
-          locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
-            bloc.thisDate.hour,
-            bloc.thisDate.minute,
-            bloc.thisDate.second,
-          ]);
-
-          Navigator.pushNamed(context, '/checkoutsuccess');
-        },
-        label: Text('Checkout now', style: whiteSubtitle)
+      floatingActionButton: Builder(
+        builder: (scaffContext) => FloatingActionButton.extended(
+          elevation: 0,
+          highlightElevation: 0,
+          backgroundColor: mainColor,
+          onPressed: () {
+            bloc.onCheckOut();
+            // Navigator.pushNamed(context, '/checkoutsuccess');
+            // Scaffold.of(scaffContext).showBottomSheet(
+            //   (context) => Container(
+            //     height: 200,
+            //     color: Colors.amber,
+            //   )
+            // );
+            showModalBottomSheet(
+              context: scaffContext,
+              builder: (context) => Container(
+                height: 300,
+                child: Material(
+                  color: Colors.white,
+                  child: ListView(
+                    children: [
+                      ListTile(
+                        onTap: () => Navigator.pushNamed(context, '/checkoutsuccess'),
+                        title: Text('Gopay', style: blackSubtitle),
+                      ),
+                      ListTile(
+                        onTap: () => Navigator.pushNamed(context, '/checkoutsuccess'),
+                        title: Text('Link Aja', style: blackSubtitle),
+                      ),
+                      ListTile(
+                        onTap: () => Navigator.pushNamed(context, '/checkoutsuccess'),
+                        title: Text('OVO', style: blackSubtitle),
+                      ),
+                      ListTile(
+                        onTap: () => Navigator.pushNamed(context, '/checkoutsuccess'),
+                        title: Text('ATM', style: blackSubtitle),
+                      ),
+                    ],
+                  ),
+                ),
+            ));
+          },
+          label: Text('Checkout now', style: whiteSubtitle)
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      
     );
   }
 }
