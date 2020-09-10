@@ -28,28 +28,62 @@ class ProfilePage extends Page<ProfileBloc> {
         child: Column(
           children: [
             Container(
-              height: 150,
+              padding: const EdgeInsets.all(24),
+              height: 120,
+              color: whiteColor,
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () async {
+                      await bloc.setProfilePicture();
+                    },
+                    child: CircleAvatar(
+                        radius: 36,
+                        backgroundImage: (user.photoURL != '') 
+                        ? NetworkImage(user.photoURL)
+                        : const AssetImage('assets/no_image.png') as ImageProvider,
+                      )
+                  ),
+                  const SizedBox(width: 24,),
+                  Text(user.name, style: blueSubtitle),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
+            Material(
               color: whiteColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Center(
-                    child: InkWell(
-                      onTap: () {},
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/no_image.png'),
-                        radius: 36,
-                      ),
-                    ),
+                  ListTile(
+                    leading: const Icon(Icons.confirmation_number),
+                    title: Text('My Tickets', style: blackSubtitle,),
+                    onTap: () {},
                   ),
-                  Text('Rizky Eky', style: blueSubtitle),
+                  ListTile(
+                    leading: const Icon(Icons.credit_card),
+                    title: Text('My Transaction', style: blackSubtitle,),
+                    onTap: () {},
+                  ),
                 ],
               ),
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 12),
             Container(
-              
-            )
+              color: whiteColor,
+              height: 120,
+            ),
+            const SizedBox(height: 12),
+            Container(
+              color: whiteColor,
+              height: 120,
+            ),
+            const SizedBox(height: 12),
+            BlueRectButton(
+              text: 'Sign Out',
+              onTap: () => bloc.signOut(),
+            ),
+            const SizedBox(height: 12),
           ],
         )
       ),
