@@ -25,8 +25,12 @@ class Data {
 
 Future<void> main() async {
 
-  DateTime now = DateTime.now();
-  print('${now.hour} : ${now.minute} : ${now.second}');
+  final String str = '';
+  final List<String> ls = str.split(',');
+  print(ls);
+
+  // DateTime now = DateTime.now();
+  // print('${now.hour} : ${now.minute} : ${now.second}');
 
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
   //   // Build our app and trigger a frame.
