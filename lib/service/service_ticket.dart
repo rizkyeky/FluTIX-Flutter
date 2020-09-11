@@ -7,18 +7,43 @@ class TicketService {
   Future<void> saveTicket(String id, Ticket ticket) async {
     await ticketCollection.doc().set({
       "movieID": ticket.movie.id ?? "",
-      "userID": id ?? "",
-      "place": ticket.bookingPlace ?? "",
-      "time": ticket.time ?? DateTime.now().millisecondsSinceEpoch,
-      "bookCode": ticket.bookingCode ?? "",
-      "seats": ticket.seats ?? [],
-      "name": ticket.movie.title,
-      "totalPrice": ticket.price
+      "movieName": ticket.movie.title ?? "",
+      "ticketID": id ?? "",
+      "price": ticket.price ?? 0,
+      "seats": ticket.seats.join(',') ?? "",
+      "time": ticket.time.join(':') ?? "",
+      "dayDate": ticket.dayDate.join(',') ?? "",
+      "bookingCode": ticket.bookingCode ?? "",
+      "bookingPlace": ticket.bookingPlace ?? "",
+      "bookingDayDate": ticket.bookingDayDate ?? "",
+      "bookingTime": ticket.bookingTime ?? ""
     });
   }
 
-  // Future<List<Ticket>> getTickets(String userID) async {
-  //   fire_store.QuerySnapshot snapshot = await ticketCollection.get();
-  //   var documents = snapshot.docs.where((document) => document.data()['userID'] == userID);
-  // }
+  Future<List<Ticket>> getTickets(String userId) async {
+    final fire_store.QuerySnapshot snapshot = await ticketCollection.get();
+    final Iterable<fire_store.QueryDocumentSnapshot> documents = snapshot.docs.where(
+      (element) =>  element.data()['userID'] == userId
+    );
+
+    final MovieService movieService = MovieService();
+
+    final List<Ticket> tickets = [];
+    for (final fire_store.QueryDocumentSnapshot doc in documents) {
+      final Movie movie = await movieService.getMovie((doc.data()['movieID'] as num).toInt());
+      tickets.add(Ticket(
+        doc.data()['ticketID'] as String, 
+        doc.data()['bookingCode'] as String, 
+        doc.data()['bookingPlace'] as String, 
+        movie,
+        (doc.data()['price'] as num).toInt(), 
+        (doc.data()['time'] as String).split(':') as List<int>,
+        doc.data()['bookingTime'] as String, 
+        (doc.data()['dayDate'] as String).split(',') as List<int>,
+        doc.data()['bookingDayDate'] as String, 
+        (doc.data()['seats'] as String).split(',')
+      ));
+    }
+    return tickets;
+  }
 }
