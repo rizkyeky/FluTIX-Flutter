@@ -15,7 +15,6 @@ class BookTimeBloc implements Bloc {
   List<Map<String, dynamic>> get daysInWeek => _daysInWeek;
   
   Map<String, dynamic> _selectedDate = {};
-  String get dayDate => '${_selectedDate['name']} ${_selectedDate['date']} ${_thisDate.year}';
   
   String _selectedPlace = '';
   String get place => _selectedPlace;
@@ -123,7 +122,7 @@ class BookTimeBloc implements Bloc {
 
   void onSelectedBookTime() {
     locator.call<Ticket>(instanceName: 'Ticket')
-      .copyWith(bookingDayDate: '${_selectedDate['name']} ${_selectedDate['date']} ${_thisDate.year}');
+      .copyWith(bookingDayDate: '${_selectedDate['name']} ${_selectedDate['date']} ${_thisDate.month} ${_thisDate.year}');
     locator.call<Ticket>(instanceName: 'Ticket')
       .copyWith(bookingPlace: _selectedPlace);
     locator.call<Ticket>(instanceName: 'Ticket')
