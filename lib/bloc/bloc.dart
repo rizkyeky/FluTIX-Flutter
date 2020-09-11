@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutix_training/model/model.dart';
 import 'package:flutix_training/share/share.dart';
+import 'package:path/path.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:flutix_training/service/service.dart';
