@@ -8,8 +8,8 @@ class ProfileBloc implements Bloc {
   final BehaviorSubject<File> _profilePictureController = BehaviorSubject();
   Stream<File> get profilePictureStream => _profilePictureController.stream;
 
-  File _profileImage;
-  File get profileImage => _profileImage;
+  File _profilePicture;
+  File get profileImage => _profilePicture;
 
   @override
   void dispose() {
@@ -22,10 +22,12 @@ class ProfileBloc implements Bloc {
   }
 
   Future<void> setProfilePicture() async {
-    await getImage().then((image) async {
-      user.photoURL = await uploadImage(image);
-      _profilePictureController.sink.add(image);
-    });
+    _profilePicture = await getImage();
+    if (_profilePicture != null) {
+      _profilePictureController.sink.add(_profilePicture);
+    } else {
+      _profilePicture = File(basename('assets/no_image.png'));
+    }
   }
 
   Future<void> signOut() async {
