@@ -4,14 +4,10 @@ class BookSeatPage extends Page<BookSeatBloc> {
   BookSeatPage({Key key}) : super(key: key);
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-  }
+  void dispose() {}
 
   @override
-  void init() {
-    // TODO: implement init
-  }
+  void init() {}
 
   @override
   Widget build(BuildContext context) {
@@ -47,24 +43,24 @@ class BookSeatPage extends Page<BookSeatBloc> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 9,
-                itemBuilder: (context, indexHuruf) => Column(
+                itemBuilder: (context, indexHuruf) => ColumnBuilder(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    for (int indexAngka = 0; indexAngka < 9; indexAngka++)
-                      Container(
-                        margin: const EdgeInsets.only(right: 6),
-                        child: XSelectedBox(
-                          isDisable: bloc.bookedSeats.contains(bloc.seats[indexHuruf][indexAngka]),
-                          disableColorBorder: mainColor,
-                          defaultColorBorder: borderColor,
-                          selectedColorBorder: accentColor,
-                          onSelected: (isSelected) => bloc.selectSeats(bloc.seats[indexHuruf][indexAngka]),
-                          height: 36, 
-                          width: 36, 
-                          text: bloc.seats[indexHuruf][indexAngka]
-                        )
-                      )
-                  ],
+                  itemCount: 9,
+                  itemBuilder: (context, indexAngka) => Container(
+                    margin: const EdgeInsets.only(right: 6),
+                    child: XSelectedBox(
+                      isDisable: bloc.bookedSeats
+                        .contains(bloc.seats[indexHuruf][indexAngka]),
+                      disableColorBorder: mainColor,
+                      defaultColorBorder: borderColor,
+                      selectedColorBorder: accentColor,
+                      onSelected: (isSelected) => bloc
+                        .selectSeats(bloc.seats[indexHuruf][indexAngka]),
+                      height: 36, 
+                      width: 36, 
+                      text: bloc.seats[indexHuruf][indexAngka]
+                    )
+                  )
                 )   
               ),
             ),
@@ -132,20 +128,25 @@ class BookSeatPage extends Page<BookSeatBloc> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        elevation: 0,
-        highlightElevation: 0,
-        backgroundColor: mainColor,
-        onPressed: () {
-          locator.call<Ticket>(instanceName: 'Ticket').copyWith(
-            seats: bloc.selectedSeats
-          );
-          locator.call<Ticket>(instanceName: 'Ticket').copyWith(
-            bookingCode: bloc.getIDTicket(10)
-          );
-          Navigator.pushNamed(context, '/checkout');
-        },
-        child: const Icon(Icons.arrow_forward),
+      floatingActionButton: Builder(
+        builder: (contextScaffold) => FloatingActionButton(
+          elevation: 0,
+          highlightElevation: 0,
+          backgroundColor: mainColor,
+          onPressed: () {
+            if (bloc.selectedSeats.isNotEmpty) {
+              bloc.onSelectSeats();
+              Navigator.pushNamed(context, '/checkout');
+            } else {
+              Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                contentText: 'Choose Date and Place',
+                labelText: 'DISMISS',
+                onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
+              ));
+            }
+          },
+          child: const Icon(Icons.arrow_forward),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
