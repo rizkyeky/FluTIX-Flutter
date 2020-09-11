@@ -4,11 +4,11 @@ class TicketService {
   fire_store.CollectionReference ticketCollection = fire_store.FirebaseFirestore
     .instance.collection("tickets");
 
-  Future<void> saveTicket(String id, Ticket ticket) async {
+  Future<void> saveTicket(String userID, Ticket ticket) async {
     await ticketCollection.doc().set({
       "movieID": ticket.movie.id ?? "",
       "movieName": ticket.movie.title ?? "",
-      "ticketID": id ?? "",
+      "userID": userID ?? "",
       "price": ticket.price ?? 0,
       "seats": ticket.seats.join(',') ?? "",
       "time": ticket.time.join(':') ?? "",
