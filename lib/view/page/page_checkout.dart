@@ -3,39 +3,15 @@ part of 'page.dart';
 class CheckoutPage extends Page<CheckoutBloc> {
   CheckoutPage({Key key}) : super(key: key);
 
-  final ticket = locator.call<Ticket>(instanceName: 'Ticket');
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-  }
+  void dispose() {}
 
   @override
-  void init() {
-    // TODO: implement init
-  }
-
-  String convertTime(int minute) {
-   
-    final str = StringBuffer();
-
-    if (minute > 60) {
-      str.write((minute / 60).floor());
-      str.write('h ');
-    }
-    if (minute % 60 != 0) {
-      str.write(minute % 60);
-      str.write('m');
-    }
-    return str.toString();
-  }
+  void init() {}
 
   @override
   Widget build(BuildContext context) {
-
-    final int starCount = (ticket.movie.voteAverage/2).round();
-    final int seatsLen = ticket.seats.length;
-    final int totalPrice = (20000 * seatsLen) + (5000 * seatsLen);
 
     return Scaffold(
       backgroundColor: canvasColor,
@@ -60,11 +36,10 @@ class CheckoutPage extends Page<CheckoutBloc> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.network(
-                      '${imageBaseURL}w92${ticket.movie.posterPath}',
+                      '${imageBaseURL}w92${bloc.ticket.movie.posterPath}',
                       fit: BoxFit.cover,
                       height: 120,
                       width: 90,
-                      // isAntiAlias: true,
                     )
                   ),
                   const SizedBox(width: 12),
@@ -74,22 +49,28 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     children: [
                       Container(
                         width: 180,
-                        child: Text(ticket.movie.title, 
+                        child: Text(bloc.ticket.movie.title, 
                           style: blueTitle, 
                           maxLines: 3,
                           textAlign: TextAlign.left, 
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      Text('${ticket.movie.country} . PG-13 . ${convertTime(ticket.movie.runtime)}', style: blackContentRegular,),
+                      Text(
+                        '${bloc.ticket.movie.country} . PG-13 . ${bloc.convertTime(bloc.ticket.movie.runtime)}', 
+                        style: blackContentRegular,
+                      ),
                       Row(
                         children: [
-                          for (int i = 0; i < starCount; i++) const Icon(Icons.star, 
+                          for (int i = 0; i < bloc.starCount; i++) const Icon(
+                            Icons.star, 
                             size: 18,
                             color: starColor
                           ),
                           const SizedBox(width: 6,),
-                          Text('${ticket.movie.voteAverage}/10', style: blackContentRegular)
+                          Text('${bloc.ticket.movie.voteAverage}/10', 
+                            style: blackContentRegular
+                          )
                         ],
                       ),
                     ]
@@ -110,22 +91,22 @@ class CheckoutPage extends Page<CheckoutBloc> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('ID Order', style: blackContentRegular),
-                      Text(ticket.bookingCode, style: blackContentBold),
+                      Text('Code Order', style: blackContentRegular),
+                      Text(bloc.ticket.bookingCode, style: blackContentBold),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Cinema', style: blackContentRegular),
-                      Text(ticket.bookingPlace, style: blackContentBold),
+                      Text(bloc.ticket.bookingPlace, style: blackContentBold),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Date & Time', style: blackContentRegular),
-                      Text(ticket.bookingDayDate,
+                      Text(bloc.ticket.bookingDayDate,
                         style: blackContentBold
                       ),
                     ],
@@ -134,7 +115,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Seat Number', style: blackContentRegular),
-                      Text(ticket.seats.join(', '), style: blackContentBold),
+                      Text(bloc.ticket.seats.join(', '), style: blackContentBold),
                     ],
                   )
                 ],
@@ -154,21 +135,25 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Price', style: blackContentRegular),
-                      Text('Rp20.000 x $seatsLen', style: blackContentBold),
+                      Text('Rp${bloc.moviePrice} x ${bloc.seatsLen}', 
+                        style: blackContentBold
+                      ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Fee', style: blackContentRegular),
-                      Text('Rp5.000 x $seatsLen', style: blackContentBold),
+                      Text('Rp${bloc.feePrice} x ${bloc.seatsLen}',
+                        style: blackContentBold
+                      ),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Total', style: blackContentRegular),
-                      Text('Rp$totalPrice', style: blackContentBold),
+                      Text('Rp${bloc.totalPrice}', style: blackContentBold),
                     ],
                   ),
                 ],
@@ -190,25 +175,12 @@ class CheckoutPage extends Page<CheckoutBloc> {
                 height: 300,
                 child: Material(
                   color: Colors.white,
-                  child: ListView(
-                    children: [
-                      ListTile(
-                        onTap: () => Navigator.pushNamed(context, '/checkoutsuccess'),
-                        title: Text('Gopay', style: blackSubtitle),
-                      ),
-                      ListTile(
-                        onTap: () => Navigator.pushNamed(context, '/checkoutsuccess'),
-                        title: Text('Link Aja', style: blackSubtitle),
-                      ),
-                      ListTile(
-                        onTap: () => Navigator.pushNamed(context, '/checkoutsuccess'),
-                        title: Text('OVO', style: blackSubtitle),
-                      ),
-                      ListTile(
-                        onTap: () => Navigator.pushNamed(context, '/checkoutsuccess'),
-                        title: Text('ATM', style: blackSubtitle),
-                      ),
-                    ],
+                  child: ListView.builder(
+                    itemCount: bloc.paymentGateways.length,
+                    itemBuilder: (context, index) => ListTile(
+                      onTap: () => Navigator.pushNamed(context, '/checkoutsuccess'),
+                      title: Text(bloc.paymentGateways[index], style: blackSubtitle),
+                    ),
                   ),
                 ),
             ));
