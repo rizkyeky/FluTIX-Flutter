@@ -5,17 +5,16 @@ class BookTimePage extends Page<BookTimeBloc>{
 
   @override
   void dispose() {
-    // TODO: implement dispose
   }
 
   @override
   void init() {
-    // TODO: implement init
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: XTopBar(
         textTitle: 'Choose Time and Place',
         textStyle: blueTitle,
@@ -47,6 +46,8 @@ class BookTimePage extends Page<BookTimeBloc>{
                   itemBuilder: (context, index) => StreamBuilder<int>(
                     stream: bloc.selectedDateStream,
                     builder: (context, snapshot) {
+                      final String day = (bloc.daysInWeek[index]['name'] as String)
+                        .toUpperCase(); 
                       return Container(
                         margin: const EdgeInsets.only(right: 12),
                         child: XSelectedBox(
@@ -59,7 +60,7 @@ class BookTimePage extends Page<BookTimeBloc>{
                             }
                           },
                           width: 96,
-                          text: '${bloc.daysInWeek[index]['name']} ${bloc.daysInWeek[index]['date']}'
+                          text: '$day ${bloc.daysInWeek[index]['date']}'
                         ),
                       );
                     }
@@ -92,7 +93,8 @@ class BookTimePage extends Page<BookTimeBloc>{
                             return Container(
                               margin: const EdgeInsets.only(right: 12),
                               child: XSelectedBox(
-                                isSelected: snapshot.data.containsKey(place) && snapshot.data.containsValue(index),
+                                isSelected: snapshot.data.containsKey(place) 
+                                  && snapshot.data.containsValue(index),
                                 onSelected: (isSelected) {
                                   if (isSelected) {
                                     bloc.selectTimePlace(place, index);
@@ -117,32 +119,26 @@ class BookTimePage extends Page<BookTimeBloc>{
           ],
         ),
       ),
-      floatingActionButton:
-        FloatingActionButton(
+      floatingActionButton: Builder(
+        builder: (contextScaffold) => FloatingActionButton(
           elevation: 0,
           highlightElevation: 0,
           backgroundColor: mainColor,
           onPressed: () {
-            // locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
-            //   bloc.thisDate.weekday,
-            //   bloc.thisDate.day
-            // ]);
-            // locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
-            //   bloc.thisDate.hour,
-            //   bloc.thisDate.minute,
-            //   bloc.thisDate.second,
-            // ]);
-            locator.call<Ticket>(instanceName: 'Ticket')
-              .copyWith(bookingDayDate: bloc.dayDate);
-            locator.call<Ticket>(instanceName: 'Ticket')
-              .copyWith(bookingPlace: bloc.place);
-            locator.call<Ticket>(instanceName: 'Ticket')
-              .copyWith(bookingTime: bloc.time);
-            
-            Navigator.pushNamed(context, '/bookseat');
+            if (bloc.place != '' && bloc.time != '') {
+              bloc.onSelectedBookTime();
+              Navigator.pushNamed(context, '/bookseat');
+            } else {
+              Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                contentText: 'Choose Date and Place',
+                labelText: 'DISMISS',
+                onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
+              ));
+            }
           },
           child: const Icon(Icons.arrow_forward),
         ),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
