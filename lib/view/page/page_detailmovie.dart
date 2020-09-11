@@ -183,9 +183,9 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                     disableNavigate: true,
                     textBuilder: (e, index) => Text(e.name, 
                       maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: blackContentRegular, 
                       textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      style: blackContentRegular, 
                     ),
                     imageBuilder: (e, index) {
                       if (e.profilePath != null) {
@@ -220,7 +220,8 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
                         ),
                         Container(
                           padding: const EdgeInsets.only(left: 12, right: 12, bottom: 18),
-                          child: Text( movie.overview,
+                          child: Text(movie.overview,
+                            textAlign: TextAlign.justify,
                             style: blackContentRegular,                                
                           ),
                         ),
