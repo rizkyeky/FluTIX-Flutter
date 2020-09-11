@@ -134,16 +134,22 @@ class XRenderView extends StatelessWidget {
 class ColumnBuilder extends StatelessWidget {
   final IndexedWidgetBuilder itemBuilder;
   final int itemCount;
+  final MainAxisAlignment mainAxisAlignment;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const ColumnBuilder({
     Key key,
     @required this.itemBuilder,
     @required this.itemCount,
+    this.mainAxisAlignment,
+    this.crossAxisAlignment
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: crossAxisAlignment,
       children: List.generate(
         itemCount, (index) => itemBuilder(context, index)).toList(),
     );
