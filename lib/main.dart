@@ -33,6 +33,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: mainColor,
         accentColor: accentColor,
+        canvasColor: whiteColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: isSignIn ? '/' : '/signin',
