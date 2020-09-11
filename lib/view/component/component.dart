@@ -100,7 +100,7 @@ class ContentList<T> extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: list.length,
                 itemBuilder: (context, index) => (textBuilder != null) ? Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     buildCard(context, index),
                     textBuilder(list[index], index) 
