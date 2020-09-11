@@ -184,13 +184,6 @@ class CheckoutPage extends Page<CheckoutBloc> {
           backgroundColor: mainColor,
           onPressed: () {
             bloc.onCheckOut();
-            // Navigator.pushNamed(context, '/checkoutsuccess');
-            // Scaffold.of(scaffContext).showBottomSheet(
-            //   (context) => Container(
-            //     height: 200,
-            //     color: Colors.amber,
-            //   )
-            // );
             showModalBottomSheet(
               context: scaffContext,
               builder: (context) => Container(
