@@ -2,11 +2,6 @@ part of 'bloc.dart';
 
 class BookSeatBloc implements Bloc {
 
-  final BehaviorSubject<List<String>> _selectedSeatsController = BehaviorSubject();
-  Stream<List<String>> get selectedDateStream => _selectedSeatsController.stream;
-
-  bool isInit = false;
-
   final List<List<String>> _seats = List.generate(
     9, (indexHuruf) => List.generate(
       9, (indexAngka) => '${String.fromCharCode(indexHuruf + 65)}${indexAngka + 1}'
@@ -21,19 +16,10 @@ class BookSeatBloc implements Bloc {
   List<String> get bookedSeats => _bookedSeats;
 
   @override
-  void dispose() {
-    if (isInit) {
-      isInit = false;
-      _selectedSeatsController.close();
-    }
-  }
+  void dispose() {}
 
   @override
-  Future<void> init() async {
-    if (!isInit) {
-      isInit = true;
-    }
-  }
+  Future<void> init() async {}
 
   void selectSeats(String seatName) {
     if (!_selectedSeats.contains(seatName)) {
@@ -47,6 +33,15 @@ class BookSeatBloc implements Bloc {
   final String _chars = '1234567890';
   final Random _rnd = Random();
 
-  String getIDTicket(int length) => String.fromCharCodes(Iterable.generate(
-    length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+  String _getBookingCode() => String.fromCharCodes(Iterable.generate(
+    10, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+
+  void onSelectSeats() {
+    locator.call<Ticket>(instanceName: 'Ticket').copyWith(
+      seats: _selectedSeats
+    );
+    locator.call<Ticket>(instanceName: 'Ticket').copyWith(
+      bookingCode: _getBookingCode()
+    );
+  }
 }
