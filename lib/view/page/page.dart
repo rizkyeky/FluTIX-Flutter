@@ -1,6 +1,6 @@
 library page;
 
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:flutix_training/bloc/bloc.dart';
 import 'package:flutix_training/locator.dart';
@@ -22,6 +22,7 @@ part 'page_checkout.dart';
 part 'page_maintabbar.dart';
 part 'page_success_checkout.dart';
 part 'page_profile.dart';
+part 'page_editprofile.dart';
 // part 'page_test.dart';
 
 SnackBar snackBar({

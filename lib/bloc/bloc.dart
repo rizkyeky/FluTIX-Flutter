@@ -20,6 +20,7 @@ part 'bloc_test.dart';
 part 'bloc_checkout.dart';
 part 'bloc_preference.dart';
 part 'bloc_profile.dart';
+part 'bloc_editprofile.dart';
 
 abstract class Bloc {
   Future<void> init();
