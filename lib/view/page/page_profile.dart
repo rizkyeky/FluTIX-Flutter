@@ -45,8 +45,24 @@ class ProfilePage extends Page<ProfileBloc> {
                       )
                   ),
                   const SizedBox(width: 24,),
-                  Text(user.name, style: blueSubtitle),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(user.name, style: blueSubtitle),
+                      Text(user.email, style: blackContentRegular),
+                    ],
+                  ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 12),
+            Material(
+              color: whiteColor,
+              child: ListTile(
+                leading: const Icon(Icons.edit),
+                title: Text('Edit Profile', style: blackSubtitle,),
+                onTap: () {},
               ),
             ),
             const SizedBox(height: 12),
