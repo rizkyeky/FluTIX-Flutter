@@ -3,8 +3,6 @@ part of 'page.dart';
 class ProfilePage extends Page<ProfileBloc> {
   ProfilePage({Key key}) : super(key: key);
 
-  final User user = locator.call<User>(instanceName: 'User Active');
-
   @override
   void dispose() {
     // TODO: implement dispose
@@ -39,8 +37,8 @@ class ProfilePage extends Page<ProfileBloc> {
                     },
                     child: CircleAvatar(
                         radius: 36,
-                        backgroundImage: (user.photoURL != '') 
-                        ? NetworkImage(user.photoURL)
+                        backgroundImage: (bloc.user.photoURL != '') 
+                        ? NetworkImage(bloc.user.photoURL)
                         : const AssetImage('assets/no_image.png') as ImageProvider,
                       )
                   ),
@@ -49,8 +47,8 @@ class ProfilePage extends Page<ProfileBloc> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(user.name, style: blueSubtitle),
-                      Text(user.email, style: blackContentRegular),
+                      Text(bloc.user.name, style: blueSubtitle),
+                      Text(bloc.user.email, style: blackContentRegular),
                     ],
                   ),
                 ],
@@ -59,18 +57,14 @@ class ProfilePage extends Page<ProfileBloc> {
             const SizedBox(height: 12),
             Material(
               color: whiteColor,
-              child: ListTile(
-                leading: const Icon(Icons.edit),
-                title: Text('Edit Profile', style: blackSubtitle,),
-                onTap: () {},
-              ),
-            ),
-            const SizedBox(height: 12),
-            Material(
-              color: whiteColor,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  ListTile(
+                    leading: const Icon(Icons.edit),
+                    title: Text('Edit Profile', style: blackSubtitle,),
+                    onTap: () => Navigator.pushNamed(context, '/editprofile'),
+                  ),
                   ListTile(
                     leading: const Icon(Icons.confirmation_number),
                     title: Text('My Tickets', style: blackSubtitle,),
