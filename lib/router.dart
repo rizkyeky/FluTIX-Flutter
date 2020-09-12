@@ -25,6 +25,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => SignInPage());
       case '/preference':
         return MaterialPageRoute(builder: (_) => PreferencePage());
+      case '/editprofile':
+        return MaterialPageRoute(builder: (_) => EditProfilePage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
