@@ -5,12 +5,14 @@ class XTextField extends StatelessWidget {
   final String text;
   final TextEditingController controller;
   final bool obscureText;
+  final Widget suffixIcon;
 
   const XTextField({ 
   Key key,
   this.text,
   this.controller,
-  this.obscureText
+  this.obscureText,
+  this.suffixIcon
   }) : super(key: key);
 
   @override
@@ -21,6 +23,7 @@ class XTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: text,
         labelStyle: blackSubtitle,
+        suffixIcon: suffixIcon,
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
           borderSide: const BorderSide(
