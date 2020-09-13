@@ -1,6 +1,6 @@
 part of 'bloc.dart';
 
-class MyTicketBloc implements Bloc {
+class MyTicketsBloc implements Bloc {
   @override
   void dispose() {
   }
