@@ -32,9 +32,7 @@ class ProfilePage extends Page<ProfileBloc> {
               child: Row(
                 children: [
                   InkWell(
-                    onTap: () async {
-                      await bloc.setProfilePicture();
-                    },
+                    onTap: () {},
                     child: CircleAvatar(
                         radius: 36,
                         backgroundImage: (bloc.user.photoURL != '') 
