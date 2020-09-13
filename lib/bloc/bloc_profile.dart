@@ -21,15 +21,6 @@ class ProfileBloc implements Bloc {
     
   }
 
-  Future<void> setProfilePicture() async {
-    _profilePicture = await getImage();
-    if (_profilePicture != null) {
-      _profilePictureController.sink.add(_profilePicture);
-    } else {
-      _profilePicture = File(basename('assets/no_image.png'));
-    }
-  }
-
   Future<void> signOut() async {
     await _authService.signOut();
   }
