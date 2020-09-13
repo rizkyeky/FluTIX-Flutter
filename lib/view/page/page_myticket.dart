@@ -1,31 +1,46 @@
 part of 'page.dart';
 
-class MyTicketPage extends Page<MyTicketBloc> {
+class MyTicketsPage extends Page<MyTicketsBloc> {
 
   @override
-  void dispose() {
-    // TODO: implement dispose
-  }
+  void dispose() {}
 
   @override
-  void init() {
-    // TODO: implement init
-  }
+  void init() {}
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: XTopBar(
-        textTitle: 'My Tickets',
-        textStyle: blueTitle,
-        backgroundColor: whiteColor,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: mainColor,), 
-          onPressed: () => Navigator.pop(context)
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: canvasColor,
+        appBar: AppBar(
+          title: Text('My Tickets', style: whiteTitle),
+          bottom: const TabBar(tabs: [
+            Tab(text: 'Newest',),
+            Tab(text: 'Oldest',),
+          ]),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(),
+        body: TabBarView(
+          children: [
+            ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) => Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                color: whiteColor,
+                height: 100,
+              ),
+            ),
+            ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) => Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                color: whiteColor,
+                height: 100,
+              ),
+            )
+          ]
+        )
       ),
     );
   }
