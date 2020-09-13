@@ -40,7 +40,7 @@ class UserService {
       data['favoriteCountry'] = favCountries.join(',');
     }
     
-    await _userCollection.doc(id).set(data);
+    await _userCollection.doc(id).update(data);
   }
 
   Future<User> getUser(String id) async {
