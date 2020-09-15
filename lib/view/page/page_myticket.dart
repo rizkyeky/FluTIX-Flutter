@@ -23,22 +23,28 @@ class MyTicketsPage extends Page<MyTicketsBloc> {
         ),
         body: TabBarView(
           children: [
-            ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) => Container(
-                margin: const EdgeInsets.only(bottom: 12),
-                color: whiteColor,
-                height: 100,
-              ),
+            FutureBuilder<List<Ticket>>(
+              future: bloc.getNewestMovies(),
+              builder: (context, snapshot) => (snapshot.hasData) ? ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) => Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  color: whiteColor,
+                  height: 100,
+                ),
+              ) : const Center(child: CircularProgressIndicator()) 
+            ) ,
+            FutureBuilder<List<Ticket>>(
+              future: bloc.getOldestMovies(),
+              builder: (context, snapshot) => (snapshot.hasData) ? ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) => Container(
+                  margin: const EdgeInsets.only(bottom: 12),
+                  color: whiteColor,
+                  height: 100,
+                ),
+              ) : const Center(child: CircularProgressIndicator()) 
             ),
-            ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) => Container(
-                margin: const EdgeInsets.only(bottom: 12),
-                color: whiteColor,
-                height: 100,
-              ),
-            )
           ]
         )
       ),
