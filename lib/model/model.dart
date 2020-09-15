@@ -6,3 +6,4 @@ part 'genre.dart';
 part 'cast.dart';
 part 'background.dart';
 part 'ticket.dart';
+part 'transaction.dart';
