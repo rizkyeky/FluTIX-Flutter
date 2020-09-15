@@ -24,6 +24,7 @@ part 'page_success_checkout.dart';
 part 'page_profile.dart';
 part 'page_editprofile.dart';
 part 'page_myticket.dart';
+part 'page_ticketdetail.dart';
 // part 'page_test.dart';
 
 SnackBar snackBar({
