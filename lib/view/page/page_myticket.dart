@@ -25,25 +25,35 @@ class MyTicketsPage extends Page<MyTicketsBloc> {
           children: [
             FutureBuilder<List<Ticket>>(
               future: bloc.getNewestMovies(),
-              builder: (context, snapshot) => (snapshot.hasData) ? ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) => Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  color: whiteColor,
-                  height: 100,
+              builder: (context, snapshot) => (snapshot.hasData) 
+              ? (snapshot.data.isNotEmpty) ? ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(snapshot.data[index].movie.title, style: blackSubtitle),
+                  subtitle: Text(snapshot.data[index].bookingPlace, style: blackContentRegular),
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network('${imageBaseURL}w92${snapshot.data[index].movie.posterPath}')
+                  ), 
                 ),
-              ) : const Center(child: CircularProgressIndicator()) 
+              ) : const Center(child: Text('No Tickets')) 
+              : const Center(child: CircularProgressIndicator()) 
             ) ,
             FutureBuilder<List<Ticket>>(
               future: bloc.getOldestMovies(),
-              builder: (context, snapshot) => (snapshot.hasData) ? ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) => Container(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  color: whiteColor,
-                  height: 100,
+              builder: (context, snapshot) => (snapshot.hasData) 
+              ? (snapshot.data.isNotEmpty) ? ListView.builder(
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(snapshot.data[index].movie.title, style: blackSubtitle),
+                  subtitle: Text(snapshot.data[index].bookingPlace, style: blackContentRegular),
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network('${imageBaseURL}w92${snapshot.data[index].movie.posterPath}')
+                  ), 
                 ),
-              ) : const Center(child: CircularProgressIndicator()) 
+              ) : const Center(child: Text('No Tickets')) 
+              : const Center(child: CircularProgressIndicator()) 
             ),
           ]
         )
