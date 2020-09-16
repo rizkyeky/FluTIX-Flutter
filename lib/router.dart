@@ -29,6 +29,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => EditProfilePage());
       case '/mytickets':
         return MaterialPageRoute(builder: (_) => MyTicketsPage());
+      case '/mytransaction':
+        return MaterialPageRoute(builder: (_) => MyTransactionPage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
