@@ -27,7 +27,7 @@ class SuccessCheckoutPage extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                     context, 
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => MainTabBarPage()),
                     (route) => false
                   );
                 }, 
