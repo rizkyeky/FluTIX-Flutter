@@ -20,16 +20,21 @@ class MyTransactionPage extends Page<MyTransactionBloc> {
           onPressed: () => Navigator.pop(context)
         ),
       ),
-      body: FutureBuilder<Object>(
+      body: FutureBuilder<List<Transaction>>(
         future: null,
-        builder: (context, snapshot) {
-          return ListView.builder(
-            itemCount: 5,
-            itemBuilder: (context, index) => ListTile(
-              // title: ,
-            )
-          );
-        }
+        builder: (context, snapshot) => (snapshot.hasData) 
+        ? (snapshot.data.isNotEmpty) ? ListView.builder(
+          itemCount: snapshot.data.length,
+          itemBuilder: (context, index) => ListTile(
+            // title: Text(snapshot.data[index].movie.title, style: blackSubtitle),
+            // subtitle: Text(snapshot.data[index].bookingPlace, style: blackContentRegular),
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              // child: Image.network('${imageBaseURL}w92${snapshot.data[index].movie.posterPath}')
+            ), 
+          ),
+        ) : const Center(child: Text('No Tickets')) 
+        : const Center(child: CircularProgressIndicator()) 
       ),
     );
   }
