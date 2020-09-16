@@ -3,6 +3,7 @@ part of 'bloc.dart';
 class CheckoutBloc implements Bloc {
 
   final TicketService _ticketService = TicketService();
+  final TransactionService _transactionService = TransactionService();
   final ticket = locator.call<Ticket>(instanceName: 'Ticket');
 
   final DateTime _thisDate = DateTime.now();
@@ -57,9 +58,17 @@ class CheckoutBloc implements Bloc {
       _thisDate.second,
     ]);
 
-    final Ticket ticket = locator.get<Ticket>(instanceName: 'Ticket');
     final String userID = locator.get<User>(instanceName: 'User Active').id;
 
     await _ticketService.saveTicket(userID, ticket);
+
+    final Transaction transaction = Transaction(
+      userID, 
+      ticket.movie.title, 
+      ticket.bookingPlace, 
+      totalPrice, ticket.time, ticket.movie.posterPath
+    );
+
+    await _transactionService.saveTransaction(transaction);
   }
 }
