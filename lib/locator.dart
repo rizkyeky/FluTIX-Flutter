@@ -16,6 +16,7 @@ void setupLocator() {
   locator.registerLazySingleton(() => MovieService(), instanceName: 'Movie Service');
   locator.registerLazySingleton(() => LocalService(), instanceName: 'Local Service');
   locator.registerLazySingleton(() => TicketService(), instanceName: 'Ticket Service');
+  locator.registerLazySingleton(() => TransactionService(), instanceName: 'Transaction Service');
   
   
   locator.registerFactory(() => HomeBloc());
@@ -30,6 +31,7 @@ void setupLocator() {
   locator.registerFactory(() => ProfileBloc());
   locator.registerFactory(() => EditProfileBloc());
   locator.registerFactory(() => MyTicketsBloc());
+  locator.registerFactory(() => MyTransactionBloc());
 
   locator.registerSingleton<Ticket>(Ticket.initial(), instanceName: 'Ticket');
   locator.registerSingleton<User>(User.initial(), instanceName: 'User Active');
