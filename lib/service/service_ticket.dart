@@ -37,9 +37,9 @@ class TicketService {
         doc.data()['bookingPlace'] as String, 
         movie,
         (doc.data()['price'] as num).toInt(), 
-        (doc.data()['time'] as String).split(':') as List<int>,
+        (doc.data()['time'] as String).split(':').map<int>((e) => int.parse(e)).toList(),
         doc.data()['bookingTime'] as String, 
-        (doc.data()['dayDate'] as String).split(',') as List<int>,
+        (doc.data()['dayDate'] as String).split(',').map<int>((e) => int.parse(e)).toList(),
         doc.data()['bookingDayDate'] as String, 
         (doc.data()['seats'] as String).split(',')
       ));
