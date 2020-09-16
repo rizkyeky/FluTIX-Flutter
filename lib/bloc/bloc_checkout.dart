@@ -47,7 +47,9 @@ class CheckoutBloc implements Bloc {
     
     locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
       _thisDate.weekday,
-      _thisDate.day
+      _thisDate.day,
+      _thisDate.month,
+      _thisDate.year,
     ]);
     locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
       _thisDate.hour,
