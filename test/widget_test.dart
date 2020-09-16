@@ -25,8 +25,8 @@ class Data {
 
 Future<void> main() async {
 
-  final String str = '';
-  final List<String> ls = str.split(',');
+  const String str = '1,2,3,4';
+  final List<int> ls = str.split(',').map<int>((e) => int.parse(e)).toList();
   print(ls);
 
   // DateTime now = DateTime.now();
