@@ -10,7 +10,7 @@ class TransactionService {
       'userID': transaction.userID,
       'title': transaction.title,
       'subtitle': transaction.subtitle,
-      'time': transaction.time.millisecondsSinceEpoch,
+      'time': transaction.time.join(','),
       'amount': transaction.amount,
       'picture': transaction.picture
     });
@@ -22,15 +22,13 @@ class TransactionService {
     final documents = snapshot.docs
         .where((document) => document.data()['userID'] == userID);
 
-    return documents
-        .map((e) => Transaction(
-          e.data()['userID'] as String,
-          e.data()['title'] as String,
-          e.data()['subtitle'] as String,
-          e.data()['amount'] as int,
-          DateTime.fromMillisecondsSinceEpoch(e.data()['time'] as int),
-          e.data()['picture'] as String
-          ))
-        .toList();
+    return documents.map((e) => Transaction(
+      e.data()['userID'] as String,
+      e.data()['title'] as String,
+      e.data()['subtitle'] as String,
+      e.data()['amount'] as int,
+      (e.data()['time'] as String).split(',').map<int>((e) => int.parse(e)).toList(),
+      e.data()['picture'] as String
+    )).toList();
   }
 }
