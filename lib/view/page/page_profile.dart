@@ -71,7 +71,7 @@ class ProfilePage extends Page<ProfileBloc> {
                   ListTile(
                     leading: const Icon(Icons.credit_card),
                     title: Text('My Transaction', style: blackSubtitle,),
-                    onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, '/mytransaction'),
                   ),
                 ],
               ),
