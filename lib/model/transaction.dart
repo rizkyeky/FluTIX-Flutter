@@ -5,7 +5,7 @@ class Transaction {
   final String title;
   final String subtitle;
   final int amount;
-  final DateTime time;
+  final List<int> time;
   final String picture;
 
   Transaction(
