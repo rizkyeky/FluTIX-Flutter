@@ -2,8 +2,8 @@ part of 'bloc.dart';
 
 class CheckoutBloc implements Bloc {
 
-  final TicketService _ticketService = TicketService();
-  final TransactionService _transactionService = TransactionService();
+  final TicketService _ticketService = locator.get<TicketService>(instanceName: 'Ticket Service');
+  final TransactionService _transactionService = locator.get<TransactionService>(instanceName: 'Transaction Service');
   final ticket = locator.call<Ticket>(instanceName: 'Ticket');
 
   final DateTime _thisDate = DateTime.now();
@@ -26,7 +26,7 @@ class CheckoutBloc implements Bloc {
   void dispose() {}
 
   @override
-  Future<void> init() async {}
+  void init() {}
   
   Future<void> onCheckOut() async {
     locator.call<Ticket>(instanceName: 'Ticket').copyWith(price: totalPrice);

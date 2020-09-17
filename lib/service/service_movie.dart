@@ -30,8 +30,6 @@ class MovieService {
     
     final String _subBase = '3/movie/$typeBase';
 
-    // print('request api from $_homeBase');
-
     try {
       final Uri _uri = Uri.https(_homeBase, _subBase, query);
       final http.Response response = await _client.get(_uri).timeout(const Duration(seconds: 10));
@@ -71,11 +69,7 @@ class MovieService {
     }
     else {
       // Respone success
-      final Map data = json.decode(response.body) as Map;
-
-      // print('respone success');
-      // print(data['runtime']);
-      
+      final Map data = json.decode(response.body) as Map;      
       return Movie.fromJson(data as Map<String, dynamic>);
     }
   }

@@ -2,7 +2,6 @@ part of 'bloc.dart';
 
 class SignUpBloc implements Bloc {
 
-  
   final AuthService _authService = locator.get<AuthService>(instanceName: 'Auth Service');
 
   @override
@@ -11,14 +10,12 @@ class SignUpBloc implements Bloc {
   }
 
   @override
-  Future<void> init() async {
+  void init() {
     _loadingController.sink.add(false);
   }
 
   final BehaviorSubject<bool> _loadingController = BehaviorSubject();
   Stream<bool> get isLoadingStream => _loadingController.stream;
-
-  // final Map<String, String> _registerData = {};
 
   Future<String> signUp(String name, String email, String password) async {
     _loadingController.sink.add(true);

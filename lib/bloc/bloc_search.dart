@@ -1,18 +1,20 @@
 part of 'bloc.dart';
 
 class SearchBloc implements Bloc {
+  
+  final BehaviorSubject<bool> _searchController = BehaviorSubject();
+  Stream<bool> get searchStream => _searchController.stream;
+  
   @override
   void dispose() {
+    _searchController.close();
   }
 
   @override
-  Future<void> init() async {
+  void init() {
     _activeSearch = false;
     _searchController.sink.add(_activeSearch);
   }
-
-  final BehaviorSubject<bool> _searchController = BehaviorSubject();
-  Stream<bool> get searchStream => _searchController.stream;
 
   bool _activeSearch;  
   bool get activeSearch => _activeSearch;

@@ -38,10 +38,10 @@ class BookTimeBloc implements Bloc {
   }
 
   @override
-  Future<void> init() async {
-      _getDaysInWeek();
-      _selectedDateController.sink.add(-1);
-      _selectedTimePlaceController.sink.add({});
+  void init() {
+    _getDaysInWeek();
+    _selectedDateController.sink.add(-1);
+    _selectedTimePlaceController.sink.add({});
   }
 
   void selectDate(int index) {

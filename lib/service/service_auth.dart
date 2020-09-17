@@ -2,7 +2,7 @@ part of 'service.dart';
 
 class AuthService {
   final fire_auth.FirebaseAuth _auth = fire_auth.FirebaseAuth.instance;
-  final UserService _userService = UserService();
+  final UserService _userService = locator.get<UserService>(instanceName: 'User Service');
 
   bool _isSignIn = false;
   bool get isSignIn => _isSignIn;
@@ -16,12 +16,6 @@ class AuthService {
       locator.call<User>(instanceName: 'User Active').duplicate(user);
     }
   }
-
-  // Stream<bool> isSignInStream() async* {
-  //   await for (final fire_auth.User user in _auth.authStateChanges()) {
-  //     yield user != null;
-  //   }
-  // }
 
   Future<AuthResult> signUp(String name, String email, String password, 
   {List<String> favoriteGenre = const [], List<String> favoriteCountry = const []}) async {
@@ -70,7 +64,7 @@ class AuthService {
 
     } on fire_auth.FirebaseAuthException catch (e) {
 
-      String errorType = '';
+      String errorType = 'Error Unknown';
       
       if (e.code == 'wrong-password') {
         errorType = 'Password is not correct';

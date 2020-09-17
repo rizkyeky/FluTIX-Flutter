@@ -7,8 +7,8 @@ import 'package:flutix_training/share/share.dart';
 import 'package:flutix_training/view/component/component.dart';
 
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:carousel_slider/carousel_slider.dart' show CarouselSlider, CarouselOptions;
+import 'package:qr_flutter/qr_flutter.dart' show QrImage, QrErrorCorrectLevel;
 
 part 'page_signin.dart';
 part 'page_signup.dart';
@@ -26,7 +26,6 @@ part 'page_myticket.dart';
 part 'page_detailticket.dart';
 part 'page_mytransaction.dart';
 part 'page_search.dart';
-// part 'page_test.dart';
 
 SnackBar snackBar({
   String contentText, String labelText, VoidCallback onPressed

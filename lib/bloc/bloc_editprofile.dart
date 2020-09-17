@@ -13,10 +13,10 @@ class EditProfileBloc implements Bloc {
   void dispose() {}
 
   @override
-  Future<void> init() async {}
+  void init() {}
 
   Future<void> resetPassword() async {
-    _auth.resetPassword(user.email);
+   await _auth.resetPassword(user.email);
   }
 
   Future<void> updateUser(String name, String email) async {

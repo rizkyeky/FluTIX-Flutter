@@ -10,7 +10,7 @@ class SignInBloc implements Bloc {
   }
 
   @override
-  Future<void> init() async {
+  void init() {
     _loadingController.sink.add(false);
   }
 

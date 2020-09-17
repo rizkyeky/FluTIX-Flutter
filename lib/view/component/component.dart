@@ -116,21 +116,6 @@ class ContentList<T> extends StatelessWidget {
   }
 }
 
-class XRenderView extends StatelessWidget {
-  final Widget child;
-  final Color color;
-
-  const XRenderView({Key key, this.child, this.color}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: color ?? Colors.blue,
-      child: child,
-    );
-  }
-}
-
 class ColumnBuilder extends StatelessWidget {
   final IndexedWidgetBuilder itemBuilder;
   final int itemCount;

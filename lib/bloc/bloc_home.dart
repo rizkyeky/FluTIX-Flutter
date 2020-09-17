@@ -3,30 +3,19 @@ part of 'bloc.dart';
 class HomeBloc implements Bloc {
 
   final LocalService _localService = locator.get<LocalService>(instanceName: 'Local Service');
-  final User _user = locator.call<User>(instanceName: 'User Active');
-
-  final BehaviorSubject<List<Movie>> _movieCarouselController = BehaviorSubject();
-  // Stream<List<Movie>> get movieCarouselStream => _movieCarouselController.stream;
+  final User _user = locator.get<User>(instanceName: 'User Active');
 
   List<Movie> _popularitymovies = [];
   List<Movie> _comingSoonMovies = [];
   List<Movie> _playingNowMovies = [];
 
-  bool isInit = false;
-
   @override
   Future<void> init() async {
-    if (!isInit) {
-      isInit = true;
-
-      await getMoviesFromService();
-    }
+    await getMoviesFromService();
   }
 
   @override
-  void dispose() {
-    _movieCarouselController.close();
-  }
+  void dispose() {}
 
   Future<void> getMoviesFromService() async {
     _popularitymovies = _localService.popularMovies;

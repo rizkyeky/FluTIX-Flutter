@@ -11,8 +11,7 @@ class MyTicketsBloc implements Bloc {
   }
 
   @override
-  Future<void> init() async {
-  }
+  void init() {}
 
   Future<List<Ticket>> getNewestMovies() async {
     final List<int> nowDayDate = [_thisDate.weekday,_thisDate.day,_thisDate.month,_thisDate.year];

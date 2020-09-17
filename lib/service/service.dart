@@ -5,8 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart'  as fire_store;
 import 'package:firebase_core/firebase_core.dart' as fire_core;
 import 'package:http/http.dart' as http;
 
-// import 'package:flutix_training/extension/extension.dart';
-
 import 'package:flutix_training/model/model.dart';
 import 'package:flutix_training/share/share.dart';
 import 'package:flutix_training/locator.dart';

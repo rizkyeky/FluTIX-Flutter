@@ -19,7 +19,7 @@ class BookSeatBloc implements Bloc {
   void dispose() {}
 
   @override
-  Future<void> init() async {}
+  void init() {}
 
   void selectSeats(String seatName) {
     if (!_selectedSeats.contains(seatName)) {

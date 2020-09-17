@@ -6,7 +6,7 @@ enum SwitchTab {home, search, favorite, promo, profile}
 class MainTabBarBloc implements Bloc {
 
   @override
-  Future<void> init() async {
+  void init() {
     _tab = SwitchTab.home;
     _tabController.sink.add(_tab);
   }
@@ -26,9 +26,6 @@ class MainTabBarBloc implements Bloc {
 
   SwitchTab _tab;
   SwitchTab get tab => _tab;
-
-  // bool _activeIcon;
-  // bool get activeIcon => _activeIcon;
 
   void setTab(SwitchTab val) {
     if (val != _tab) {

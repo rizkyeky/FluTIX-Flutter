@@ -17,9 +17,7 @@ class ProfileBloc implements Bloc {
   }
 
   @override
-  Future<void> init() async {
-    
-  }
+  void init() {}
 
   Future<void> signOut() async {
     await _authService.signOut();

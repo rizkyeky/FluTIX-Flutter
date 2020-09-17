@@ -11,15 +11,13 @@ class DetailMovieBloc implements Bloc {
   Movie _movie;
   List<Cast> _casts = [];
 
-  bool isInit = false;
-
   @override
   void dispose() {
     _favoriteController.close();
   }
 
   @override
-  Future<void> init() async {
+  void init() {
     _favoriteController.sink.add(false);
   }
 
@@ -36,11 +34,8 @@ class DetailMovieBloc implements Bloc {
   }
 
   Future<Movie> getDetailMovie(Movie movie) async {
-    
     await getMovieFromService(movie.id);
-
     movie.runtime = _movie.runtime;
-
     return movie;
   }
 
