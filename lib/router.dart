@@ -31,6 +31,9 @@ class Router {
         return MaterialPageRoute(builder: (_) => MyTicketsPage());
       case '/mytransaction':
         return MaterialPageRoute(builder: (_) => MyTransactionPage());
+      case '/detailticket':
+        final Ticket ticket = settings.arguments as Ticket;
+        return MaterialPageRoute(builder: (_) => DetailTicketPage(ticket));
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
