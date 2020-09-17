@@ -24,7 +24,7 @@ part 'page_success_checkout.dart';
 part 'page_profile.dart';
 part 'page_editprofile.dart';
 part 'page_myticket.dart';
-part 'page_ticketdetail.dart';
+part 'page_detailticket.dart';
 part 'page_mytransaction.dart';
 part 'page_search.dart';
 // part 'page_test.dart';
