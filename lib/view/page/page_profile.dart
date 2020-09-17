@@ -87,9 +87,9 @@ class ProfilePage extends Page<ProfileBloc> {
               height: 120,
             ),
             const SizedBox(height: 12),
-            BlueRectButton(
-              text: 'Sign Out',
-              onTap: () => bloc.signOut(),
+            FlatButton(
+              onPressed: () => bloc.signOut(),
+              child: Text('Sign Out', style: blackContentRegular),
             ),
             const SizedBox(height: 12),
           ],
