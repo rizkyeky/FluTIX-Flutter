@@ -135,7 +135,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Price', style: blackContentRegular),
-                      Text('Rp${bloc.moviePrice} x ${bloc.seatsLen}', 
+                      Text('${convertCurrRP(bloc.moviePrice)} x ${bloc.seatsLen}', 
                         style: blackContentBold
                       ),
                     ],
@@ -144,7 +144,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Fee', style: blackContentRegular),
-                      Text('Rp${bloc.feePrice} x ${bloc.seatsLen}',
+                      Text('${convertCurrRP(bloc.feePrice)} x ${bloc.seatsLen}',
                         style: blackContentBold
                       ),
                     ],
@@ -153,7 +153,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Total', style: blackContentRegular),
-                      Text('Rp${bloc.totalPrice}', style: blackContentBold),
+                      Text(convertCurrRP(bloc.totalPrice), style: blackContentBold),
                     ],
                   ),
                 ],
