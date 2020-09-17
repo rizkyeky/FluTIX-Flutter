@@ -4,6 +4,7 @@ class MainTabBarPage extends Page<MainTabBarBloc> {
 
   final HomePage homePage = HomePage();
   final ProfilePage profilePage = ProfilePage();
+  final SearchPage searchPage = SearchPage();
 
   MainTabBarPage({Key key}) : super(key: key);
 
@@ -27,7 +28,7 @@ class MainTabBarPage extends Page<MainTabBarBloc> {
                 return homePage;
                 break;
               case SwitchTab.search: 
-                return const Center(child: Icon(Icons.search));
+                return searchPage;
                 break;
               case SwitchTab.favorite: 
                 return const Center(child: Icon(Icons.favorite),);

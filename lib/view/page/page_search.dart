@@ -50,6 +50,7 @@ class SearchPage extends Page<SearchBloc> {
             _searchNode.requestFocus();
           }
         },
+        backgroundColor: mainColor,
         elevation: 0,
         highlightElevation: 0,
         child: StreamBuilder<bool>(
