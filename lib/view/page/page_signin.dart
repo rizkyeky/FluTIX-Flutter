@@ -65,12 +65,12 @@ class SignInPage extends Page<SignInBloc> {
                       await bloc.signIn(
                         _emailText.text, _passwordText.text)
                         .then((value) {
-                          if (value) {
-                            Navigator.pushReplacementNamed(context, '/home');
+                          if (value == 'User Active') {
+                            Navigator.pushReplacementNamed(context, '/');
                           }
                           else {
                             Scaffold.of(contextScaffold).showSnackBar(snackBar(
-                              contentText: 'Error Sign In User',
+                              contentText: value,
                               labelText: 'DISMISS',
                               onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
                             ));
