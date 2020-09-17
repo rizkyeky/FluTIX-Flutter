@@ -12,21 +12,6 @@ class DetailMoviePage extends Page<DetailMovieBloc>  {
   void init() {
     bloc.checkFavoriteMovie(movie);
   }
-
-  String convertTime(int minute) {
-   
-    final str = StringBuffer();
-
-    if (minute > 60) {
-      str.write((minute / 60).floor());
-      str.write('h ');
-    }
-    if (minute % 60 != 0) {
-      str.write(minute % 60);
-      str.write('m');
-    }
-    return str.toString();
-  }
   
   DetailMoviePage(this.movie, {Key key}) : super(key: key);
 

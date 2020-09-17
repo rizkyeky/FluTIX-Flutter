@@ -57,7 +57,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
                         ),
                       ),
                       Text(
-                        '${bloc.ticket.movie.country} . PG-13 . ${bloc.convertTime(bloc.ticket.movie.runtime)}', 
+                        '${bloc.ticket.movie.country} . PG-13 . ${convertTime(bloc.ticket.movie.runtime)}', 
                         style: blackContentRegular,
                       ),
                       Row(
