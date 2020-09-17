@@ -1,18 +1,10 @@
 part of 'page.dart';
 
-class TicketDetailPage extends Page<TicketDetailBloc> {
+class DetailTicketPage extends StatelessWidget {
 
   final Ticket ticket;
 
-  TicketDetailPage(this.ticket);
-
-  @override
-  void dispose() {
-  }
-
-  @override
-  void init() {
-  }
+  const DetailTicketPage(this.ticket, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +14,7 @@ class TicketDetailPage extends Page<TicketDetailBloc> {
     return Scaffold(
       backgroundColor: canvasColor,
       appBar: XTopBar(
-        textTitle: 'Profile',
+        textTitle: 'Detail Ticket',
         textStyle: blueTitle,
         backgroundColor: whiteColor,
         leading: IconButton(
@@ -93,7 +85,7 @@ class TicketDetailPage extends Page<TicketDetailBloc> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       "Date & Time",
                     ),
                     Text(
@@ -108,7 +100,7 @@ class TicketDetailPage extends Page<TicketDetailBloc> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       "Seat Numbers",
                     ),
                     SizedBox(
@@ -127,7 +119,7 @@ class TicketDetailPage extends Page<TicketDetailBloc> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       "Order ID",
                     ),
                     Text(
