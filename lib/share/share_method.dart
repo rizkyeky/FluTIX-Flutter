@@ -17,6 +17,11 @@ Future<String> uploadImage(File image) async {
   return snapshot.ref.getDownloadURL() as String;
 }
 
+String convertCurrRP(int value) {
+  final NumberFormat formatCurrency = NumberFormat.simpleCurrency(name: 'IDR', decimalDigits: 0);
+  return formatCurrency.format(value);
+}
+
 
 // Future<String> getImageFromFirebase(String imageName) async {
 //   final FirebaseStorage storage = FirebaseStorage.instance;
