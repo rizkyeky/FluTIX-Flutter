@@ -22,7 +22,7 @@ class MyTicketsPage extends Page<MyTicketsBloc> {
         itemBuilder: (context, index) => Material(
           color: whiteColor,
           child: InkWell(
-            onTap: () {},
+            onTap: () => Navigator.pushNamed(context, '/detailticket'),
             child: Container(
               padding: const EdgeInsets.all(12),
               child: Row(
