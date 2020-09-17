@@ -88,7 +88,10 @@ class ProfilePage extends Page<ProfileBloc> {
             ),
             const SizedBox(height: 12),
             FlatButton(
-              onPressed: () => bloc.signOut(),
+              onPressed: () async {
+                await bloc.signOut()
+                  .whenComplete(() => Navigator.pushReplacementNamed(context, '/signin'));
+              },
               child: Text('Sign Out', style: blackContentRegular),
             ),
             const SizedBox(height: 12),
