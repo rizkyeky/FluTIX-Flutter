@@ -24,6 +24,7 @@ part 'bloc_editprofile.dart';
 part 'bloc_myticket.dart';
 part 'bloc_ticketdetail.dart';
 part 'bloc_mytransaction.dart';
+part 'bloc_search.dart';
 
 abstract class Bloc {
   Future<void> init();
