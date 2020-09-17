@@ -8,8 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutix_training/main.dart';
-import 'package:flutix_training/service/service.dart';
+import 'package:flutix_training/share/share.dart';
 
 class Data {
   final String name;
@@ -25,9 +24,8 @@ class Data {
 
 Future<void> main() async {
 
-  const String str = '1,2,3,4';
-  final List<int> ls = str.split(',').map<int>((e) => int.parse(e)).toList();
-  print(ls);
+  String uang = convertCurrRP(10000);
+  print(uang); 
 
   // DateTime now = DateTime.now();
   // print('${now.hour} : ${now.minute} : ${now.second}');
