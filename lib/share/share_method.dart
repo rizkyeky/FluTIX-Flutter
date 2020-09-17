@@ -22,6 +22,20 @@ String convertCurrRP(int value) {
   return formatCurrency.format(value);
 }
 
+String convertTime(int minute) {
+   
+    final str = StringBuffer();
+
+    if (minute > 60) {
+      str.write((minute / 60).floor());
+      str.write('h ');
+    }
+    if (minute % 60 != 0) {
+      str.write(minute % 60);
+      str.write('m');
+    }
+    return str.toString();
+  }
 
 // Future<String> getImageFromFirebase(String imageName) async {
 //   final FirebaseStorage storage = FirebaseStorage.instance;
