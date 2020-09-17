@@ -44,7 +44,7 @@ class AuthService {
     
     } on fire_auth.FirebaseAuthException catch (e) {
       
-      String errorType;
+      String errorType = '';
       
       if (e.code == 'weak-password') {
         errorType = 'Password is too weak';
@@ -68,8 +68,20 @@ class AuthService {
       final User user = await _userService.getUser(result.user.uid);
       return AuthResult(user: user);
 
+    } on fire_auth.FirebaseAuthException catch (e) {
+
+      String errorType = '';
+      
+      if (e.code == 'wrong-password') {
+        errorType = 'Password is not correct';
+      }
+      else if (e.code == 'user-not-found') {
+        errorType = 'Email is not found';
+      }
+
+      return AuthResult(message: errorType);
     } catch (e) {
-      return AuthResult(message: 'Error signIn: $e');
+      return AuthResult(message: 'Error signUp: $e');
     }
   }
 
