@@ -1,6 +1,6 @@
 # FluTIX-Flutter
 
-FluTIX App is app build by Flutter.
+FluTIX is app build by Flutter. It is only demo app for my portofolio.
 Provide only executive movies for you
 
 ## Inside The App
@@ -11,8 +11,11 @@ Provide only executive movies for you
   - http (for API Request)
   - intl (for Currency Format)
   - Firebase (for Authentication and Online Database)
-  - shared_preferences (for Local Database)
 
 ## Look up The App
 
-![Alt](screenshot.jpg)
+![Alt](img1.jpg)
+![Alt](img2.jpg)
+![Alt](img3.jpg)
+![Alt](img4.jpg)
+![Alt](img5.jpg)
