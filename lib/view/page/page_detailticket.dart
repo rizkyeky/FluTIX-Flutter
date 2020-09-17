@@ -24,111 +24,158 @@ class DetailTicketPage extends StatelessWidget {
       ),
       body: Center(
         child: Material(
+          elevation: 1,
           color: whiteColor,
+          clipBehavior: Clip.antiAlias,
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           child: Container(
-            width: double.infinity,
-            color: Colors.white,
-            padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.8,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  ticket.movie.title,
-                  maxLines: 2,
-                  overflow: TextOverflow.clip,
-                  style: blackContentRegular
+                Image.network('${imageBaseURL}w780${ticket.movie.backdropPath}',
+                  height: 174,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
                 ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Text(
-                  ticket.movie.country,
-                  style: blackContentRegular,
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Row(
-                  children: [
-                    for (int i = 0; i < starCount; i++) const Icon(Icons.star, 
-                      size: 18,
-                      color: starColor
-                    ),
-                    const SizedBox(width: 6,),
-                    Text('${ticket.movie.voteAverage}/10', style: blackContentRegular)
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                      "Cinema",
-                      style: blackContentBold,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      child: Text(
-                        ticket.bookingPlace,
-                        textAlign: TextAlign.end,
+                Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        ticket.movie.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.clip,
+                        style: blueTitle
                       ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 9,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const Text(
-                      "Date & Time",
-                    ),
-                    Text(
-                      ticket.bookingTime
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 9,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const Text(
-                      "Seat Numbers",
-                    ),
-                    SizedBox(
-                      width:
-                          MediaQuery.of(context).size.width * 0.45,
-                      child: Text(
-                        ticket.seats.join(', '),
-                        textAlign: TextAlign.end,
+                      const SizedBox(
+                        height: 6,
                       ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 9,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const Text(
-                      "Order ID",
-                    ),
-                    Text(
-                      ticket.bookingCode,
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
+                      Text('${ticket.movie.country} . PG-13 . ${convertTime(ticket.movie.runtime)}', style: blackContentRegular,),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Row(
+                        children: [
+                          for (int i = 0; i < starCount; i++) const Icon(Icons.star, 
+                            size: 18,
+                            color: starColor
+                          ),
+                          const SizedBox(width: 6,),
+                          Text('${ticket.movie.voteAverage}/10', style: blackContentRegular)
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Cinema", style: blackContentRegular,
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: Text(
+                              ticket.bookingPlace,
+                              textAlign: TextAlign.end,
+                              style: blackContentBold,
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 9,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Date & Time", style: blackContentRegular,
+                          ),
+                          Text(
+                            ticket.bookingTime, style: blackContentBold,
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 9,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Seat Numbers", style: blackContentRegular,
+                          ),
+                          SizedBox(
+                            width:
+                                MediaQuery.of(context).size.width * 0.45,
+                            child: Text(
+                              ticket.seats.join(', '),
+                              textAlign: TextAlign.end,
+                              style: blackContentBold,
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 9,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "Order ID", style: blackContentRegular,
+                          ),
+                          Text(
+                            ticket.bookingCode, style: blackContentBold,
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Name: ",
+                                style: blackContentRegular,
+                              ),
+                              Text(
+                                ticket.userName,
+                                style: blackContentBold,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                "Paid: ",
+                                style: blackContentRegular
+                              ),
+                              Text(
+                                convertCurrRP(ticket.price),
+                                style: blackContentBold,
+                              ),
+                            ],
+                          ),
+                          QrImage(
+                            version: 6,
+                            errorCorrectionLevel: QrErrorCorrectLevel.M,
+                            padding: const EdgeInsets.all(0),
+                            size: 100,
+                            data: ticket.bookingCode,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
