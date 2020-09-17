@@ -27,6 +27,7 @@ class SignUpBloc implements Bloc {
       .whenComplete(() => _loadingController.sink.add(false));
 
     if (result.user != null) {
+      locator.call<User>(instanceName: 'User Active').duplicate(result.user);
       return 'User added';
     }
     else {
