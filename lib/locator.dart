@@ -31,6 +31,7 @@ void setupLocator() {
   locator.registerFactory(() => EditProfileBloc());
   locator.registerFactory(() => MyTicketsBloc());
   locator.registerFactory(() => MyTransactionBloc());
+  locator.registerFactory(() => SearchBloc());
 
   locator.registerSingleton<Ticket>(Ticket.initial(), instanceName: 'Ticket');
   locator.registerSingleton<User>(User.initial(), instanceName: 'User Active');
