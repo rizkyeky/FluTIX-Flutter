@@ -27,12 +27,17 @@ class TicketService {
     );
 
     final MovieService movieService = MovieService();
+    final UserService userService = UserService();
 
     final List<Ticket> tickets = [];
     for (final fire_store.QueryDocumentSnapshot doc in documents) {
+      
       final Movie movie = await movieService.getMovie((doc.data()['movieID'] as num).toInt());
+      final User user = await userService.getUser(doc.data()['userID'] as String);
+      
       tickets.add(Ticket(
         doc.data()['ticketID'] as String, 
+        user.name, 
         doc.data()['bookingCode'] as String, 
         doc.data()['bookingPlace'] as String, 
         movie,
