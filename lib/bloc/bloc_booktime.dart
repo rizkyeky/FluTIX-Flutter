@@ -122,7 +122,7 @@ class BookTimeBloc implements Bloc {
 
   void onSelectedBookTime() {
     locator.call<Ticket>(instanceName: 'Ticket')
-      .copyWith(bookingDayDate: '${_selectedDate['name']} ${_selectedDate['date']} ${_thisDate.month} ${_thisDate.year}');
+      .copyWith(bookingDayDate: '${_selectedDate['name']}, ${_selectedDate['date']}, ${_thisDate.month}, ${_thisDate.year}');
     locator.call<Ticket>(instanceName: 'Ticket')
       .copyWith(bookingPlace: _selectedPlace);
     locator.call<Ticket>(instanceName: 'Ticket')
