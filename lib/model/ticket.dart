@@ -2,6 +2,7 @@ part of 'model.dart';
 
 class Ticket {
   String id;
+  String userName;
   String bookingCode;
   String bookingPlace;
   Movie movie;
@@ -13,7 +14,8 @@ class Ticket {
   List<String> seats;
 
   Ticket(
-    this.id, 
+    this.id,
+    this.userName, 
     this.bookingCode, 
     this.bookingPlace, 
     this.movie, 
@@ -29,6 +31,7 @@ class Ticket {
     '',
     '',
     '',
+    '',
     Movie.initial(),
     0,
     [],
@@ -40,6 +43,7 @@ class Ticket {
 
   void copyWith({
     String id,
+    String userName,
     String bookingCode,
     String bookingPlace,
     Movie movie,
@@ -51,6 +55,7 @@ class Ticket {
     List<String> seats
   }) {
     this.id = id ?? this.id;
+    this.userName = userName ?? this.userName;
     this.bookingCode = bookingCode ?? this.bookingCode;
     this.bookingTime = bookingTime ?? this.bookingTime;
     this.bookingDayDate = bookingDayDate ?? this.bookingDayDate;
