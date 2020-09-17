@@ -17,20 +17,18 @@ class SignInBloc implements Bloc {
   final BehaviorSubject<bool> _loadingController = BehaviorSubject();
   Stream<bool> get isLoadingStream => _loadingController.stream;
 
-  // final Map<String, String> _registerData = {};
 
-  Future<bool> signIn(String name, String password) async {
+  Future<String> signIn(String name, String password) async {
     _loadingController.sink.add(true);
     final AuthResult result = await _authService.signIn(
       name, password).whenComplete(() => _loadingController.sink.add(false));
 
-      
     if (result.user != null) {
       locator.call<User>(instanceName: 'User Active').duplicate(result.user);
-      return true;
+      return 'User Active';
     }
     else {
-      return false;
+      return result.message;
     }
   }
 
