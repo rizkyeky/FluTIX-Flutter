@@ -51,7 +51,7 @@ class MyTicketsPage extends Page<MyTicketsBloc> {
                         ),
                       ),
                       Text(
-                        '${snapshot.data[index].movie.country} . PG-13 . ${bloc.convertTime(snapshot.data[index].movie.runtime)}', 
+                        snapshot.data[index].bookingDayDate, 
                         style: blackContentRegular,
                       ),
                       Text(
