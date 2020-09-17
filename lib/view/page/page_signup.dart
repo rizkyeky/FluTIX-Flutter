@@ -84,7 +84,7 @@ class SignUpPage extends Page<SignUpBloc> {
                     ),
                     GestureDetector(
                       onTap: () => Navigator.pushReplacementNamed(context, '/signin'),
-                      child: Text('Join now',
+                      child: Text('Enter now',
                         style: blueSubtitle,
                       ),
                     ),
