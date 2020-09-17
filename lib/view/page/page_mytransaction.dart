@@ -11,6 +11,7 @@ class MyTransactionPage extends Page<MyTransactionBloc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: canvasColor,
       appBar: XTopBar(
         textTitle: 'My Transaction',
         textStyle: blueTitle,
@@ -62,7 +63,7 @@ class MyTransactionPage extends Page<MyTransactionBloc> {
                         ),
                       ),
                       Text(
-                        snapshot.data[index].amount.toString(),
+                        convertCurrRP(snapshot.data[index].amount),
                         style: blueSubtitle,
                       ),
                       Text(
