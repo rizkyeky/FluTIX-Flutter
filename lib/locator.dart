@@ -1,4 +1,3 @@
-import 'package:flutix_training/main.dart';
 import 'package:get_it/get_it.dart';
 
 import 'bloc/bloc.dart';

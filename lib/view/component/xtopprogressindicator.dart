@@ -13,7 +13,7 @@ class TopLinearProgressIndicator extends StatelessWidget
   @override
   Size get preferredSize => const Size.fromHeight(6);
   
-  TopLinearProgressIndicator({
+  const TopLinearProgressIndicator({
     Key key,
     this.value,
     this.backgroundColor,

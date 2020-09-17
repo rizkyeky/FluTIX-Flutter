@@ -27,11 +27,9 @@ class SignUpBloc implements Bloc {
       .whenComplete(() => _loadingController.sink.add(false));
 
     if (result.user != null) {
-      print('user added');
       return 'User added';
     }
     else {
-      print(result.message);
       return result.message;
     }
   } 

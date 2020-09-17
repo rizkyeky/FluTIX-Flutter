@@ -27,11 +27,9 @@ class SignInBloc implements Bloc {
       
     if (result.user != null) {
       locator.call<User>(instanceName: 'User Active').duplicate(result.user);
-      print('user valid');
       return true;
     }
     else {
-      print(result.message);
       return false;
     }
   }

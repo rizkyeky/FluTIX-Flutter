@@ -5,10 +5,8 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutix_training/share/share.dart';
+// import 'package:flutix_training/share/share.dart';
 
 class Data {
   final String name;
@@ -24,8 +22,7 @@ class Data {
 
 Future<void> main() async {
 
-  String uang = convertCurrRP(10000);
-  print(uang); 
+  // final String uang = convertCurrRP(10000);
 
   // DateTime now = DateTime.now();
   // print('${now.hour} : ${now.minute} : ${now.second}');
