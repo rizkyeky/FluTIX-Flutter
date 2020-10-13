@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'view/page/page.dart';
 // import 'Model/Model.dart';
 
-class Router {
+class XRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':

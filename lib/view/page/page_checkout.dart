@@ -183,7 +183,8 @@ class CheckoutPage extends Page<CheckoutBloc> {
                     ),
                   ),
                 ),
-            ));
+              )
+            );
           },
           label: Text('Checkout now', style: whiteSubtitle)
         ),

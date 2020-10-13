@@ -46,7 +46,7 @@ Future<void> awaitSetupLocator() async {
   await locator.get<LocalService>(instanceName: 'Local Service').init();
 
   // Setup first bloc
-  await locator.get<HomeBloc>().init();
+  // await locator.get<HomeBloc>().init();
 
   // print("setup locator success");
 }

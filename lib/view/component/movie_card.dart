@@ -22,15 +22,15 @@ class MovieCard extends StatelessWidget {
         width: 300,
         padding: const EdgeInsets.all(12),
         alignment: Alignment.bottomCenter,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-            colors: [
-              Colors.black.withOpacity(0.6),
-              Colors.black.withOpacity(0),
-            ]
-          )
+        decoration: const BoxDecoration(
+          // gradient: LinearGradient(
+          //   colors: [
+          //     Colors.black.withOpacity(0.6),
+          //     Colors.black.withOpacity(0),
+          //   ],
+          //   begin: Alignment.bottomCenter,
+          //   end: Alignment.topCenter,
+          // )
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,

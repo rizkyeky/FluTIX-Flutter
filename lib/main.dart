@@ -36,7 +36,7 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: isSignIn ? '/' : '/signin',
-      onGenerateRoute: Router.generateRoute,
+      onGenerateRoute: XRouter.generateRoute,
     );
   }
 }
