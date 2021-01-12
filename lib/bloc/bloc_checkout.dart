@@ -28,32 +28,32 @@ class CheckoutBloc implements Bloc {
   @override
   void init() {}
   
-  Future<void> onCheckOut() async {
-    locator.call<Ticket>(instanceName: 'Ticket').copyWith(price: totalPrice);
+  // Future<void> onCheckOut() async {
+  //   locator.call<Ticket>(instanceName: 'Ticket').copyWith(price: totalPrice);
     
-    locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
-      _thisDate.weekday,
-      _thisDate.day,
-      _thisDate.month,
-      _thisDate.year,
-    ]);
-    locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
-      _thisDate.hour,
-      _thisDate.minute,
-      _thisDate.second,
-    ]);
+  //   locator.call<Ticket>(instanceName: 'Ticket').copyWith(dayDate: [
+  //     _thisDate.weekday,
+  //     _thisDate.day,
+  //     _thisDate.month,
+  //     _thisDate.year,
+  //   ]);
+  //   locator.call<Ticket>(instanceName: 'Ticket').copyWith(time: [
+  //     _thisDate.hour,
+  //     _thisDate.minute,
+  //     _thisDate.second,
+  //   ]);
 
-    final String userID = locator.get<User>(instanceName: 'User Active').id;
+  //   final String userID = locator.get<User>(instanceName: 'User Active').id;
 
-    await _ticketService.saveTicket(userID, ticket);
+  //   await _ticketService.saveTicket(userID, ticket);
 
-    final Transaction transaction = Transaction(
-      userID, 
-      ticket.movie.title, 
-      ticket.bookingPlace, 
-      totalPrice, ticket.time, ticket.movie.posterPath
-    );
+  //   final Transaction transaction = Transaction(
+  //     userID, 
+  //     ticket.movie.title, 
+  //     ticket.bookingPlace, 
+  //     totalPrice, ticket.time, ticket.movie.posterPath
+  //   );
 
-    await _transactionService.saveTransaction(transaction);
-  }
+  //   await _transactionService.saveTransaction(transaction);
+  // }
 }

@@ -8,6 +8,7 @@ class HomePage extends Page<HomeBloc> {
     return Scaffold(
       backgroundColor: canvasColor,
       appBar: XTopBar(
+        automaticallyImplyLeading: false,
         textTitle: 'FluTIX',
       ),
       body: SingleChildScrollView(

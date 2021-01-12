@@ -28,7 +28,7 @@ class MainTabBarPage extends Page<MainTabBarBloc> {
                 return homePage;
                 break;
               case SwitchTab.search: 
-                return searchPage;
+                return const Center(child: Icon(Icons.search),);
                 break;
               case SwitchTab.favorite: 
                 return const Center(child: Icon(Icons.favorite),);

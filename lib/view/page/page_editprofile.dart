@@ -82,7 +82,7 @@ class EditProfilePage extends Page<EditProfileBloc> {
                       icon: const Icon(Icons.check, color: mainColor),
                       onPressed: () {
                         if (_nameText.text != bloc.user.name || _emailText.text != bloc.user.email) {
-                          bloc.updateUser(_nameText.text, _emailText.text);
+                          // bloc.updateUser(_nameText.text, _emailText.text);
                           Scaffold.of(contextScaffold).showSnackBar(snackBar(
                             contentText: 'Saved',
                             labelText: 'DISMISS',
@@ -103,13 +103,13 @@ class EditProfilePage extends Page<EditProfileBloc> {
               const SizedBox(height: 12,),
               FlatButton(
                 onPressed: () async {
-                  await bloc.resetPassword().whenComplete(() {
-                    Scaffold.of(contextScaffold).showSnackBar(snackBar(
-                      contentText: 'The link to change your password has been sent to your email',
-                      labelText: 'DISMISS',
-                      onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
-                    ));
-                  });
+                  // await bloc.resetPassword().whenComplete(() {
+                  //   Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                  //     contentText: 'The link to change your password has been sent to your email',
+                  //     labelText: 'DISMISS',
+                  //     onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
+                  //   ));
+                  // });
                 },
                 child: Text('Reset Password', style: blackContentRegular,)
               )

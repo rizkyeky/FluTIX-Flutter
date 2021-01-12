@@ -11,11 +11,11 @@ Future<void> main() async {
   setupLocator();
   await awaitSetupLocator();
 
-  final bool isSignIn = locator.get<AuthService>(instanceName: 'Auth Service')
-    .isSignIn;
+  // final bool isSignIn = locator.get<AuthService>(instanceName: 'Auth Service')
+    // .isSignIn;
   
   // Run App
-  runApp(App(isSignIn: isSignIn));
+  runApp(const App(isSignIn: false));
 }
 
 class App extends StatelessWidget {

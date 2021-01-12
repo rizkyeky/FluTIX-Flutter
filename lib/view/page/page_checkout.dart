@@ -168,7 +168,7 @@ class CheckoutPage extends Page<CheckoutBloc> {
           highlightElevation: 0,
           backgroundColor: mainColor,
           onPressed: () {
-            bloc.onCheckOut();
+            // bloc.onCheckOut();
             showModalBottomSheet(
               context: scaffContext,
               builder: (context) => Container(

@@ -1,8 +1,7 @@
 part of 'service.dart';
 
 class UserService {
-  final fire_store.CollectionReference _userCollection = fire_store.FirebaseFirestore
-    .instance.collection('user'); 
+  fire_store.CollectionReference _userCollection ;//= fire_store.FirebaseFirestore.instance.collection('user'); 
 
   Future<User> setUser(User user) async {
 

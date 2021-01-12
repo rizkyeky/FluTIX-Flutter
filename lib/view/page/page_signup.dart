@@ -47,33 +47,33 @@ class SignUpPage extends Page<SignUpBloc> {
                 text: "Let's start",
                 onTap: () async {
 
-                  final bool isValidEmail = _emailText.text.contains(
-                    RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$')
-                  ); 
+                  // final bool isValidEmail = _emailText.text.contains(
+                  //   RegExp(r'^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$')
+                  // ); 
 
-                  final bool isValidPassword = _passwordText.text.length >= 6; 
+                  // final bool isValidPassword = _passwordText.text.length >= 6; 
 
-                  if (isValidEmail && isValidPassword) {
-                    await bloc.signUp(
-                      _nameText.text, _emailText.text, _passwordText.text)
-                      .then((value) {
-                        if (value == 'User added') {
+                  // if (isValidEmail && isValidPassword) {
+                  //   await bloc.signUp(
+                  //     _nameText.text, _emailText.text, _passwordText.text)
+                  //     .then((value) {
+                  //       if (value == 'User added') {
                           Navigator.pushReplacementNamed(context, '/preference');
-                        } else {
-                          Scaffold.of(contextScaffold).showSnackBar(snackBar(
-                            contentText: value,
-                            labelText: 'DISMISS',
-                            onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
-                          ));
-                        }
-                      });
-                  } else {
-                    Scaffold.of(contextScaffold).showSnackBar(snackBar(
-                      contentText: 'Email or password not valid',
-                      labelText: 'DISMISS',
-                      onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
-                    ));
-                  }
+                  //       } else {
+                  //         Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                  //           contentText: value,
+                  //           labelText: 'DISMISS',
+                  //           onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
+                  //         ));
+                  //       }
+                  //     });
+                  // } else {
+                  //   Scaffold.of(contextScaffold).showSnackBar(snackBar(
+                  //     contentText: 'Email or password not valid',
+                  //     labelText: 'DISMISS',
+                  //     onPressed: () => Scaffold.of(contextScaffold).hideCurrentSnackBar()
+                  //   ));
+                  // }
                 },
               ),
                 const SizedBox(height: 36,),

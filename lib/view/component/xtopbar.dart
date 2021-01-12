@@ -7,8 +7,10 @@ class XTopBar extends AppBar {
     String textTitle,
     Widget leading,
     Color backgroundColor,
-    TextStyle textStyle, 
+    TextStyle textStyle,
+    bool automaticallyImplyLeading = true
   }) : super(
+    automaticallyImplyLeading: automaticallyImplyLeading,
     key: key,
     backgroundColor: backgroundColor ?? mainColor,
     centerTitle: true,

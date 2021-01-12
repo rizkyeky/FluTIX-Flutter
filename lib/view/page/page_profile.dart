@@ -66,12 +66,12 @@ class ProfilePage extends Page<ProfileBloc> {
                   ListTile(
                     leading: const Icon(Icons.confirmation_number),
                     title: Text('My Tickets', style: blackSubtitle,),
-                    onTap: () => Navigator.pushNamed(context, '/mytickets'),
+                    onTap: () {} //=> Navigator.pushNamed(context, '/mytickets'),
                   ),
                   ListTile(
                     leading: const Icon(Icons.credit_card),
                     title: Text('My Transaction', style: blackSubtitle,),
-                    onTap: () => Navigator.pushNamed(context, '/mytransaction'),
+                    onTap: () {} //=> Navigator.pushNamed(context, '/mytransaction'),
                   ),
                 ],
               ),

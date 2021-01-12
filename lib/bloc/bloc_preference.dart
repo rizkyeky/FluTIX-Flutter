@@ -49,10 +49,10 @@ class PreferenceBloc implements Bloc {
   }
 
   Future<void> setUserPreference() async {
-    final User user = locator.get<User>(instanceName: 'User Active');
+    // final User user = locator.get<User>(instanceName: 'User Active');
     
-    _loadingController.sink.add(true);
-    await _userService.updateUser(user.id, favGenres: _selectedGenres, favCountries: _selectedCountries)
-    .whenComplete(() => _loadingController.sink.add(false));
+    // _loadingController.sink.add(true);
+    // await _userService.updateUser(user.id, favGenres: _selectedGenres, favCountries: _selectedCountries)
+    // .whenComplete(() => _loadingController.sink.add(false));
   }
 }

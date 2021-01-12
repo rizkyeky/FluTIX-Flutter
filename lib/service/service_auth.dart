@@ -1,7 +1,7 @@
 part of 'service.dart';
 
 class AuthService {
-  final fire_auth.FirebaseAuth _auth = fire_auth.FirebaseAuth.instance;
+  fire_auth.FirebaseAuth _auth;//= fire_auth.FirebaseAuth.instance;
   final UserService _userService = locator.get<UserService>(instanceName: 'User Service');
 
   bool _isSignIn = false;
