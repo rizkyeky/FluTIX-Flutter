@@ -1,8 +1,7 @@
 part of 'service.dart';
 
 class TicketService {
-  fire_store.CollectionReference ticketCollection = fire_store.FirebaseFirestore
-    .instance.collection("tickets");
+  fire_store.CollectionReference ticketCollection ;//= fire_store.FirebaseFirestore.instance.collection("tickets");
 
   Future<void> saveTicket(String userID, Ticket ticket) async {
     await ticketCollection.doc().set({

@@ -135,7 +135,7 @@ class BookSeatPage extends Page<BookSeatBloc> {
           backgroundColor: mainColor,
           onPressed: () {
             if (bloc.selectedSeats.isNotEmpty) {
-              bloc.onSelectSeats();
+              // bloc.onSelectSeats();
               Navigator.pushNamed(context, '/checkout');
             } else {
               Scaffold.of(contextScaffold).showSnackBar(snackBar(

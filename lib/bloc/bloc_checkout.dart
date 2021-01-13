@@ -2,8 +2,8 @@ part of 'bloc.dart';
 
 class CheckoutBloc implements Bloc {
 
-  final TicketService _ticketService = locator.get<TicketService>(instanceName: 'Ticket Service');
-  final TransactionService _transactionService = locator.get<TransactionService>(instanceName: 'Transaction Service');
+  // final TicketService _ticketService = locator.get<TicketService>(instanceName: 'Ticket Service');
+  // final TransactionService _transactionService = locator.get<TransactionService>(instanceName: 'Transaction Service');
   final ticket = locator.call<Ticket>(instanceName: 'Ticket');
 
   final DateTime _thisDate = DateTime.now();
