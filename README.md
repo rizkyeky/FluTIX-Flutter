@@ -13,4 +13,4 @@ FluTIX is app built with Flutter. App for purchase cinema ticket
 
 ## Look up The App
 
-![Alt](flutix-Cover Github.png)
+![Alt](flutix-cover.png)
