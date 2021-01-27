@@ -1,13 +1,12 @@
 # FluTIX-Flutter
 
-FluTIX is app build by Flutter. It is only demo app for my portofolio.
-Provide only executive movies for you
+FluTIX is app built with Flutter. App for purchase cinema ticket
 
 ## Inside The App
 
   - RXDart (for State Management)
   - GetIt (for Depedency Injector)
-  - Bloc (for Design Pattern)
+  - MVVM (for Design Pattern)
   - http (for API Request)
   - intl (for Currency Format)
   - Firebase (for Authentication and Online Database)
